@@ -1,0 +1,17 @@
+<apex:page standardController="Account" id="pg">
+<script>
+function validationRule(){
+document.getElementById("pg:frm:cmd").disabled=true;
+savePost();
+return false;
+}
+</script>
+<apex:form id="frm">
+<apex:actionStatus startText="Loading..." stopText="" id="str"> </apex:actionStatus>
+                   <apex:actionRegion >
+                            <apex:actionFunction name="savePost" action="{!save}" rerender="" status="str" >
+                           </apex:actionFunction>
+                  </apex:actionRegion>
+  <apex:commandButton id="cmd" value="Post" onclick="validationRule();return false;"  /> 
+</apex:form>
+</apex:page>

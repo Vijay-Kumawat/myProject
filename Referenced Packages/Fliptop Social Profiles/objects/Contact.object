@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <fullName>Email_Last_Updated__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Used internally by Fliptop to determine record eligibility for fliptop updates</description>
+        <externalId>false</externalId>
+        <label>Email Last Updated</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Email_Updated_Since_Last_Fliptop_Run__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Used internally by Fliptop to determine record eligibility for fliptop updates</description>
+        <externalId>false</externalId>
+        <formula>if( Email_Last_Updated__c &gt;  Fliptop_Last_Checked__c, &apos;yes&apos;,&apos;no&apos;)</formula>
+        <label>Email Updated Since Last Fliptop Run</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Facebook_URL__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Raw Facebook URL</description>
+        <externalId>false</externalId>
+        <label>Facebook URL</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Url</type>
+    </fields>
+    <fields>
+        <fullName>Facebook__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Read-only Facebook URL with Icon</description>
+        <externalId>false</externalId>
+        <formula>IF(ISBLANK(Facebook_URL__c),
+	&quot;&quot;,
+	HYPERLINK(Facebook_URL__c, IMAGE(&quot;/resource/fliptop__Fliptop_Images/facebook.png&quot;, &quot;facebook logo&quot;), &quot;_blank&quot;) + &quot; &quot; +
+	HYPERLINK(Facebook_URL__c,
+		IF(CONTAINS(Facebook_URL__c,&quot;?id=&quot;),
+			RIGHT(Facebook_URL__c,
+				LEN(Facebook_URL__c) - (FIND(&quot;?id=&quot;,Facebook_URL__c) + 3)),
+			RIGHT(Facebook_URL__c,
+				LEN(Facebook_URL__c) - (FIND(&quot;.com/&quot;,Facebook_URL__c) + 4))
+)
+)
+)</formula>
+        <label>Facebook</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Fliptop_Age__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Fliptop Age</label>
+        <length>10</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Fliptop_Company__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Fliptop Company</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Fliptop_Gender__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Fliptop Gender</label>
+        <length>10</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Fliptop_Image_URL__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Fliptop Image URL</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Url</type>
+    </fields>
+    <fields>
+        <fullName>Fliptop_Last_Checked__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Fliptop Last Updated</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Fliptop_Last_Status__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Fliptop Last Status</label>
+        <length>50</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Fliptop_Location__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Fliptop Location</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Fliptop_Name__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Fliptop Name</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Fliptop_Photo__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>IF(ISBLANK(Fliptop_Image_URL__c),
+&quot;&quot;,
+IMAGE(Fliptop_Image_URL__c, &quot;fliptop photo&quot;, 80, 80))</formula>
+        <label>Fliptop Photo</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Fliptop_Processed__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>if( Fliptop_Last_Status__c = &apos;Contact Found&apos; || Fliptop_Last_Status__c = &apos;Contact Not Found&apos;, 
+&apos;Completed&apos;, 
+&apos;Pending&apos; 
+)</formula>
+        <label>Fliptop Processed</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Fliptop_Title__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Fliptop Title</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Has_Facebook__c</fullName>
+        <deprecated>false</deprecated>
+        <description>For reporting purposes</description>
+        <externalId>false</externalId>
+        <formula>IF( ISBLANK( Facebook_URL__c ) ,&quot;No&quot;,&quot;Yes&quot;)</formula>
+        <label>Has Facebook</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Has_LinkedIn__c</fullName>
+        <deprecated>false</deprecated>
+        <description>For reporting purposes</description>
+        <externalId>false</externalId>
+        <formula>IF( ISBLANK( LinkedIn_URL__c ) ,&quot;No&quot;,&quot;Yes&quot;)</formula>
+        <label>Has LinkedIn</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Has_Twitter__c</fullName>
+        <deprecated>false</deprecated>
+        <description>For reporting purposes</description>
+        <externalId>false</externalId>
+        <formula>IF( ISBLANK( Twitter_URL__c ) ,&quot;No&quot;,&quot;Yes&quot;)</formula>
+        <label>Has Twitter</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>LinkedIn_URL__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Raw LinkedIn URL</description>
+        <externalId>false</externalId>
+        <label>LinkedIn URL</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Url</type>
+    </fields>
+    <fields>
+        <fullName>LinkedIn__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Read-only LinkedIn URL with Icon</description>
+        <externalId>false</externalId>
+        <formula>IF(ISBLANK(LinkedIn_URL__c), 
+&quot;&quot;, 
+HYPERLINK(LinkedIn_URL__c, IMAGE(&quot;/resource/fliptop__Fliptop_Images/linkedin.png&quot;, &quot;linkedin logo&quot;), &quot;_blank&quot;) + &quot; &quot; +
+HYPERLINK(LinkedIn_URL__c,
+		IF(CONTAINS(LinkedIn_URL__c,&quot;.com/in/&quot;),
+			RIGHT(LinkedIn_URL__c,
+				LEN(LinkedIn_URL__c) - (FIND(&quot;.com/in/&quot;,LinkedIn_URL__c) + 7)),
+			LEFT(RIGHT(LinkedIn_URL__c,
+				LEN(LinkedIn_URL__c) - (FIND(&quot;.com/pub/&quot;,LinkedIn_URL__c) + 8)),FIND(&quot;/&quot;,RIGHT(LinkedIn_URL__c,
+				LEN(LinkedIn_URL__c) - (FIND(&quot;.com/pub/&quot;,LinkedIn_URL__c) + 8))) - 1)
+)
+)
+)</formula>
+        <label>LinkedIn</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Twitter_URL__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Raw Twitter URL</description>
+        <externalId>false</externalId>
+        <label>Twitter URL</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Url</type>
+    </fields>
+    <fields>
+        <fullName>Twitter__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Read-only Twitter URL with Icon</description>
+        <externalId>false</externalId>
+        <formula>IF(ISBLANK(Twitter_URL__c), 
+&quot;&quot;, 
+HYPERLINK(Twitter_URL__c, IMAGE(&quot;/resource/fliptop__Fliptop_Images/twitter.png&quot;, &quot;twitter logo&quot;), &quot;_blank&quot;) + &quot; &quot; + 
+HYPERLINK(Twitter_URL__c,RIGHT(Twitter_URL__c,
+				LEN(Twitter_URL__c) - (FIND(&quot;.com/&quot;,Twitter_URL__c) + 4)) , &quot;_blank&quot;))</formula>
+        <label>Twitter</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+</CustomObject>

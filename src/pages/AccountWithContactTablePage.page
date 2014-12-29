@@ -1,0 +1,65 @@
+<apex:page StandardController="Account" tabStyle="Account" extensions="AccountWithContactTableController" id="page">
+
+	<script>
+	
+		//Method for calculate totalContact Amount
+		function calculateTotalConAmount(obj) {
+		
+			var prefix = "page:form:pB:pBS:conTable:";
+			var suffix = ":conAmount";
+			var totalConAmount = 0.00;
+			var eachAmount = 0.00;
+			for(var i=0; i<obj; i++) {
+				eachAmount = parseFloat(document.getElementById(prefix + i + suffix).value);
+				totalConAmount = totalConAmount + eachAmount;
+			}
+			document.getElementById("page:form:pB:totalContactAmount").innerText = totalConAmount.toFixed(2); 
+			var totalAmount = parseFloat(document.getElementById("page:form:pB:totalAccountAmount").innerText).toFixed(2);
+			var diff = totalAmount - totalConAmount;
+			document.getElementById("page:form:pB:differenceAmount").innerText = '(' + parseFloat(diff).toFixed(2) + ')';
+		}   
+	</script>
+
+	<!-- Form -->
+	<apex:form id="form">
+	
+		<!-- Page Block -->
+		<apex:pageBlock id="pB">
+		
+			<!-- Page Block Section -->
+			<apex:pageBlockSection title="Account" collapsible="false">
+			
+					<apex:inputField value="{!account.Amount__c}"/>
+			</apex:pageBlockSection>
+			
+			<!-- Page Block Section displaying contact information -->
+			<apex:pageBlockSection title="Contacts" collapsible="false" columns="1" id="pBS">
+			
+				<!-- Page Block Table -->
+				<apex:pageBlockTable value="{!contacts}" var="con" id="conTable">
+					<apex:column value="{!con.FirstName}"/>
+					<apex:column value="{!con.LastName}"/>
+					<apex:column headervalue="Amount">
+						<apex:inputText value="{!con.Amount__c}" id="conAmount" onblur="calculateTotalConAmount('{!contacts.size}');"/>
+					</apex:column>
+					
+				</apex:pageBlockTable>
+			</apex:pageBlockSection>
+			
+			<div style="margin-left:315px;">
+				<div style="margin-top:10px;">
+					<label style="font-Weight:bold;font-size:15px;color:black;">Total</label>&nbsp;&nbsp;&nbsp;
+					<apex:outputText value="{!totalAccountAmount}" id="totalAccountAmount" style="margin-left:125px;font-size: 15px;"/>
+				</div>
+				<div style="margin-top:15px;">
+					<label style="font-Weight:bold;font-size:15px;color:black;">Negotiated</label>&nbsp;&nbsp;&nbsp;
+					<apex:outputText value="{!totalContactAmount}" id="totalContactAmount" style="margin-left:83px;font-size: 15px;"/>
+				</div>
+				<div style="margin-top:15px;">
+					<label style="font-Weight:bold;font-size:15px;color:black;">Discrepancy</label>&nbsp;&nbsp;&nbsp;
+					<apex:outputText value="({!differenceAmount})" id="differenceAmount" style="margin-left:73px;font-size: 15px;color:red;"/>
+				</div>
+			</div>
+		</apex:pageBlock>
+	</apex:form>
+</apex:page>

@@ -1,0 +1,17 @@
+<apex:page >
+  <script>
+      var startDate = '7\23\2014';
+      var startTime = '04:00 AM';
+      var endDate = '7\21\2014';
+      var endTime = '03:00 PM';
+      
+      var sDT = new Date(2014,07,23);
+      var eDT = new Date(2014,07,21);
+      var d = new Date();
+      if(sDT > eDT) {
+          alert('Start Date Time less than End Date Time');
+          
+      }
+      alert(d);
+  </script>
+</apex:page>

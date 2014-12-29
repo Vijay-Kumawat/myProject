@@ -1,0 +1,4 @@
+<apex:page controller="DataTableController">
+    <!-- Data Table Component -->
+    <c:DataTableComponent1 sobjectName="Contact" listOfSObjectAPIName="FirstName,LastName,Estimation_Start_Date__c,Phone,Fax,Email,ADDTL_CONTACT__c,Account.Name,AccountId,School__r.Name" listOfSobjectRecords="{!listContacts}"/>
+</apex:page>

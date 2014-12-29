@@ -1,0 +1,107 @@
+<!--
+* Description   : This is Visualforce Page to Save Student Record.
+* 
+* Created By    : Vijay Kumar Kumawat
+*
+* Created Date  : 10/13/2012
+*
+* Version       : v1.0 - Create 
+-->
+
+<apex:page controller="StudentRecordClass">
+
+    <!-- Form -->    
+   <apex:form id="form">
+        
+      <!-- Page Block -->
+      <apex:pageBlock > 
+          
+         <!-- Page Block Button  -->   
+         <apex:pageBlockButtons >    
+             
+            <apex:commandButton value="Save" action="{!save}" reRender="form"/> 
+                   
+        </apex:pageBlockButtons>
+            
+        <!-- Page Block Section --> 
+        <apex:pageBlockSection columns="2">
+        
+            <apex:pageBlockSectionItem >
+            
+                <!-- Output Label for First Name -->
+                <apex:outputLabel value="First Name"/>  
+                    
+                <!-- Input Text for firstName -->          
+                <apex:inputText value="{!name}"/> 
+            
+            </apex:pageBlockSectionItem>
+                
+            <apex:pageBlockSectionItem >
+            
+                <!-- Output Label for Last Name -->
+                <apex:outputLabel value="Last Name"/>
+                
+                <!-- Input Test for lastName -->       
+                <apex:inputText value="{!lastName}"/>
+            
+            </apex:pageBlockSectionItem>
+            
+            <apex:pageBlockSectionItem >
+            
+                <!-- Output Label for Class -->
+                <apex:outputLabel value="Class"/>
+                
+                <!-- Input Text for class1  -->      
+               <apex:inputText value="{!classId}"/> 
+            
+            </apex:pageBlockSectionItem>
+            
+            <apex:pageBlockSectionItem >
+            
+                <!-- Output Label for Email -->
+                <apex:outputLabel value="Email"/>
+                
+                <!-- Input Text for email -->        
+                <apex:inputText value="{!email}"/>
+           
+           </apex:pageBlockSectionItem>
+           
+           <apex:pageBlockSectionItem >
+                
+                <!-- Output Label for Attendence -->
+                <apex:outputLabel value="Attendence"/>
+                
+                <!-- Input Text for attendence -->        
+                <apex:inputText value="{!attendence}"/>
+            
+            </apex:pageBlockSectionItem>
+            
+            <apex:pageBlockSectionItem >
+                
+                <!-- Output Label for Fee -->
+                <apex:outputLabel value="Fee"/>
+                
+                <!-- Input Text for fee -->        
+                <apex:inputText value="{!fee}"/>
+            
+            </apex:pageBlockSectionItem>
+            
+            <apex:pageBlockSectionItem >
+                
+                <!-- Output Label for Sex -->
+                <apex:outputLabel value="Sex"/>
+                
+                <!-- Input Text for sex -->        
+                <apex:selectList value="{!sex}" multiselect="false" size="1">
+                <apex:selectOption itemValue="Male" itemLabel="Male"/>
+                <apex:selectOption itemValue="Female" itemLabel="Female"/>
+                
+                </apex:selectList> 
+            
+            </apex:pageBlockSectionItem>
+            
+        </apex:pageBlockSection>
+            
+        </apex:pageBlock>
+    </apex:form> 
+</apex:page>

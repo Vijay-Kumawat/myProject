@@ -1,0 +1,8 @@
+<apex:page >
+    <apex:sectionHeader title="Thank You"/>
+    <apex:pageblock >
+        <apex:pageblocksection columns="1">
+            <apex:outputlabel value="Thank you for submitting the information.We will get back to you soon." style="font-weight:bold"></apex:outputlabel>
+        </apex:pageblocksection>
+    </apex:pageblock>
+</apex:page>

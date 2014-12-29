@@ -1,0 +1,123 @@
+<!--
+/** 
+  * Description     :   Client's Visualforce page.
+  *
+  * Created By      :   Abhi Tripathi (Simplyforce Technology)
+  *
+  * Created Date    :   2/4/2014    
+  *
+  * Revision Log    :   V1.0      
+  **/
+  -->
+<apex:page controller="LoginController" action="{!pageRef}" showHeader="false" sidebar="false">
+  
+      <!-- static resource style sheet -->
+    <apex:stylesheet value="{!URLFOR($Resource.SitesStyles, 'css/site.css')}" />
+    
+    <style>
+        body {
+            width:360px;
+        }
+        .login-submit {
+          display: block;
+          width: 35%;
+          height: 32px;
+          font-size: 14px;
+          font-weight: bold;
+          color: #294779;
+          text-align: center;
+          text-shadow: 0 1px rgba(255, 255, 255, 0.3);
+          background: #adcbfa;
+          background-clip: padding-box;
+          border: 1px solid #284473;
+          border-bottom-color: #223b66;
+          border-radius: 4px;
+          float:left;
+          cursor: pointer;
+          background-image: -webkit-linear-gradient(top, #d0e1fe, #96b8ed);
+          background-image: -moz-linear-gradient(top, #d0e1fe, #96b8ed);
+          background-image: -o-linear-gradient(top, #d0e1fe, #96b8ed);
+          background-image: linear-gradient(to bottom, #d0e1fe, #96b8ed);
+          -webkit-box-shadow: inset 0 1px rgba(255, 255, 255, 0.5), inset 0 0 7px rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.15);
+          box-shadow: inset 0 1px rgba(255, 255, 255, 0.5), inset 0 0 7px rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.15);
+        }
+        .login-submit:active {
+          background: #a4c2f3;
+          -webkit-box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.4), 0 1px rgba(255, 255, 255, 0.1);
+          box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.4), 0 1px rgba(255, 255, 255, 0.1);
+        }
+        .bPageBlock .detailList .labelCol {
+            background:#0099FF;
+            
+        }
+        body .bPageBlock .pbBody .labelCol {
+            color:white;
+        }
+        input {
+            width: 70%;
+            height: 24px;
+            color: black;
+            border: 1px solid #15243b;
+            border-top-color: #0d1827;
+            border-radius: 4px;
+        }
+    </style>
+    
+    <!-- block UI component -->
+    <c:BlockUI />
+
+    <div style="width:360px;">
+    
+    <!-- page form -->
+    <apex:form rendered="{!isLoggedIn}">
+    
+        <!-- Background Processing Message -->
+        <apex:actionStatus onStart="blockMe();" onstop="unBlockMe();" id="waitMsg" />
+   
+        <!-- section header -->
+        <apex:image url="{!$Resource.Logo}" width="360px" height="100px"/> 
+        
+        <apex:pageMessages />
+      
+        <!-- page block -->
+        <apex:pageblock >
+        
+        <!-- page message -->  
+        <apex:pageMessages id="msg"/>
+    
+            <!-- Log out button -->
+            <apex:outputLink value="{!$Page.TSLoginPage}" id="eventlink" style="margin-left:268px;float:left;" styleClass="styled-button-2">Logout</apex:outputLink>
+        
+            <!-- page section -->
+            <apex:pageblockSection columns="1" id="pBS">
+            
+                  <!-- Select List of Projects -->
+                <apex:selectList value="{!selectedProject}" size="1" style="margin:10px" styleClass="styled-select">
+                    <apex:selectOptions value="{!options}"/>
+                </apex:selectList>
+           
+                    <apex:inputField value="{!carrier.Start_Date__c}"/>
+                    <apex:inputField value="{!carrier.Final_Date__c}" />
+            
+            <apex:repeat value="{!companiesList}" var="company">
+                    <td>
+                        <apex:outputField value="{!company.Task_Date__c}"/>
+                        <apex:outputField value="{!company.Name}" label="Module Name"/>
+                        <apex:outputField value="{!company.Status__c}" styleClass="picklistClass"/>
+                        <apex:outputField value="{!company.Hours__c}"/>
+                        <apex:outputField value="{!company.Task_Detail__c}"/>
+                    </td>
+                    
+            </apex:repeat>    
+           
+            </apex:pageblockSection>
+           
+            <apex:pageBlockButtons location="bottom">
+               <apex:commandButton status="waitMsg" value="Submit" action="{!showFilteredRecords}" style="margin-left:-15px;" styleClass="login-submit" onComplete="javascript:location.href = '#Results';" reRender="tble,msg, tabelPanel,pBS"/>
+               <!-- <apex:commandButton value="Export Details" action="{!downloadExcelOfRecords}" style="margin-left:10px;" styleClass="login-submit"/>-->
+            </apex:pageBlockButtons> 
+            
+           </apex:pageblock>
+    </apex:form> 
+    </div>      
+</apex:page>

@@ -1,0 +1,10 @@
+<apex:page controller="MyStudentClass">
+    <apex:form >
+        <apex:pageBlock title="Vijay">
+            <apex:pageBlockTable value="{!listStudent}" var="std">
+                <apex:column value="{!std.Name}"/>
+                <apex:column value="{!std.Attendence__c}"/>    
+            </apex:pageBlockTable>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

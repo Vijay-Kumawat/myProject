@@ -1,0 +1,341 @@
+<apex:page controller="AmazonImageViewerController" showHeader="false" sidebar="false">
+
+    <apex:includeScript value="{!$Resource.JQueryForAmazon}"/>
+    <apex:includeScript value="{!URLFOR($Resource.Amzaon, 'JS/Jquery.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.Amzaon, 'JS/tableSorter.js')}"/>
+    
+    <head>
+	    <link rel="stylesheet" href="http://tablesorter.com/docs/css/jq.css" type="text/css" media="print, projection, screen"/>
+    </head>
+    <style>
+        #imageTable tr:nth-child(even){
+            background-color:#EEE8AC;
+        }
+        #imageTable tr:nth-child(odd){
+            background-color:#F9FAD0;
+        }
+        #imageTable {
+            border-collapse: collapse;
+        }
+        .pg-normal { 
+			color: #000000; 
+			font-size: 15px; 
+			cursor: pointer; 
+			background: #D0B389; 
+			padding: 2px 4px 2px 4px; 
+		}
+		.pg-selected { 
+			color: #fff; 
+			font-size: 15px; 
+			background: #000000; 
+			padding: 2px 4px 2px 4px; 
+		}
+		#imageTable thead tr .header {
+			background-image: url("http://tablesorter.com/themes/blue/bg.gif");
+			background-repeat: no-repeat;
+			background-position: center right;
+			cursor: pointer;
+		}
+		#imageTable thead tr .headerSortUp {
+			background-image: url("http://tablesorter.com/themes/blue/asc.gif");
+		}
+		#imageTable thead tr .headerSortDown {
+			background-image: url("http://tablesorter.com/themes/blue/desc.gif");
+		}
+    </style>
+    <script>
+        function checkAll(cb){
+               
+            var inputElem = document.getElementsByTagName("input");
+               
+               for(var i=0; i<inputElem.length; i++) {
+               
+                   if(inputElem[i].id.indexOf("checkedone")!=-1)
+                   
+                   inputElem[i].checked = cb.checked;
+               }
+        }
+        function deleteJS() {
+             deletemethod();
+        }
+        function emailJS() {
+            emailmethod();
+        }
+        function sendEmailJS() {
+           sendmethod();
+        }
+        function cancelJS() {
+            cancelmethod();
+        }
+        function shareLinkJS() {
+            shareLinkmethod();
+        }
+        $(document).ready(function() { 
+        	$("#imageTable").tablesorter(); 
+    	} 
+		); 
+    </script>
+    
+    <script type="text/javascript">
+
+		function Pager(tableName, itemsPerPage) {
+		
+		this.tableName = tableName;
+		
+		this.itemsPerPage = itemsPerPage;
+		
+		this.currentPage = 1;
+		
+		this.pages = 0;
+		
+		this.inited = false;
+		
+		this.showRecords = function(from, to) {
+		
+		var rows = document.getElementById(tableName).rows;
+		
+		// i starts from 1 to skip table header row
+		
+		for (var i = 1; i < rows.length; i++) {
+		
+		if (i < from || i > to)
+		
+		rows[i].style.display = 'none';
+		
+		else
+		
+		rows[i].style.display = '';
+		
+		}
+		
+		}
+		
+		this.showPage = function(pageNumber) {
+		
+		if (! this.inited) {
+		
+		alert("not inited");
+		
+		return;
+		
+		}
+		
+		var oldPageAnchor = document.getElementById('pg'+this.currentPage);
+		
+		oldPageAnchor.className = 'pg-normal';
+		
+		this.currentPage = pageNumber;
+		
+		var newPageAnchor = document.getElementById('pg'+this.currentPage);
+		
+		newPageAnchor.className = 'pg-selected';
+		
+		var from = (pageNumber - 1) * itemsPerPage + 1;
+		
+		var to = from + itemsPerPage - 1;
+		
+		this.showRecords(from, to);
+		
+		}
+		
+		this.prev = function() {
+		
+		if (this.currentPage > 1)
+		
+		this.showPage(this.currentPage - 1);
+		
+		}
+		
+		this.next = function() {
+		
+		if (this.currentPage < this.pages) {
+		
+		this.showPage(this.currentPage + 1);
+		
+		}
+		
+		}
+		
+		this.init = function() {
+		
+		var rows = document.getElementById(tableName).rows;
+		
+		var records = (rows.length - 1);
+		
+		this.pages = Math.ceil(records / itemsPerPage);
+		
+		this.inited = true;
+		
+		}
+		
+		this.showPageNav = function(pagerName, positionId) {
+		
+		if (! this.inited) {
+		
+		alert("not inited");
+		
+		return;
+		
+		}
+		
+		var element = document.getElementById(positionId);
+		
+		var pagerHtml = '<span onclick="' + pagerName + '.prev();" class="pg-normal"> « Prev </span> ';
+		
+		for (var page = 1; page <= this.pages; page++)
+		
+		pagerHtml += '<span id="pg' + page + '" class="pg-normal" onclick="' + pagerName + '.showPage(' + page + ');">' + page + '</span> ';
+		
+		pagerHtml += '<span onclick="'+pagerName+'.next();" class="pg-normal"> Next »</span>';
+		
+		element.innerHTML = pagerHtml;
+		
+		}
+		}
+	</script>
+    
+    <apex:form >
+        <c:BlockUI />
+        <apex:actionStatus onStart="blockMe();" onstop="unBlockMe();" id="waitMsg"/>
+        <apex:outputPanel id="records"> 
+            
+            <apex:outPutPanel rendered="{!showMainPanel}">
+            <table border="0" style="width: 100%;line-height: 34px;background: #D0B389;padding-left: 33px;">
+                 <tr>
+                    <td><input type="button" onclick="deleteJS();" value="Delete" style="cursor:pointer;height: 27px;font-size: 15px;"/></td>
+                    <td><input type="button" onclick="emailJS();" value="Email" style="cursor:pointer;height: 27px;font-size: 15px;"/></td>
+                    <td><input type="button" onclick="shareLinkJS();" value="Share Link" style="cursor:pointer;height: 27px;font-size: 15px;"/></td>
+                 </tr>
+            </table>
+                           
+            <table class="tablesorter" style="width: 100%;line-height: 34px;" id="imageTable">
+            	<thead>
+                <tr style="font-size:13px;font-weight:bold;background: #D0B389;">
+                    <td width="15px;">
+                        <apex:inputCheckbox onClick="checkAll(this)"/>
+                    </td>
+                    <th width="100">
+                        Preview
+                    </th>
+                    <th width="150">
+                        File Name
+                    </th>
+                    <th width="50">
+                        File Size
+                    </th>
+                    <th width="100">
+                        Upload Date
+                    </th>
+                    <th width="50">
+                        Download
+                    </th>
+                    <apex:outPutPanel rendered="{!ShareLink}" layout="block">
+                        <th>
+                            Share Link(s)
+                        </th>
+                    </apex:outPutPanel>
+                </tr>
+                </thead>
+                <tbody>
+                <apex:repeat value="{!objList}" var="obj">
+                    <tr>
+                        <td>
+                            <apex:inputCheckbox value="{!obj.Sel}" id="checkedone"/>
+                        </td>
+                        <td>
+                            <apex:outputPanel rendered="{!IF((obj.fileType=='xls'),true,false)}" > 
+                                <apex:image url="{!URLFOR($Resource.AwsStorage, 'Excel.png')}" height="40" width="40" onclick="open_win2('{!obj.objectURL}');" />
+                            </apex:outputpanel>
+                            
+                            <apex:outputPanel rendered="{!IF((obj.fileType=='doc'),true,false)}" > 
+                                <apex:image url="{!URLFOR($Resource.AwsStorage, 'Doc.png')}"  height="40" width="40" onclick="open_win2('{!obj.objectURL}');" />
+                            </apex:outputpanel>
+                            
+                            <apex:outputPanel rendered="{!IF((obj.fileType=='zip'),true,false)}" > 
+                                <apex:image url="{!URLFOR($Resource.AwsStorage, 'Zip.png')}"  height="40" width="40" onclick="open_win2('{!obj.objectURL}');"  />
+                            </apex:outputpanel>
+                            
+                            <apex:outputPanel rendered="{!IF((obj.fileType=='pdf'),true,false)}" > 
+                                 <apex:image url="{!URLFOR($Resource.AwsStorage, 'pdf-icon.jpg')}"  height="40" width="40" onclick="open_win2('{!obj.objectURL}');"  />
+                            </apex:outputpanel>
+                            
+                            <apex:outputPanel rendered="{!IF((obj.fileType=='pic'),true,false)}"   > 
+                                <apex:image url="{!obj.objectURL}"   height="40" width="40" onclick="open_win();" />
+                             </apex:outputpanel>
+                            <apex:outputPanel rendered="{!IF((obj.fileType=='ppt'),true,false)}" > 
+                                <apex:image url="{!URLFOR($Resource.AwsStorage, 'PPT.png')}" height="40" width="40" onclick="open_win2('{!obj.objectURL}');" />
+                            </apex:outputpanel>
+                        </td>
+                        <td>
+                            <a style="text-decoration:none"  href="{!obj.objectURL}" target="_blank" ><span><apex:outputText value="{!obj.Name}" style="color: #597390;" /></span></a>
+                        </td>
+                        <td>
+                            <apex:outputText value="{!obj.FileSizeDetail}" style="color: #597390;" />
+                        </td>
+                        <td>
+                            <apex:outputText value="{0,date,MM/dd/yyyy hh:mm:ss a}" style="color: #597390;">
+                                <apex:param value="{!obj.UploadDate}"/>
+                            </apex:outputText> 
+                        </td>
+                        <td>
+                            <a href="{!obj.objectURL}" download="{!obj.Name}" title="Download"> 
+                                <img src="{!URLFOR($Resource.ImageGallery,'download.png')}" alt="ImageName" width="16" height="16" />
+                            </a>
+                        </td>
+                        <apex:outPutPanel rendered="{!ShareLink}" layout="block">
+                            <td>
+                                <apex:inputText value="{!obj.objectURL}" style="width:332px;"  rendered="{!Obj.ShareLink}"/>
+                            </td>
+                        </apex:outPutPanel>
+                    </tr>
+                </apex:repeat>
+                </tbody>
+            </table>
+            <div id="pageNavPosition" style="padding-top: 20px" align="center">
+			</div>
+			<script type="text/javascript">
+			var pager = new Pager('imageTable', 3);
+			pager.init();
+			pager.showPageNav('pager', 'pageNavPosition');
+			pager.showPage(1);
+			</script>
+            </apex:outPutPanel>
+            
+            <apex:outputPanel rendered="{!ShowEmailPanel}"> 
+            
+                <table border="0" style="width: 100%;line-height: 34px;background: slategray;padding-left: 33px;">
+                     <tr>
+                        <td><input type="button" onclick="sendEmailJS();" value="Send Email" style="cursor:pointer;height: 27px;font-size: 15px;"/></td>
+                        <td><input type="button" onclick="cancelJS();" value="Cancel" style="cursor:pointer;height: 27px;font-size: 15px;"/></td>
+                     </tr>
+                </table>
+                
+                <br/>
+                <table border="0" width="900">
+                    <tr>
+                        <td width="60" align="right"> <b> TO: </b>&nbsp;</td>
+                        <td width="800"> <apex:inputText value="{!ToAddress}" style="width:350px;" /> </td>
+                    </tr>
+                    <tr>
+                        <td width="60" align="right" > <b> CC: </b> &nbsp;</td>
+                        <td width="800"> <apex:inputText value="{!CCAddress}" style="width:350px;" /> </td>
+                    </tr>
+                    <tr>
+                        <td width="60" align="right" > <b> Subject:  </b> &nbsp;</td>
+                        <td width="800"> <apex:inputText value="{!Subject}" style="width:350px;" /> </td>
+                    </tr>
+                    <tr>
+                        <td width="900" colspan="2"> <apex:inputTextarea value="{!emailBody}" style="width:900px;height:500px;"/>  </td>
+                    </tr>
+                </table>
+            </apex:outputPanel>
+        </apex:outputpanel>
+
+        <apex:actionFunction action="{!deleteObjects}"  reRender="records" name="deletemethod"  status="waitMsg"/>    
+        <apex:actionFunction action="{!refreshObject}"  reRender="records" name="refreshmethod" status="waitMsg"/>  
+        <apex:actionFunction action="{!sendEmail}"  reRender="records" name="sendmethod" status="waitMsg"/>
+        <apex:actionFunction action="{!Cancel}"  reRender="records" name="cancelmethod" status="waitMsg"/>
+        <apex:actionFunction action="{!renderemail}"  reRender="records" name="emailmethod" status="waitMsg"/>
+        <apex:actionFunction action="{!renderShareLink}"  reRender="records" name="shareLinkmethod" status="waitMsg" />
+    </apex:form>
+</apex:page>

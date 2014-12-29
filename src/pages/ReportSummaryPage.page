@@ -1,0 +1,353 @@
+<apex:page showHeader="false" sidebar="false" id="page" controller="ReportSummaryController">
+
+    <!-- CSS Styles -->
+    <style>
+        table {
+            width:70%;
+        }
+        p {
+            font-size:18px;
+            font-weight:bold;
+        }
+        .filterDiv {
+            margin-left:100px;
+        }
+        .filterDiv1 {
+            margin-left:100px;
+            margin-bottom:15px;
+            font-size:15px;
+        }
+        .listClass {
+            width:300px;
+        }
+        .runReportClass {
+            margin-top: 15px;
+            margin-left: 421px;
+            font-size: 15px;
+            margin-bottom:15px;
+        }
+        th {
+            width:200px;
+        }
+    </style>
+    
+    <!-- Section Header -->
+    <apex:sectionHeader title="Report Builder"/>
+    
+    <!-- Block UI component -->
+    <c:BlockUI />
+   
+    <!-- Form -->
+    <apex:form id="frm">
+    
+    <!-- Page Block -->
+    <apex:pageBlock >
+    
+        <!-- Page Message -->
+        <apex:pageMessages id="pageMsg"/>
+            
+        <!-- Background Processing Message -->
+        <apex:actionStatus onStart="blockMe();" onstop="unBlockMe();" id="waitMsg" />
+    
+            <p>Filter By :</p>
+            <div class="filterDiv">
+                <table>
+                    <tr>
+                        <td>
+                            <b>Case</b>
+                        </td>
+                        <td>
+                            <apex:actionRegion >
+                            <apex:selectList value="{!selectedCaseField}" size="1" styleClass="listClass" >
+                                <apex:selectOptions value="{!caseFields}"/>
+                                <apex:actionSupport event="onchange" action="{!validateCaseReference}" rerender="filterPanel" status="waitMsg"/>
+                            </apex:selectList>
+                            </apex:actionRegion>
+                        </td>
+                        <td>
+                            <apex:selectList value="{!selectedCaseOperator}" size="1">
+                                <apex:selectOptions value="{!OperationType}"/>
+                            </apex:selectList>
+                        </td>
+                        <td>
+                            <apex:outPutPanel layout="block" id="filterPanel">
+                            <apex:inputText value="{!selectedCaseFieldValue}" rendered="{!AND(selectedCaseField != null , OR(mapCaseFields[selectedCaseField] == 'CURRENCY' , mapCaseFields[selectedCaseField] == 'NUMBER' , mapCaseFields[selectedCaseField] == 'COMBOBOX' , mapCaseFields[selectedCaseField] == 'DOUBLE' , mapCaseFields[selectedCaseField] == 'EMAIL' , mapCaseFields[selectedCaseField] == 'ID' , mapCaseFields[selectedCaseField] == 'INTEGER' , mapCaseFields[selectedCaseField] == 'PERCENT' , mapCaseFields[selectedCaseField] == 'PHONE' , mapCaseFields[selectedCaseField] == 'BASE64' , mapCaseFields[selectedCaseField] == 'TEXT'))}"/>
+                            <apex:inputTextArea value="{!selectedCaseFieldValue}" rendered="{!AND(selectedCaseField != null , mapCaseFields[selectedCaseField] == 'TEXTAREA')}"/>
+                            <apex:inputCheckBox value="{!selectedCaseFieldValue}" rendered="{!AND(selectedCaseField != null , mapCaseFields[selectedCaseField] == 'BOOLEAN')}"/> 
+                            <apex:inputText value="{!selectedCaseFieldValue}" rendered="{!mapCaseFields[selectedCaseField] == 'STRING'}"/>
+                            <apex:inputText value="{!selectedCaseFieldValue}" rendered="{!AND(selectedCaseField != null , mapCaseFields[selectedCaseField] == 'DATE')}" id="caseDatePicker" onfocus="DatePicker.pickDate(false, 'page:frm:j_id9:caseDatePicker', false);"/>
+                            <apex:inputText value="{!selectedCaseFieldValue}" rendered="{!AND(selectedCaseField != null , mapCaseFields[selectedCaseField] == 'DATETIME')}" id="caseDateTimePicker" onfocus="DatePicker.pickDate(true, 'page:frm:j_id9:caseDateTimePicker', true);"/>
+                            <apex:selectList value="{!selectedCaseFieldValue}" size="1" rendered="{!AND(selectedCaseField != null , mapCaseFields[selectedCaseField] == 'PICKLIST')}">
+                                <apex:selectOptions value="{!casePicklistValues}"/>   
+                            </apex:selectList>
+                            
+                            <apex:selectList value="{!selectedCaseFieldValue}" size="3" rendered="{!AND(selectedCaseField != null , mapCaseFields[selectedCaseField] == 'MULTIPICKLIST')}" multiselect="true">
+                                <apex:selectOptions value="{!caseMultiSelectPicklistValues}"/>   
+                            </apex:selectList>
+                            <apex:outputPanel rendered="{!AND(selectedCaseField != null , mapCaseFields[selectedCaseField] == 'REFERENCE')}">
+                   
+                               <span class="lookupInput">
+                                   <input id="opp51" maxlength="255" name="opp51" onchange="getElementByIdCS('page:frm:j_id9:updateValue').value=getElementByIdCS('opp51_lkid').value;getElementByIdCS('opp51_lkid').value='';getElementByIdCS('opp51_mod').value='1';" 
+                                    size="20" tabindex="0" type="text" align="left">
+                                       <a href="javascript:%20openLookup%28%27%2F_ui%2Fcommon%2Fdata%2FLookupPage%3Flkfm%3DeditPage%26lknm%3Dopp51%26lktp%3D%27%20%2B%20getElementByIdCS%28%27opp51_lktp%27%29.value%2C670%2C%271%27%2C%27%26lksrch%3D%27%20%2B%20escapeUTF%28getElementByIdCS%28%27opp51%27%29.value.substring%280%2C%2080%29%29%29" id="opp51_lkwgt" onclick="setLastMousePosition(event)" tabindex="3" title="Account Name Lookup (New Window)">
+                
+                                           <img src="/s.gif" alt="Account Name Lookup (New Window)" class="lookupIcon" onblur="this.className = 'lookupIcon';" onfocus="this.className = 'lookupIconOn';" onmouseout="this.className = 'lookupIcon';this.className = 'lookupIcon';" onmouseover="this.className = 'lookupIconOn';this.className = 'lookupIconOn';" title="Account Name Lookup (New Window)"></img>
+                                       </a>
+                                   </input>
+                                </span>
+                                   <apex:inputHidden value="{!selectedCaseFieldValue}" id="updateValue"/>
+                                   <input type="hidden" name="opp51_lkid" id="opp51_lkid" value="000000000000000"></input>
+                                   <input type="hidden" name="opp51_lkold" id="opp51_lkold" value="null"></input>
+                                   <input type="hidden" name="opp51_lktp" id="opp51_lktp" value="{!keyPrefixForCase}"></input>
+                                   <input type="hidden" name="opp51_lspf" id="opp51_lspf" value="0"></input>
+                                   <input type="hidden" name="opp51_lspfsub" id="opp51_lspfsub" value="0"></input>
+                                   <input type="hidden" name="opp51_mod" id="opp51_mod" value="0"></input>
+                            </apex:outputPanel>
+                            </apex:outPutPanel>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>Expert</b>
+                        </td>
+                        <td>
+                            <apex:actionRegion >
+                            <apex:selectList value="{!selectedExpertField}" size="1" styleClass="listClass">
+                                <apex:selectOptions value="{!expertFields}"/>
+                                <apex:actionSupport event="onchange" action="{!validateExpertReference}" rerender="filterPanelForExpert" status="waitMsg"/>
+                            </apex:selectList>
+                            </apex:actionRegion>
+                        </td>
+                        <td>
+                            <apex:selectList value="{!selectedExpertOperator}" size="1">
+                                <apex:selectOptions value="{!OperationType}"/>
+                            </apex:selectList>
+                        </td>
+                        <td>
+                            <apex:outPutPanel layout="block" id="filterPanelForExpert">
+                            
+                            <apex:inputText value="{!selectedExpertFieldValue}" rendered="{!AND(selectedExpertField != null , OR(mapExpertFields[selectedExpertField] == 'CURRENCY' , mapExpertFields[selectedExpertField] == 'NUMBER' , mapExpertFields[selectedExpertField] == 'COMBOBOX' , mapExpertFields[selectedExpertField] == 'DOUBLE' , mapExpertFields[selectedExpertField] == 'EMAIL' , mapExpertFields[selectedExpertField] == 'ID' , mapExpertFields[selectedExpertField] == 'INTEGER' , mapExpertFields[selectedExpertField] == 'PERCENT' , mapExpertFields[selectedExpertField] == 'PHONE' , mapExpertFields[selectedExpertField] == 'TEXT' , mapExpertFields[selectedExpertField] == 'BASE64'))}"/>
+                            <apex:inputTextArea value="{!selectedExpertFieldValue}" rendered="{!AND(selectedExpertField != null , mapExpertFields[selectedExpertField] == 'TEXTAREA')}"/>
+                            <apex:inputCheckBox value="{!selectedExpertFieldValue}" rendered="{!AND(selectedExpertField != null , mapExpertFields[selectedExpertField] == 'BOOLEAN')}"/> 
+                            <apex:inputText value="{!selectedExpertFieldValue}" rendered="{!mapExpertFields[selectedExpertField] == 'STRING'}"/>
+                            <apex:inputText value="{!selectedExpertFieldValue}" rendered="{!AND(selectedExpertField != null , mapExpertFields[selectedExpertField] == 'DATE')}" id="expertDatePicker" onfocus="DatePicker.pickDate(false, 'page:frm:j_id9:expertDatePicker', false);"/>
+                            <apex:inputText value="{!selectedExpertFieldValue}" rendered="{!AND(selectedExpertField != null , mapExpertFields[selectedExpertField] == 'DATETIME')}" id="expertDateTimePicker" onfocus="DatePicker.pickDate(true, 'page:frm:j_id9:expertDateTimePicker', true);"/>
+                            
+                            <apex:selectList value="{!selectedExpertFieldValue}" size="1" rendered="{!AND(selectedExpertField != null , mapExpertFields[selectedExpertField] == 'PICKLIST')}">
+                                <apex:selectOptions value="{!expertPicklistValues}"/>
+                            </apex:selectList>
+                            
+                            <apex:selectList value="{!selectedExpertFieldValue}" size="3" rendered="{!AND(selectedExpertField != null , mapExpertFields[selectedExpertField] == 'MULTIPICKLIST')}" multiselect="true">
+                                <apex:selectOptions value="{!expertMultiSelectPicklistValues}"/>
+                            </apex:selectList>
+                            
+                            <apex:outputPanel rendered="{!AND(selectedExpertField != null , mapExpertFields[selectedExpertField] == 'REFERENCE')}">
+                   
+                               <span class="lookupInput">
+                                   <input id="opp52" maxlength="255" name="opp52" onchange="getElementByIdCS('page:frm:j_id9:updateValue1').value=getElementByIdCS('opp52_lkid').value;getElementByIdCS('opp52_lkid').value='';getElementByIdCS('opp52_mod').value='1';" 
+                                    size="20" tabindex="0" type="text" align="left">
+                                       <a href="javascript:%20openLookup%28%27%2F_ui%2Fcommon%2Fdata%2FLookupPage%3Flkfm%3DeditPage%26lknm%3Dopp52%26lktp%3D%27%20%2B%20getElementByIdCS%28%27opp52_lktp%27%29.value%2C670%2C%271%27%2C%27%26lksrch%3D%27%20%2B%20escapeUTF%28getElementByIdCS%28%27opp52%27%29.value.substring%280%2C%2080%29%29%29" id="opp52_lkwgt" onclick="setLastMousePosition(event)" tabindex="3" title="Account Name Lookup (New Window)">
+                
+                                           <img src="/s.gif" alt="Account Name Lookup (New Window)" class="lookupIcon" onblur="this.className = 'lookupIcon';" onfocus="this.className = 'lookupIconOn';" onmouseout="this.className = 'lookupIcon';this.className = 'lookupIcon';" onmouseover="this.className = 'lookupIconOn';this.className = 'lookupIconOn';" title="Account Name Lookup (New Window)"></img>
+                                       </a>
+                                   </input>
+                                </span>
+                                   <apex:inputHidden value="{!selectedExpertFieldValue}" id="updateValue1"/>
+                                   <input type="hidden" name="opp52_lkid" id="opp52_lkid" value="000000000000000"></input>
+                                   <input type="hidden" name="opp52_lkold" id="opp52_lkold" value="null"></input>
+                                   <input type="hidden" name="opp52_lktp" id="opp52_lktp" value="{!keyPrefixForExpert}"></input>
+                                   <input type="hidden" name="opp52_lspf" id="opp52_lspf" value="0"></input>
+                                   <input type="hidden" name="opp52_lspfsub" id="opp52_lspfsub" value="0"></input>
+                                   <input type="hidden" name="opp52_mod" id="opp52_mod" value="0"></input>
+                            </apex:outputPanel>
+                            </apex:outPutPanel>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>Program</b>
+                        </td>
+                        <td>
+                            <apex:actionRegion >
+                            <apex:selectList value="{!selectedProgramField}" size="1" styleClass="listClass">
+                                <apex:selectOptions value="{!programFields}"/>
+                                <apex:actionSupport event="onchange" action="{!validateProgramReference}" rerender="filterPanelForProgram" status="waitMsg"/>
+                            </apex:selectList>
+                            </apex:actionRegion>
+                        </td>
+                        <td>
+                            <apex:selectList value="{!selectedProgramOperator}" size="1">
+                                <apex:selectOptions value="{!OperationType}"/>
+                            </apex:selectList>
+                        </td>
+                        <td>
+                            <apex:outPutPanel layout="block" id="filterPanelForProgram">
+                            
+                            <apex:inputText value="{!selectedProgramFieldValue}" rendered="{!AND(selectedProgramField != null , OR(mapProgramFields[selectedProgramField] == 'CURRENCY' , mapProgramFields[selectedProgramField] == 'NUMBER' , mapProgramFields[selectedProgramField] == 'COMBOBOX' , mapProgramFields[selectedProgramField] == 'DOUBLE' , mapProgramFields[selectedProgramField] == 'EMAIL' , mapProgramFields[selectedProgramField] == 'ID' , mapProgramFields[selectedProgramField] == 'INTEGER' , mapProgramFields[selectedProgramField] == 'PERCENT' , mapProgramFields[selectedProgramField] == 'PHONE' , mapProgramFields[selectedProgramField] == 'TEXT' , mapProgramFields[selectedProgramField] == 'BASE64'))}"/>
+                            <apex:inputTextArea value="{!selectedProgramFieldValue}" rendered="{!AND(selectedProgramField != null , mapProgramFields[selectedProgramField] == 'TEXTAREA')}"/>
+                            <apex:inputCheckBox value="{!selectedProgramFieldValue}" rendered="{!AND(selectedProgramField != null , mapProgramFields[selectedProgramField] == 'BOOLEAN')}"/> 
+                            <apex:inputText value="{!selectedProgramFieldValue}" rendered="{!mapProgramFields[selectedProgramField] == 'STRING'}"/>
+                            <apex:inputText value="{!selectedProgramFieldValue}" rendered="{!AND(selectedProgramField != null , mapProgramFields[selectedProgramField] == 'DATE')}" id="programDatePicker" onfocus="DatePicker.pickDate(false, 'page:frm:j_id9:programDatePicker', false);"/>
+                            <apex:inputText value="{!selectedProgramFieldValue}" rendered="{!AND(selectedProgramField != null , mapProgramFields[selectedProgramField] == 'DATETIME')}" id="programDateTimePicker" onfocus="DatePicker.pickDate(true, 'page:frm:j_id9:programDateTimePicker', true);"/>
+                            
+                            <apex:selectList value="{!selectedProgramFieldValue}" size="1" rendered="{!AND(selectedProgramField != null , mapProgramFields[selectedProgramField] == 'PICKLIST')}">
+                                <apex:selectOptions value="{!programPicklistValues}"/>
+                            </apex:selectList>
+                            
+                            <apex:selectList value="{!selectedProgramFieldValue}" size="3" rendered="{!AND(selectedProgramField != null , mapProgramFields[selectedProgramField] == 'MULTIPICKLIST')}" multiselect="true">
+                                <apex:selectOptions value="{!programMultiSelectPicklistValues}"/>
+                            </apex:selectList>
+                            
+                            <apex:outputPanel rendered="{!AND(selectedProgramField != null , mapProgramFields[selectedProgramField] == 'REFERENCE')}">
+                   
+                               <span class="lookupInput">
+                                   <input id="opp53" maxlength="255" name="opp53" onchange="getElementByIdCS('page:frm:j_id9:updateValue2').value=getElementByIdCS('opp53_lkid').value;getElementByIdCS('opp53_lkid').value='';getElementByIdCS('opp53_mod').value='1';" 
+                                    size="20" tabindex="0" type="text" align="left">
+                                       <a href="javascript:%20openLookup%28%27%2F_ui%2Fcommon%2Fdata%2FLookupPage%3Flkfm%3DeditPage%26lknm%3Dopp53%26lktp%3D%27%20%2B%20getElementByIdCS%28%27opp53_lktp%27%29.value%2C670%2C%271%27%2C%27%26lksrch%3D%27%20%2B%20escapeUTF%28getElementByIdCS%28%27opp53%27%29.value.substring%280%2C%2080%29%29%29" id="opp53_lkwgt" onclick="setLastMousePosition(event)" tabindex="3" title="Account Name Lookup (New Window)">
+                
+                                           <img src="/s.gif" alt="Account Name Lookup (New Window)" class="lookupIcon" onblur="this.className = 'lookupIcon';" onfocus="this.className = 'lookupIconOn';" onmouseout="this.className = 'lookupIcon';this.className = 'lookupIcon';" onmouseover="this.className = 'lookupIconOn';this.className = 'lookupIconOn';" title="Account Name Lookup (New Window)"></img>
+                                       </a>
+                                   </input>
+                                </span>
+                                   <apex:inputHidden value="{!selectedProgramFieldValue}" id="updateValue2"/>
+                                   <input type="hidden" name="opp53_lkid" id="opp53_lkid" value="000000000000000"></input>
+                                   <input type="hidden" name="opp53_lkold" id="opp53_lkold" value="null"></input>
+                                   <input type="hidden" name="opp53_lktp" id="opp53_lktp" value="{!keyPrefixForProgram}"></input>
+                                   <input type="hidden" name="opp53_lspf" id="opp53_lspf" value="0"></input>
+                                   <input type="hidden" name="opp53_lspfsub" id="opp53_lspfsub" value="0"></input>
+                                   <input type="hidden" name="opp53_mod" id="opp53_mod" value="0"></input>
+                            </apex:outputPanel>
+                            </apex:outPutPanel>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>Case Category</b>
+                        </td>  
+                        <td>
+                            <apex:actionRegion >
+                            <apex:selectList value="{!selectedCaseCategoryField}" size="1" styleClass="listClass">
+                                <apex:selectOptions value="{!caseCategoryFields}"/>
+                                <apex:actionSupport event="onchange" action="{!validateCaseCategoryReference}" rerender="filterPanelForCaseCategory" status="waitMsg"/>
+                            </apex:selectList>
+                            </apex:actionRegion>
+                        </td>
+                        <td>
+                            <apex:selectList value="{!selectedCaseCategoryOperator}" size="1">
+                                <apex:selectOptions value="{!OperationType}"/>
+                            </apex:selectList>
+                        </td>
+                        <td>
+                            <apex:outPutPanel layout="block" id="filterPanelForCaseCategory">
+                            
+                            <apex:inputText value="{!selectedCaseCategoryFieldValue}" rendered="{!AND(selectedCaseCategoryField != null , OR(mapCaseCategoryFields[selectedCaseCategoryField] == 'CURRENCY' , mapCaseCategoryFields[selectedCaseCategoryField] == 'NUMBER' , mapCaseCategoryFields[selectedCaseCategoryField] == 'COMBOBOX' , mapCaseCategoryFields[selectedCaseCategoryField] == 'DOUBLE' , mapCaseCategoryFields[selectedCaseCategoryField] == 'EMAIL' , mapCaseCategoryFields[selectedCaseCategoryField] == 'ID' , mapCaseCategoryFields[selectedCaseCategoryField] == 'INTEGER' , mapCaseCategoryFields[selectedCaseCategoryField] == 'PERCENT' , mapCaseCategoryFields[selectedCaseCategoryField] == 'PHONE' , mapCaseCategoryFields[selectedCaseCategoryField] == 'TEXT' , mapCaseCategoryFields[selectedCaseCategoryField] == 'BASE64'))}"/>
+                            <apex:inputTextArea value="{!selectedCaseCategoryFieldValue}" rendered="{!AND(selectedCaseCategoryField != null , mapCaseCategoryFields[selectedCaseCategoryField] == 'TEXTAREA')}"/>
+                            <apex:inputCheckBox value="{!selectedCaseCategoryFieldValue}" rendered="{!AND(selectedCaseCategoryField != null , mapCaseCategoryFields[selectedCaseCategoryField] == 'BOOLEAN')}"/> 
+                            <apex:inputText value="{!selectedCaseCategoryFieldValue}" rendered="{!mapCaseCategoryFields[selectedCaseCategoryField] == 'STRING'}"/>
+                            <apex:inputText value="{!selectedCaseCategoryFieldValue}" rendered="{!AND(selectedCaseCategoryField != null , mapCaseCategoryFields[selectedCaseCategoryField] == 'DATE')}" id="caseCategoryDatePicker" onfocus="DatePicker.pickDate(false, 'page:frm:j_id9:caseCategoryDatePicker', false);"/>
+                            <apex:inputText value="{!selectedCaseCategoryFieldValue}" rendered="{!AND(selectedCaseCategoryField != null , mapCaseCategoryFields[selectedCaseCategoryField] == 'DATETIME')}" id="caseCategoryDateTimePicker" onfocus="DatePicker.pickDate(true, 'page:frm:j_id9:caseCategoryDateTimePicker', true);"/>
+                            
+                            <apex:selectList value="{!selectedCaseCategoryFieldValue}" size="1" rendered="{!AND(selectedCaseCategoryField != null , mapCaseCategoryFields[selectedCaseCategoryField] == 'PICKLIST')}">
+                                <apex:selectOptions value="{!caseCategoryPicklistValues}"/>
+                            </apex:selectList>
+                            <apex:selectList value="{!selectedCaseCategoryFieldValue}" size="3" rendered="{!AND(selectedCaseCategoryField != null , mapCaseCategoryFields[selectedCaseCategoryField] == 'MULTIPICKLIST')}" multiselect="true">
+                                <apex:selectOptions value="{!caseCategoryMultiSelectPicklistValues}"/>
+                            </apex:selectList>
+                            <apex:outputPanel rendered="{!AND(selectedCaseCategoryField != null , mapCaseCategoryFields[selectedCaseCategoryField] == 'REFERENCE')}">
+
+                               <span class="lookupInput">
+                                   <input id="opp54" maxlength="255" name="opp54" onchange="getElementByIdCS('page:frm:j_id9:updateValue3').value=getElementByIdCS('opp54_lkid').value;getElementByIdCS('opp54_lkid').value='';getElementByIdCS('opp54_mod').value='1';" 
+                                    size="20" tabindex="0" type="text" align="left">
+                                       <a href="javascript:%20openLookup%28%27%2F_ui%2Fcommon%2Fdata%2FLookupPage%3Flkfm%3DeditPage%26lknm%3Dopp54%26lktp%3D%27%20%2B%20getElementByIdCS%28%27opp54_lktp%27%29.value%2C670%2C%271%27%2C%27%26lksrch%3D%27%20%2B%20escapeUTF%28getElementByIdCS%28%27opp54%27%29.value.substring%280%2C%2080%29%29%29" id="opp54_lkwgt" onclick="setLastMousePosition(event)" tabindex="3" title="Account Name Lookup (New Window)">
+                
+                                           <img src="/s.gif" alt="Account Name Lookup (New Window)" class="lookupIcon" onblur="this.className = 'lookupIcon';" onfocus="this.className = 'lookupIconOn';" onmouseout="this.className = 'lookupIcon';this.className = 'lookupIcon';" onmouseover="this.className = 'lookupIconOn';this.className = 'lookupIconOn';" title="Account Name Lookup (New Window)"></img>
+                                       </a>
+                                   </input>
+                                </span>
+                                   <apex:inputHidden value="{!selectedCaseCategoryFieldValue}" id="updateValue3"/>
+                                   <input type="hidden" name="opp54_lkid" id="opp54_lkid" value="000000000000000"></input>
+                                   <input type="hidden" name="opp54_lkold" id="opp54_lkold" value="null"></input>
+                                   <input type="hidden" name="opp54_lktp" id="opp54_lktp" value="{!keyPrefixForCaseCategory}"></input>
+                                   <input type="hidden" name="opp54_lspf" id="opp54_lspf" value="0"></input>
+                                   <input type="hidden" name="opp54_lspfsub" id="opp54_lspfsub" value="0"></input>
+                                   <input type="hidden" name="opp54_mod" id="opp54_mod" value="0"></input>
+                            </apex:outputPanel>
+                            </apex:outPutPanel>
+                        </td>
+                    </tr>
+                </table>
+                <div class="runReportClass">
+                    <apex:commandButton value="Run Report" action="{!searchRecords}" status="waitMsg" reRender="pBS,filterCriteria,pageMsg"/>
+                </div>
+            </div>
+            
+            <apex:outPutPanel id="filterCriteria">
+            <p>Criteria :</p>
+            <div class="filterDiv1">
+            
+                <apex:outPutPanel rendered="{!(selectedCaseField != null || selectedCaseOperator != '')}">
+                    Case.{!selectedCaseField} {!selectedCaseOperator} {!selectedCaseFieldValue}<br/><br/>
+                </apex:outPutPanel>
+                <apex:outPutPanel rendered="{!(selectedExpertField != null || selectedExpertOperator != '')}">
+                    Expert.{!selectedExpertField} {!selectedExpertOperator} {!selectedExpertFieldValue}<br/><br/>
+                </apex:outPutPanel>
+                <apex:outPutPanel rendered="{!(selectedProgramField != null || selectedProgramOperator != '')}">
+                    Program.{!selectedProgramField} {!selectedProgramOperator} {!selectedProgramFieldValue}<br/><br/>
+                </apex:outPutPanel>
+                <apex:outPutPanel rendered="{!(selectedCaseCategoryField != null || selectedCaseCategoryOperator != '')}">
+                    Category.{!selectedCaseCategoryField} {!selectedCaseCategoryOperator} {!selectedCaseCategoryFieldValue}
+                </apex:outPutPanel>
+            </div>
+            </apex:outPutPanel>
+            
+            <!-- Page Block Section displaying records -->
+            <apex:pageBlockSection title="Result" columns="1" id="pBS" collapsible="false">
+            
+                <!-- OutPut text displaying no records message -->
+                <apex:outPutText value="No Records to display." rendered="{!cases.size == 0}"/>
+                
+                <!-- Page Block Section displaying case records -->
+                <apex:pageBlockTable value="{!cases}" var="c" rendered="{!cases.size > 0}">
+                
+                    <apex:column value="{!c.CaseNumber}"/>
+                    <apex:column value="{!c.Type}"/>
+                    <apex:column value="{!c.Origin}"/>
+                    <apex:column value="{!c.Status}"/>
+                    <apex:column value="{!c.Reason}"/>
+                <apex:column breakBefore="true" colspan="5">
+                
+                <!-- Page Block Section displaying expert records -->
+                <apex:pageBlockTable value="{!c.Experts__r}" var="c1" rendered="{!c.Experts__r.size > 0}">
+                    
+                    <apex:column value="{!c1.Id}"/>
+                    <apex:column value="{!c1.Name}"/>
+                    <apex:column value="{!c1.Description__c}"/>
+                    <apex:column value="{!c1.Phone__c}"/>
+                    <apex:column value="{!c1.E_Number__c}"/>
+                </apex:pageBlockTable>
+                
+                <!-- Page Block Section displaying program records -->
+                <apex:pageBlockTable value="{!c.Programs__r}" var="c2" rendered="{!c.Programs__r.size > 0}">
+                
+                    <apex:column value="{!c2.Id}"/>
+                    <apex:column value="{!c2.Name}"/>
+                    <apex:column value="{!c2.Description__c}"/>
+                    <apex:column value="{!c2.Title__c}"/>
+                    <apex:column value="{!c2.P_Number__c}"/>
+                </apex:pageBlockTable>
+                
+                <!-- Page Block Section displaying case categories records -->
+                <apex:pageBlockTable value="{!c.Case_Categories__r}" var="c3" rendered="{!c.Case_Categories__r.size > 0}">
+                
+                    <apex:column value="{!c3.Id}"/>
+                    <apex:column value="{!c3.Name}"/>
+                    <apex:column value="{!c3.Description__c}"/>
+                    <apex:column value="{!c3.Count__c}"/>
+                    <apex:column value="{!c3.CC_Number__c}"/>
+                </apex:pageBlockTable>
+                </apex:column>
+                </apex:pageBlockTable>
+            </apex:pageBlockSection>
+    </apex:pageBlock>
+    </apex:form>
+</apex:page>

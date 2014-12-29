@@ -1,0 +1,42 @@
+<!--
+* Description   : This is Visualforce Page to show contact records with the help of wrapper list.
+* 
+* Created By    : Vijay Kumar Kumawat
+*
+* Created Date  : 1/28/2013
+*
+* Version       : v1.0 - Create 
+-->
+<!-- Page -->
+<apex:page controller="ContactWithWrapperClassBinding">
+    
+    <!-- Form -->
+    <apex:form >
+        
+        <!-- Page Block -->
+        <apex:pageBlock title="Wrapper Class :: Example ">
+            
+            <!-- Page Block Buttons -->
+            <apex:pageBlockButtons >
+                <apex:commandbutton action="{!save}" value="Save"/> 
+            </apex:pageBlockButtons>
+            
+            <!-- Page Block Table -->
+            <apex:pageblocktable value="{!listWrapper}" var="list">
+            
+                <apex:column headerValue="Select">
+                    <apex:inputCheckbox value="{!list.selected}"/>
+                </apex:column>
+                
+                <apex:column >
+                    <apex:inputText value="{!list.Contact.FirstName}"/>
+                </apex:column>
+                
+                <apex:column > 
+                    <apex:outputText value="{!list.Contact.LastName}"/>
+                </apex:column>
+                
+            </apex:pageblocktable>
+        </apex:pageblock>
+    </apex:form>
+</apex:page>

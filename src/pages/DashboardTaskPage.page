@@ -1,0 +1,360 @@
+<apex:page controller="DashboardTasksTestController" id="pg">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css"/>
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    <!--<apex:stylesheet value="{!URLFOR($Resource.AJELITE_DashboardTasksTest, 'skuitUi.css')}"/>-->
+    <apex:stylesheet value="{!URLFOR($Resource.AJELITE_DashboardTasksTest, 'css/callUtility.css')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.AJELITE_DashboardTasksTest, 'js/tab.js')}"/>  
+    <script>
+        $(function() {
+            
+            $( "#tabs" ).tabs();
+            $( "#tabs-1" ).tabs();
+            $( "#tabs-2" ).tabs();
+            $( "#tabs" ).show();
+            tabScriptIntitialize();
+        });
+        
+        function switchToStep(numb,operationType){
+        
+            document.getElementById("pg:frm:opType").value = operationType;
+            
+            if(operationType == 'Seller Opportunity'){
+                
+                sellerOpSelectStep(numb);
+            } 
+            if(operationType == 'Sphere Opportunity'){
+               
+               sphereSelectStep(numb); 
+            }  
+        }
+        
+    </script>
+    <style>
+        #tabs{
+            background:#F5F5F5;
+        }
+        #main-ul li.ui-state-default{
+          background-image: -webkit-gradient(
+         linear,
+         left top,
+         left bottom,
+         color-stop(0, #ACD3F0),
+         color-stop(0.4, #729FC0)
+         );
+        background-image: -o-linear-gradient(bottom, #acd3f0 0%, #729fc0 40%);
+        background-image: -moz-linear-gradient(bottom, #acd3f0 0%, #729fc0 40%);
+        background-image: -webkit-linear-gradient(bottom, #ACD3F0 0%, #729FC0 40%);
+        background-image: -ms-linear-gradient(bottom, #acd3f0 0%, #729fc0 40%);
+        background-image: linear-gradient(to bottom, #ACD3F0 0%, #729FC0 40%);
+        }
+        #main-ul li.ui-state-default a{
+          color:#FFF;
+          font-weight:bold;
+        }
+        #main-ul li.ui-tabs-active{
+          background:#2F658E;
+          
+        }
+        #main-ul li a.ui-tabs-anchor{
+          padding:.7em 1em;
+          text-transform: uppercase;
+        }
+        #main-ul li.ui-tabs-active a.ui-tabs-anchor{
+          color:#FFF;
+          font-weight:bold;
+           
+        }
+        .ui-widget-header{
+          border:none;
+          background:#2F658E
+        }
+        
+        
+        .ui-state-default a.ui-tabs-anchor {
+            color:#FFF;
+        }
+        .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+            border: none;
+            background: none;
+            font-weight: normal;
+        }
+        
+        .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active {
+            border: 1px solid #AAA;
+            background: #F5F5F5 url(images/ui-bg_glass_65_ffffff_1x400.png) 50% 50% repeat-x;
+            font-weight: normal;
+            
+        }
+        .ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited{
+            color: #212121;
+        }
+        
+        /** Header Styles **/
+        /** Footer Styles **/
+        .floater-left{
+            float:left;
+            margin-left:10px;
+        }
+        .floater-left:nth-child(2){
+            margin-top:-6px;
+        }
+        .floater-left .combo-wrapper{
+            padding:0px;
+        }
+        .floater-left:nth-child(4){
+            margin-left:50px;
+        }
+        .floater-left label{
+            color:#a1a1a1;
+        }
+        .floater-left .show-value{
+            color:#2E76A7;
+        }
+        .floater-right{
+            float:right;
+            margin-right:20px;
+        }
+        .page-button-default{
+            display: inline-block;
+            padding: 2px 5px;
+            color: #FEFEFE;
+            font-weight: normal;
+            font-family: Arial;
+            border-radius: 3px;
+            vertical-align: middle;
+            text-decoration: none;
+            background: #2F658E;
+        }
+        .page-button-disabled{
+            
+            display: inline-block;
+            padding: 2px 5px;
+            color: #FEFEFE;
+            font-weight: normal;
+            font-family: Arial;
+            border-radius: 3px;
+            vertical-align: middle;
+            text-decoration: none;
+            background: #979797;
+        }
+        .floater-right a{
+            color: #FEFEFE;
+        }
+        .floater-right .floater-right-el{
+            margin-left:2px;
+        }
+    </style>
+    <apex:form id="frm">
+        
+        <!-- All hidden variablles -->
+        <apex:inputHidden value="{!operationFor}" id="opType"/>
+        <div id="tabs" style="display:none;">
+            <ul style="background:none;border:none;" id="main-ul">
+                <li><a href="#tabs-1">Prospecting</a></li>
+                <li><a href="#tabs-2">Current Clients</a></li>
+                <li><a href="#tabs-3">Meetings</a></li>
+            </ul>
+            <div id="tabs-1" style="padding:0;">
+                
+                <ul>
+                    <li><a href="#seller-Op">Seller Opportunities</a></li>
+                    <li><a href="#all-cont">All Contacts</a></li>
+                    <li><a href="#reo-op">Reo Opportunities</a></li>
+                    <li><a href="#investor-op">Investor Opportunities</a></li>
+                    <li><a href="#buyer-op">Buyer Opportunities</a></li>
+                    <li><a href="#sphere-op">Sphere</a></li>
+                    <li><a href="#recruiting-op">Recruiting</a></li>
+                    <li><a href="#seller-leads">Seller Leads</a></li>
+                    <li><a href="#reo-leads">Reo Leads</a></li>
+                    <li><a href="#buyer-leads">Buyer Leads</a></li>
+                    <!--<li><a href="#investors-leads">Investros Leads</a></li> -->
+                </ul>
+                <div id="seller-Op">
+                    <!-- Variable to hold Seller Tab Data -->
+                    <apex:variable value="{!tabItemsMap['Seller Opportunity']}" var="sellerOpItem"/>
+                    
+                    <!-- Handle User Selected Step -->
+                    <apex:actionFunction name="sellerOpSelectStep" action="{!switchToStep}" reRender="sellerContents,stageBox" status="loading">
+                        <apex:param name="sellerOpUserStep" value="" assignTo="{!sellerOpItem.userSelectedStep}"/>   
+                    </apex:actionFunction>
+                    
+                    <!-- Handle Sorting for Seller Opportunity -->
+                    <apex:actionFunction name="sellerSortView" action="{!sortView}" reRender="sellerContents,stageBox" oncomplete="tabScriptIntitialize();">
+                        <apex:param value="" name="param1" assignTo="{!sellerOpItem.sortValue}"/>
+                    </apex:actionFunction>
+                    
+                    <div id="seller-header" class="subHeader">
+                        <div id="massActionBox"></div> 
+                        <div id="searchBox" style="float:left;">
+                            <input type="text" class="searchbox" placeholder="Search Contacts"/>
+                        </div> 
+                        <apex:outputPanel id="stageBox">
+                            <div id="stageSelectBox" style="width:150px;float:left;margin-left:20px;margin-top:-7px;">
+                                <div class="stage-selection-box">
+                                    <apex:inputField value="{!sellerOpItem.contactObj.Seller_Stage__c}"/>
+                                </div>
+                            </div> 
+                        </apex:outputPanel> 
+                    </div>
+                    <apex:outputPanel id="sellerContents">
+                    <div id="seller-content" class="subContent" style="clear:both;">
+                        <table cellpadding="0" cellspacing="0" class="callTable">
+                            <thead>
+                                <tr>
+                                    <th class="checkcolumn">
+                                        <input type="checkbox" style="margin: 0px; width: 18px;"/>
+                                    </th>
+                                    <th class="actioncolumn">
+                                        <div title="Add New Contact" class="newbutton ui-silk-add ui-silk inline"></div>
+                                    </th>
+                                    <th data-field="Next_Contact__c" data-guid="36">
+                                        <span class="arrow-ui-icon {!IF(sellerOpItem.sortValue== 'Next_Contact__c',IF(sellerOpItem.sortDirection=='ASC','up-arrow-icon','down-arrow-icon'),'both-arrow-icon')}" onclick="sellerSortView('Next_Contact__c')"></span>
+                                        <span style="margin-right: 23px;">Next</span>
+                                    </th>
+                                    <th data-field="Last_Contact__c" data-guid="37">
+                                        <span class="arrow-ui-icon {!IF(sellerOpItem.sortValue== 'Last_Contact__c',IF(sellerOpItem.sortDirection=='ASC','up-arrow-icon','down-arrow-icon'),'both-arrow-icon')}" onclick="sellerSortView('Last_Contact__c')"></span>
+                                        <span style="margin-right: 23px;">Last</span>
+                                    </th>
+                                    <th data-field="Seller_Stage__c" data-guid="38">
+                                        <span class="arrow-ui-icon {!IF(sellerOpItem.sortValue== 'Seller_Stage__c',IF(sellerOpItem.sortDirection=='ASC','up-arrow-icon','down-arrow-icon'),'both-arrow-icon')}" onclick="sellerSortView('Seller_Stage__c')"></span>
+                                        <span style="margin-right: 23px;">Seller Stage</span>
+                                    </th>
+                                    <th data-field="Seller_Status__c" data-guid="39">
+                                        <span class="arrow-ui-icon {!IF(sellerOpItem.sortValue== 'Seller_Status__c',IF(sellerOpItem.sortDirection=='ASC','up-arrow-icon','down-arrow-icon'),'both-arrow-icon')}" onclick="sellerSortView('Seller_Status__c')"></span>
+                                        <span style="margin-right: 23px;">Seller Status</span>
+                                    </th>
+                                    <th data-field="Seller_Type__c" data-guid="40">
+                                        <span class="arrow-ui-icon {!IF(sellerOpItem.sortValue== 'Seller_Type__c',IF(sellerOpItem.sortDirection=='ASC','up-arrow-icon','down-arrow-icon'),'both-arrow-icon')}" onclick="sellerSortView('Seller_Type__c')"></span>
+                                        <span style="margin-right: 23px;">Seller Type</span>
+                                    </th>
+                                    <th data-guid="41" style="width: 12%;">
+                                        <span>Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                    </th>
+                                    <th data-field="Preferred_Phone__c" data-guid="42">
+                                        <span class="arrow-ui-icon {!IF(sellerOpItem.sortValue== 'Preferred_Phone__c',IF(sellerOpItem.sortDirection=='ASC','up-arrow-icon','down-arrow-icon'),'both-arrow-icon')}" onclick="sellerSortView('Preferred_Phone__c')"></span>
+                                        <span style="margin-right: 23px;">Preferred Phone</span>
+                                    </th>
+                                    <th data-field="Preferred_Email__c" data-guid="43">
+                                        <span class="arrow-ui-icon {!IF(sellerOpItem.sortValue== 'Preferred_Email__c',IF(sellerOpItem.sortDirection=='ASC','up-arrow-icon','down-arrow-icon'),'both-arrow-icon')}" onclick="sellerSortView('Preferred_Email__c')"></span>
+                                        <span style="margin-right: 23px;">Preferred Email</span>
+                                    </th>
+                                    <th data-field="Spouse__c" data-guid="44">
+                                        <span class="arrow-ui-icon {!IF(sellerOpItem.sortValue== 'Spouse__c',IF(sellerOpItem.sortDirection=='ASC','up-arrow-icon','down-arrow-icon'),'both-arrow-icon')}" onclick="sellerSortView('Spouse__c')"></span>
+                                        <span style="margin-right: 23px;">Spouse</span>
+                                    </th>
+                                    <th data-field="LeadSource" data-guid="45">
+                                        <span class="arrow-ui-icon {!IF(sellerOpItem.sortValue== 'LeadSource',IF(sellerOpItem.sortDirection=='ASC','up-arrow-icon','down-arrow-icon'),'both-arrow-icon')}" onclick="sellerSortView('LeadSource')"></span>
+                                        <span style="margin-right: 23px;">Lead Source</span>
+                                    </th>
+                                    <th data-field="Sphere_Of_Influence__c" data-guid="46">
+                                        <span>Sphere Of Influence</span>
+                                    </th>
+                                    <th data-field="RAUS_Contact_Type__c" data-guid="47">
+                                        <span>Contact Type</span>
+                                    </th>
+                                    <th data-field="OwnerId" data-guid="48">
+                                        <span>Owner ID</span>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                
+                                <apex:repeat value="{!sellerOpItem.contacts}" var="sellerCont">
+                                    <tr>
+                                        <!--<td><input type="checkbox" style="margin: 9px; width: 18px;"/></td> -->
+                                        <td><apex:inputCheckbox value="{!sellerCont.isSelected}"/></td>
+                                        <td>
+                                            <div style="white-space: nowrap; margin: 3px;">
+                                                <div class="ui-silk inline ui-silk-pencil" title="Edit Row"></div>
+                                                <div class="ui-silk inline ui-silk-delete" title="Flag For Deletion"></div>
+                                            </div>
+                                        </td>
+                                        <td><div class="nx-field"><apex:outputField value="{!sellerCont.tContact.Next_Contact__c}"/></div></td>
+                                        <td><div class="nx-field"><apex:outputField value="{!sellerCont.tContact.Last_Contact__c}"/></div></td>
+                                        <td><div class="nx-field"><apex:outputField value="{!sellerCont.tContact.Seller_Stage__c}"/></div></td>
+                                        <td><div class="nx-field"><apex:outputField value="{!sellerCont.tContact.Seller_Status__c}"/></div></td>
+                                        <td><div class="nx-field"><apex:outputField value="{!sellerCont.tContact.Seller_Type__c}"/></div></td>
+                                        <td><div class="nx-field"><a href="/{!sellerCont.tContact.Id}">{!sellerCont.tContact.Name}</a></div></td>
+                                        <td><div class="nx-field"><apex:outputField value="{!sellerCont.tContact.Preferred_Phone__c}"/></div></td>
+                                        <td><div class="nx-field"><apex:outputField value="{!sellerCont.tContact.Preferred_Email__c}"/></div></td>
+                                        <td><div class="nx-field"><apex:outputField value="{!sellerCont.tContact.Spouse__c}"/></div></td>
+                                        <td><div class="nx-field"><apex:outputField value="{!sellerCont.tContact.LeadSource}"/></div></td>
+                                        <td><div class="nx-field"><apex:outputField value="{!sellerCont.tContact.Sphere_Of_Influence__c}"/></div></td>
+                                        <td><div class="nx-field"><apex:outputField value="{!sellerCont.tContact.RAUS_Contact_Type__c}"/></div></td>
+                                        <td><div class="nx-field"><apex:outputField value="{!sellerCont.tContact.OwnerId}"/></div></td>
+                                    </tr>
+                                </apex:repeat>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="seller-footer" class="subFooter" style="padding:10px;padding-bottom:20px;">
+                        <div class="floater-left"><label>Show</label></div>
+                        <div id="size-selection-box" style="width:50px;" class="floater-left">
+                            <div class="stage-selection-box" >
+                                <apex:selectList size="1" value="{!sellerOpItem.selectedSize}"> 
+                                    <apex:actionSupport event="onchange" action="{!changePageSize}" reRender="sellerContents"/>
+                                    <apex:selectOption itemValue="5"></apex:selectOption>
+                                    <apex:selectOption itemValue="10"></apex:selectOption>
+                                    <apex:selectOption itemValue="25"></apex:selectOption>
+                                    <apex:selectOption itemValue="50"></apex:selectOption>
+                                </apex:selectList>
+                            </div> 
+                        </div> 
+                        <div class="floater-left"><label>Contacts Per Page</label></div> 
+                        <div class="floater-left"><label>Showings page {!sellerOpItem.pageNumber} of {!sellerOpItem.totalPages}</label></div> 
+                        <div class="floater-right">
+                            
+                            <apex:commandLink action="{!goFirst}" rendered="{!sellerOpItem.hasPrevious}" value="First" reRender="sellerContents" styleClass="page-button-default"/>
+                            <apex:outputLabel rendered="{!NOT(sellerOpItem.hasPrevious)}" value="First" styleClass="page-button-disabled floater-right-el"/>
+                            <apex:commandLink action="{!doPrevious}" rendered="{!sellerOpItem.hasPrevious}" value="Previous" reRender="sellerContents" styleClass="page-button-default floater-right-el"/>
+                            <apex:outputLabel rendered="{!NOT(sellerOpItem.hasPrevious)}" value="Previous" styleClass="page-button-disabled floater-right-el"/>
+                            <apex:repeat value="{!sellerOpItem.PagingNumbers}" var="sellPage">
+                                <apex:commandLink value="{!sellPage}" onclick="switchToStep('{!sellPage}','Seller Opportunity')" styleClass="page-button-default floater-right-el"/>
+                                <!--<apex:outputLabel value="{!sellPage}">-->
+                            </apex:repeat>
+                            <apex:commandLink action="{!doNext}" rendered="{!sellerOpItem.hasNext}" value="Next" reRender="sellerContents" styleClass="page-button-default floater-right-el"/>
+                            <apex:outputLabel rendered="{!NOT(sellerOpItem.hasNext)}" value="Next" styleClass="page-button-disabled floater-right-el"/>
+                            <apex:commandLink action="{!goLast}" rendered="{!sellerOpItem.hasNext}" value="Last" reRender="sellerContents" styleClass="page-button-default floater-right-el"/>
+                            <apex:outputLabel rendered="{!NOT(sellerOpItem.hasNext)}" value="Last" styleClass="page-button-disabled floater-right-el"/>
+                        </div>  
+                    </div>
+                    </apex:outputPanel>    
+                </div>
+                
+                <!-- All Contact Tabs -->
+                <div id="all-cont">
+                    All Contacts
+                </div>
+                <div id="reo-op">Reo Opportunities</div>
+                <div id="investor-op">Investor Opportunities</div>
+                <div id="buyer-op">Buyer Opportunities</div>
+                <div id="sphere-op">
+                    
+                </div>
+                <div id="recruiting-op">Recruiting</div>
+                <div id="seller-leads">Seller Leads</div>
+                <div id="reo-leads">Reo Leads</div>
+                <div id="buyer-leads">Buyer Leads</div>
+                <!--<div id="investors-leads">investros Leads</div>-->
+            </div>
+            <div id="tabs-2" style="padding:0;">
+                <ul>
+                    <li><a href="#seller-client">Seller</a></li>
+                    <li><a href="#buyer-client">Buyer</a></li>
+                    <li><a href="#investor-client">Investor</a></li>
+                    <li><a href="#reo-client">Reo</a></li>
+                </ul>
+                <div id="seller-client">Seller Div</div>
+                <div id="buyer-client">Buyer Div</div>
+                <div id="investor-client">Investor Div</div>
+                <div id="reo-client">Reo Div</div>
+                
+            </div>
+            <div id="tabs-3">
+                <p>Mauris eleifend est et turpis. Duis id erat. Suspendisse potenti. Aliquam vulputate, pede vel vehicula accumsan, mi neque rutrum erat, eu congue orci lorem eget lorem. Vestibulum non ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce sodales. Quisque eu urna vel enim commodo pellentesque. Praesent eu risus hendrerit ligula tempus pretium. Curabitur lorem enim, pretium nec, feugiat nec, luctus a, lacus.</p>
+                <p>Duis cursus. Maecenas ligula eros, blandit nec, pharetra at, semper at, magna. Nullam ac lacus. Nulla facilisi. Praesent viverra justo vitae neque. Praesent blandit adipiscing velit. Suspendisse potenti. Donec mattis, pede vel pharetra blandit, magna ligula faucibus eros, id euismod lacus dolor eget odio. Nam scelerisque. Donec non libero sed nulla mattis commodo. Ut sagittis. Donec nisi lectus, feugiat porttitor, tempor ac, tempor vitae, pede. Aenean vehicula velit eu tellus interdum rutrum. Maecenas commodo. Pellentesque nec elit. Fusce in lacus. Vivamus a libero vitae lectus hendrerit hendrerit.</p>
+            </div>
+        </div>
+    </apex:form>
+</apex:page>

@@ -1,0 +1,226 @@
+<!--
+* Description   :   This is Visualforce Page for FLU Pre-order Account details.
+* 
+* Created By    :   
+*
+* Created Date  :   09/13/2013
+*
+* Version       :   V_1.0 - Created 
+-->
+
+<apex:page StandardController="Account" showHeader="false" standardStylesheets="false">
+
+    <!-- CSS Include Here -->
+   <apex:stylesheet value="{!URLFOR($Resource.FLUPreorderCSS)}"/>
+    
+    <apex:form >
+        <apex:pageBlock >
+        
+        	<div class="headerImageClass">
+				<apex:image value="/servlet/servlet.FileDownload?file=015900000026UXz"/>
+			</div>
+        
+            <div class="headerClass">
+                {!$Label.Confirm_Account_Page_Header}
+                <span class="headerSubClass">      
+                    {!$Label.Confirm_Account_Page_Header_Season}
+                </span>
+            </div>
+            
+            <div class="panelAlignmentClass">
+                <apex:image value="/servlet/servlet.FileDownload?file=01590000001h822" styleClass="panalClass"/>
+            </div><br/>
+            
+            <table>
+                <tr>
+                    <td class="imageTdAlignmentClass">
+                        <apex:image value="/servlet/servlet.FileDownload?file=01590000001h6mM" styleClass="imageClass"/>
+                    </td>
+                    <td>
+                        <div class="mainHeadingClass"> 
+                            {!$Label.Confirm_Account_Page_Step_1_Heading}
+                        </div>
+                        <div class="mainHeadingContentClass">
+                            <apex:outputText value="{!$Label.Confirm_Account_Page_Step_1_Heading_Content}" escape="false"/>
+                        </div>
+                    </td>
+                </tr>
+            </table><br/>
+            
+            <div class="tableHeadingClass">
+                <table>
+                    <tr>
+                        <td class="headerValue">
+                            {!$ObjectType.Account.fields.AccountNumber.Label}
+                        </td>
+                        <td class="textBoldClass">
+                            <apex:outputField value="{!Account.AccountNumber}"/>
+                        </td>
+                        <td rowspan="2">
+                            <input type="submit" value="{!$Label.Confir_Account_Page_Button_Switch_Account}" onClick="window.open('/apex/FLUPreorderDashboard' , '_parent'); return false;" class="switchAccountButtonClass"/>
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="headerValue">
+                            {!$ObjectType.Account.fields.Name.Label}
+                        </td>
+                        <td class="textBoldClass">
+                            <apex:outputField value="{!Account.Name}"/>
+                        </td>     
+                        <td>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tableHeaderValueClass">
+                            Shipping Address
+                        </td>
+                        <td>
+                        </td>
+                        <td class="tableHeaderValueClass">
+                            Billing Address
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="headerValue">
+                            {!$ObjectType.Account.fields.Shipping_Address1__c.Label}
+                        </td>
+                        <td>
+                            <apex:outputField value="{!Account.Shipping_Address1__c}"/>
+                        </td>
+                        <td class="headerValue">
+                            {!$ObjectType.Account.fields.Billing_Address1__c.Label}
+                        </td>
+                        <td>
+                            <apex:outputField value="{!Account.Billing_Address1__c}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="headerValue">
+                            {!$ObjectType.Account.fields.Shipping_Address2__c.Label}
+                        </td>
+                        <td>
+                        	<apex:outputField value="{!Account.Shipping_Address2__c}"/>
+                        </td>
+                        <td class="headerValue">
+                            {!$ObjectType.Account.fields.Billing_Address2__c.Label}
+                        </td>
+                        <td>
+                        	<apex:outputField value="{!Account.Shipping_Address2__c}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="headerValue">
+                            City
+                        </td>
+                        <td>
+                            <apex:outputField value="{!Account.ShippingCity}"/>
+                        </td>
+                        <td class="headerValue">
+                            City
+                        </td>
+                        <td>
+                            <apex:outputField value="{!Account.BillingCity}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="headerValue">
+                            State
+                        </td>
+                        <td>
+                            <apex:outputField value="{!Account.ShippingState}"/>
+                        </td>
+                        <td class="headerValue">
+                            State
+                        </td>
+                        <td>
+                            <apex:outputField value="{!Account.BillingState}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="headerValue">
+                            ZIP
+                        </td>
+                        <td>
+                            <apex:outputField value="{!Account.ShippingPostalCode}"/>
+                        </td>
+                        <td class="headerValue">
+                            ZIP
+                        </td>
+                        <td>
+                            <apex:outputField value="{!Account.BillingPostalCode}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="headerValue">
+                            {!$ObjectType.Account.fields.Shipping_Phone__c.Label}
+                        </td>
+                        <td>
+                            <apex:outputField value="{!Account.Shipping_Phone__c}"/>
+                        </td>
+                        <td class="headerValue">
+                            {!$ObjectType.Account.fields.Billing_Phone__c.Label}
+                        </td>
+                        <td>
+                        	<apex:outputField value="{!Account.Billing_Phone__c}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="headerValue">
+                            {!$ObjectType.Account.fields.Shipping_Fax__c.Label}
+                        </td>
+                        <td>
+                            <apex:outputField value="{!Account.Shipping_Fax__c}"/>
+                        </td>
+                        <td class="headerValue">
+                            {!$ObjectType.Account.fields.Billing_Fax__c.Label}
+                        </td>
+                        <td>
+                        	<apex:outputField value="{!Account.Billing_Fax__c}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="headerValue">
+                            {!$ObjectType.Account.fields.Delivery_Hours__c.Label}
+                        </td>
+                        <td>
+                            <apex:outputField value="{!Account.Delivery_Hours__c}"/>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                </table>
+            </div><br/>
+            
+            <table>
+                <tr>
+                    <td>
+                        <div class="tableTdMessageClass">
+                            <apex:outputText value="{!$Label.Confirm_Account_Page_Footer_Content_Bold}" escape="false"/>
+                            <apex:outputText value="{!$Label.Confirm_Account_Page_Footer_Content_Italic}" escape="false"/>
+                        </div>
+                    </td>
+                </tr>
+                <tr> 
+                    <td>
+                        <div class="confirmAccountPageButtonClass">
+                            <input type="submit" value="{!$Label.Confirm_Account_Page_Button_Return_to_Pre_order_Dashboard}" onClick="window.open('/apex/FLUPreorderDashboard' , '_parent');return false;" class="returnPageButtonClass"/>
+                            <input type="submit" value="{!$Label.Confirm_Account_Page_Button_Yes_Pre_order_for_this_account_Continue}" onClick="window.open('/apex/FLUPreorderEnterQuantities?Id={!$CurrentPage.Parameters.Id}' , '_parent');return false;" class="forwardPageButtonClass"/>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            
+            <div id="footer"> 
+                <p> 
+                    Copyright &copy; 2010 AmerisourceBergen Corporation. All rights reserved.
+                </p> 
+            </div>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

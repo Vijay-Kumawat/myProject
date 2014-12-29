@@ -1,0 +1,349 @@
+<!--
+* Description   : This is Visualforce Page to display partner project form.
+* 
+* Created By    : 
+*
+* Created Date  : 05/19/2013
+*
+* Version       : v1.0 - Created
+-->
+<!-- Page -->
+<apex:page Standardcontroller="Contact" extensions="PartnerProjectFormController" standardStylesheets="false" showHeader="false">
+    
+    <!-- Apex Image -->
+    <apex:image id="Image" value="{!$CurrentPage.parameters.imageURL}" width="1350" height="150"/>
+    
+    <!-- Style Sheet -->
+    <apex:stylesheet value="{!$CurrentPage.parameters.styleClass}"/>
+    
+    <!-- Section Header -->
+    <apex:sectionheader title="Partner Project Form"/>
+    
+    <!-- Form -->    
+    <apex:form id="form">
+    
+      <!-- Page Block -->
+      <apex:pageBlock id="pb"> 
+          
+         <!-- Page Block Button  -->   
+         <apex:pageBlockButtons id="pbb"> 
+         
+             <apex:commandButton value="Submit Query" action="{!saveData}"/> 
+         </apex:pageBlockButtons>
+         
+         <!-- Page Block Section -->
+         <apex:pageBlockSection columns="1">   
+         
+             <!-- Page Block Section Item -->
+             <apex:pageBlockSectionItem >
+             
+                <!-- Output Panel -->
+                <apex:outputpanel >
+             
+                    <apex:outputtext value="Have you already completed the General Customer Information form?" styleClass="boldFont"/><br/>
+                     
+                    <!-- Radio Buttons -->
+                    <apex:selectradio value="{!Contact.Form_Status__c}">
+                        <apex:selectoptions value="{!InformationForm}"/>
+                    </apex:selectradio>
+                
+                </apex:outputpanel>
+            
+            </apex:pageBlockSectionItem>
+        </apex:pageBlockSection>
+         
+        <!-- Page Block Section -->
+        <apex:pageBlockSection columns="1" title="Primary Contact Person">
+             
+            <apex:pageBlockSectionItem >
+            
+                <!-- Output Label for Partner Company Name -->
+                <apex:outputLabel value="Partner Company Name :" styleClass="boldFont"/>
+                    
+                <!-- Input Text for Partner Company Name -->          
+                <apex:inputField value="{!Contact.AccountID}"/>
+                
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+            
+                <!-- Output Label for First Name -->
+                <apex:outputLabel value="First Name :" styleClass="boldFont"/>
+                    
+                <!-- Input Text for First Name -->          
+                <apex:inputField value="{!Contact.FirstName}" required="true"/>
+            
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+            
+                <!-- Output Label for Last Name -->
+                <apex:outputLabel value="Last Name :" styleClass="boldFont"/>
+                
+                <!-- Input Text for Last Name -->          
+                <apex:inputField value="{!Contact.LastName}"/>
+            
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+            
+                <!-- Output Label for Title -->
+                <apex:outputLabel value="Title :" styleClass="boldFont"/>
+                    
+                <!-- Input Text for Title -->          
+                <apex:inputField value="{!Contact.Title}"/>
+            
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+            
+                <!-- Output Label for Email -->
+                <apex:outputLabel value="Email :" styleClass="boldFont"/>
+                    
+                <!-- Input Text for Email -->          
+                <apex:inputField value="{!Contact.Email}" required="true"/>
+            
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+            
+                <!-- Output Label for Phone -->
+                <apex:outputLabel value="Phone : (Digits only)" styleClass="boldFont"/>
+                    
+                <!-- Input Text for Phone -->          
+                <apex:inputText value="{!Contact.Phone}" required="true" maxlength="10"/>
+            
+            </apex:pageBlockSectionItem>
+         </apex:pageBlockSection>
+         
+         <!-- Page Block Section -->
+         <apex:pageBlockSection columns="1" title="Project Details" >
+         
+             <apex:pageBlockSectionItem >
+            
+                <!-- Output Label for Customer Company Name -->
+                <apex:outputLabel value="Customer Company Name :" styleClass="boldFont"/>
+                    
+                <!-- Input Text for Customer Comapny Name -->          
+                <apex:inputField value="{!Contact.Fax}" required="true"/>
+            
+            </apex:pageBlockSectionItem>
+            
+         </apex:pageBlockSection><br/>
+         
+         <!-- Output panel -->
+         <apex:outputpanel styleClass="normalFont">
+         
+             <!-- Output Text -->
+             <apex:outputlabel value="Company's Credit Quality:"/>
+                 <br/>Indicate any information that would help us better understand the credit quality of the company.
+                 <br/>Include data such as a public credit rating or any subjective factors that could be relevant to an 
+                 <br/>understanding of credit quality.<br/>
+                 
+             <apex:inputtextarea cols="70"/>
+         
+         </apex:outputpanel>
+         
+         <!-- Page Block Section -->
+         <apex:pageBlockSection columns="1" title="Project Location"> 
+         
+             <apex:pageBlockSectionItem >
+            
+                <!-- Output Label for City -->
+                <apex:outputLabel value="City :" styleClass="boldFont"/>  
+                    
+                <!-- Input Text for City -->          
+                <apex:inputText value="{!Contact.MailingCity}"/>
+            
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+            
+                <!-- Output Label for State -->
+                <apex:outputLabel value="State :" styleClass="boldFont"/>  
+                    
+                <!-- Input Text for State -->          
+                <apex:inputField value="{!Contact.State__c}"/>
+            
+            </apex:pageBlockSectionItem><br/>
+            
+            <!-- Output Text -->
+            <Apex:outputtext value="Utilities Servicing This Facility" styleClass="boldFont"/><br/>
+            
+            <apex:pageBlockSectionItem >
+            
+                <!-- Output Label for Electric-->
+                <apex:outputLabel value="Electric :" styleClass="boldFont"/>  
+                    
+                <!-- Input Text for Electric -->          
+                <apex:inputText value="{!Contact.Electric__c}"/>
+            
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+            
+                <!-- Output Label for Gas-->
+                <apex:outputLabel value="Gas :" styleClass="boldFont"/>  
+                    
+                <!-- Input Text for Gas -->          
+                <apex:inputText value="{!Contact.Gas__c}"/>
+            
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+            
+                <!-- Output Label for Water -->
+                <apex:outputLabel value="Water :" styleClass="boldFont"/>  
+                    
+                <!-- Input Text for Water -->          
+                <apex:inputText value="{!Contact.Water__c}"/>
+            
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+            
+                <!-- Output Label for Other -->
+                <apex:outputLabel value="Other :" styleClass="boldFont"/>  
+                    
+                <!-- Input Text for Other -->          
+                <apex:inputText value="{!Contact.Other__c}"/>
+            </apex:pageBlockSectionItem><br/>
+            
+            <!-- Output Text -->
+            <Apex:outputtext value="Utility Rates: (Please provide rates and applicable units i.e., $0.10/kWh or $1.05/therm)" styleClass="boldFont"/><br/>
+            
+            <apex:pageBlockSectionItem >
+            
+                <!-- Output Label for Electric-->
+                <apex:outputLabel value="Electric :" styleClass="boldFont"/>  
+                    
+                <!-- Input Text for Electric -->          
+                <apex:inputText value="{!Contact.Electric_c__c}"/>
+            
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+            
+                <!-- Output Label for Gas-->
+                <apex:outputLabel value="Gas :" styleClass="boldFont"/>  
+                    
+                <!-- Input Text for Gas -->          
+                <apex:inputText value="{!Contact.Gas_c__c}"/>
+            
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+            
+                <!-- Output Label for Water -->
+                <apex:outputLabel value="Water :" styleClass="boldFont"/>  
+                    
+                <!-- Input Text for Water -->          
+                <apex:inputText value="{!Contact.Water_c__c}"/>
+            
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+            
+                <!-- Output Label for Other -->
+                <apex:outputLabel value="Other :" styleClass="boldFont"/>  
+                    
+                <!-- Input Text for Other -->          
+                <apex:inputText value="{!Contact.Other_c__c}"/>
+            </apex:pageBlockSectionItem>
+            
+            <!-- Output Text -->
+            <Apex:outputlabel value="Building Primary Use: (Select all that apply for mixed use)" styleClass="normalFont"/>
+            
+            <!-- Checkboxes -->
+            <apex:selectcheckboxes value="{!picklistValuesForBuildingPrimary}" >
+                <apex:selectoptions value="{!BuildingPrimary}"/>
+            </apex:selectcheckboxes>
+            
+            <!-- Output Text -->
+            <Apex:outputtext value="Other: Please list" styleClass="normalFont"/>
+            
+            <apex:inputtext size="50"/>
+     
+            <!-- Output Text -->
+            <Apex:outputlabel value="Building Ownership: *" styleClass="normalFont"/>
+            
+            <!-- Output Panel -->
+            <apex:outputpanel >
+        
+                <!-- Radio Buttons -->
+                <apex:selectradio value="{!Contact.Building_Ownership__c}">
+                    <apex:selectoptions value="{!BuildingOwnership}"/>
+                </apex:selectradio>
+            </apex:outputpanel>
+
+            <!-- Output Text -->
+            <Apex:outputtext value="Building Size: (Square Feet)" styleClass="normalFont"/>
+            
+            <!-- Output Panel -->
+            <apex:outputpanel >
+            
+                <!-- Radio Buttons -->
+                <apex:selectradio value="{!Contact.Building_Size__c}">
+                    <apex:selectoptions value="{!BuildingSize}"/>
+                </apex:selectradio>
+            </apex:outputpanel>
+            
+            <!-- Output Text -->
+            <Apex:outputtext value="What is the total average annual energy spend for this facility? (e.g., $123,456.78)" styleClass="normalFont"/>
+            
+            <apex:inputtext />
+            
+            <!-- Output Text -->
+            <Apex:outputLabel value="Is the proposed EE upgrade tied to any pressing building improvement or operational needs?" styleClass="normalFont"/>
+            
+            <apex:pageBlockSectionItem >
+            
+                <apex:inputfield value="{!Contact.Status__c}"/>
+            </apex:pageBlockSectionItem>
+            
+            <!-- Output Text -->
+            <Apex:outputtext value="If Yes, please explain:" styleClass="normalFont"/>
+            
+            <apex:inputtextarea />
+            
+            <!-- Output Text -->
+            <Apex:outputlabel value="Has an energy assessment been performed recently at this facility?" styleClass="normalFont"/>
+                
+            <apex:pageBlockSectionItem >
+            
+                <apex:inputfield value="{!Contact.Status__c}"/>
+            </apex:pageBlockSectionItem>
+            
+            <!-- Output Text -->
+            <Apex:outputtext value="Estimated total cost of EE retrofit: (e.g 123,456.78) *" styleClass="normalFont"/>
+            
+            <apex:outputpanel >$<apex:inputtext size="30"/></apex:outputpanel>
+            
+            <!-- Output Text -->
+            <Apex:outputtext value="Estimated annual energy savings from EE retrofit: (e.g., 123,456.78) *" styleClass="normalFont"/>
+            
+            <apex:outputpanel >$<apex:inputtext size="30"/></apex:outputpanel>
+            
+            <!-- Output Text -->
+            <Apex:outputtext value="Estimated utility, State or Federal incentives available: (e.g., 123,456.78)" styleClass="normalFont"/>
+            
+            <apex:outputpanel >$<apex:inputtext size="30"/></apex:outputpanel>
+            
+            <!-- Output Text -->
+            <Apex:outputtext value="Estimated annual maintenance associated with EE retrofit measures: (e.g., 123,456.78)" styleClass="normalFont"/>
+            
+            <apex:outputpanel >$<apex:inputtext size="30"/></apex:outputpanel>
+            
+            <apex:pageBlockSectionItem >
+            
+                <!-- Output Text -->
+                <Apex:outputlabel value="Energy Efficiency Measures Under Consideration: *" styleClass="normalFont"/>
+            
+                <!-- Checkboxes -->
+                <apex:selectcheckboxes value="{!picklistValuesForEnergyEfficiency}">
+                    <apex:selectoptions value="{!EnergyEfficiency}"/>
+                </apex:selectcheckboxes>
+
+            </apex:pageBlockSectionItem>
+            
+            <!-- Output Text -->
+            <Apex:outputtext value="Other: Please describe" styleClass="normalFont"/>
+            
+            <apex:inputtextarea />
+            
+            <!-- Output Text -->
+            <Apex:outputtext value="Other comments relevant to the project(s):" styleClass="normalFont"/>
+            
+            <apex:inputtextarea />
+         </apex:pageBlockSection>
+      </apex:pageBlock>
+    </apex:form>
+</apex:page>

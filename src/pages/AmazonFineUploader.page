@@ -1,0 +1,203 @@
+<apex:page showHeader="false" controller="AmazonFineUploaderController" sidebar="false" >
+    
+    <!-- Page Static Resources -->
+    <apex:includeScript value="{!$Resource.FineUploaderJQuery}"  />
+    <apex:includeScript value="/soap/ajax/20.0/connection.js"/>
+    <apex:include pageName="AmazonFineUploaderCSS"/>
+    <apex:includeScript value="{!$Resource.FineUploader_5}"/>
+    
+    <!-- Script -->
+    <script type = "text/javascript">
+        
+        var j$ = jQuery.noConflict();
+        
+        function closeWindow() {
+        	window.opener.location.href="/{!$CurrentPage.parameters.id}";
+        	self.close();
+        }
+        
+        //On Page Creation
+        j$(document).ready(function(){
+            
+            var endPoint = '';
+            
+            endPoint = 's3demo.php';
+            
+            //Amazon,Fine Uploader Apis and Options
+            j$("#fine-uploader").fineUploaderS3({
+                
+                //Request Parameters
+                request: {
+                    inputName: 'name',
+                    forceMultipart: true,
+                    paramsInBody : true,
+                    filenameParam : 'test',
+                    params: {},
+                    endpoint: "http://s3.amazonaws.com/AjeliteUploadedFiles",
+                    accessKey: "AKIAJZQC7NCCAJIMUKYQ"
+                },
+                signature: {
+                   endpoint: "http://ajelite.com/FineUploader/"+endPoint,
+                },
+                cors: {
+                    allowXdr: true,
+                    expected: true, //all requests are expected to be cross-domain requests
+                    sendCredentials: false, //if you want cookies to be sent along with the request 
+                },
+                iframeSupport: {
+                    localBlankPagePath: '/success.html'
+                },
+                objectProperties: {
+                    acl: "public-read",
+                    key: function (id) { 
+                       return '{!LEFT($CurrentPage.parameters.id,15)}/' + j$("#fine-uploader").fineUploaderS3("getName",id); }
+                },
+                  retry: {
+                   enableAuto: true // defaults to false
+                },
+                
+                // optional feature
+                deleteFile: {
+                    enabled: true,
+                    method: "POST",
+                    endpoint: "http://ajelite.com/FineUploader/"+endPoint,
+                },
+                chunking: {
+                    enabled: true,
+                    concurrent: {
+                        enabled: true
+                    },
+                },
+                // optional feature
+                resume: {
+                    enabled: true
+                },
+                debug: true,
+                
+                
+            }).on('complete', function(event, id, name, responseJSON) {
+                
+                   var urlSuffix = j$("#fine-uploader").fineUploaderS3("getKey", id);
+                   console.log('urlSuffix:::::' + urlSuffix);
+                   var amazonURL = "https://s3.amazonaws.com/AjeliteUploadedFiles/" + urlSuffix;
+                   console.log('amazonURL:::::' + amazonURL);
+                   
+                    var j$fileEl = j$(this).fineUploaderS3("getItemByFileId", id);
+                    //j$viewBtn = j$fileEl.find(".view-btn");
+
+                if (responseJSON.success) {
+                
+                    sforce.connection.sessionId = '{!$Api.Session_ID}';
+                    var objAccount = new sforce.SObject("Photo_Form__c");  
+                    objAccount.Amazon_Link__c = amazonURL;
+                    objAccount.Title__c = name;
+                    objAccount.Account__c = '{!$CurrentPage.parameters.Id}';
+                    var result3 = sforce.connection.create([objAccount]);
+                    console.log('result3:::::'+ result3);
+                }    
+            });	
+        });
+       
+    </script>
+    <style>
+        #wrapper{
+            width:65%;
+            margin:auto;
+        }
+        #header{
+            background:#1797C0;
+            border-bottom-left-radius: 3px;
+            border-bottom-right-radius: 3px;
+            padding: 12px 10px;
+            
+            color: #FFF;
+            width:100%;
+        }
+        #fine-uploader{border:1px dotted #ccc;min-height:300px; float:left;width:872px;height:auto; padding:10px;  margin-bottom:10px; background-color:#F1F1F1;}
+        
+        .pageTitleIcon{
+            
+            background-image: url("/img/sprites/master.png");
+            background-position: 0 -1130px;
+            height: 32px;
+            width: 32px;
+            display: inline;
+            float: left;
+            margin-right: 5px;
+            }
+            #colorId a{
+            color:#4A4A56;
+            text-decoration:none;
+            }
+            #colorIdH2 a{
+                color:black;
+                text-decoration:none;
+            }
+        }
+        #closeBt{
+            
+            display: block;
+            width: 105px;
+            padding: 7px 0;
+            text-align: center;
+            background: #800;
+            border-bottom: 1px solid #DDD;
+            color: #FFF;
+        }
+    </style>
+    <apex:form >
+        
+        <div id="wrapper">
+        <div id="header">
+            <label style="font-size: 30px;">File Upload</label>
+            
+        </div>
+        <div class="bPageTitle">
+          <div class="ptBody secondaryPalette brandSecondaryBrd">
+          <div class="content"><img alt="" title="" class="pageTitleIcon" src="/s.gif"/>
+          <h1 class="pageType" id="colorId">{!$CurrentPage.parameters.ObjectName}</h1>
+          <span class="titleSeparatingColon">:</span>
+          <h2 class="pageDescription" id="colorIdH2">Upload File For Account</h2>
+          </div>
+  </div>
+  </div>
+         <div id="fine-uploader" style="width:100%">  
+        </div>
+    </div>
+   
+      
+      
+    <script type="text/template" id="qq-template">
+        <div class="qq-uploader-selector qq-uploader">
+            <div class="qq-upload-drop-area-selector qq-upload-drop-area" qq-hide-dropzone>
+                <span>Drop files here to upload</span>
+            </div>
+            
+            <div class="qq-upload-button-selector qq-upload-button" style="display:inline-block;float:left;">
+                <div>Select files</div>
+            </div>
+            <input type="button" style="display:inline-block;margin-top: -1px;border: oldlace;width:105px;padding:7px 0;text-align:center;background:#800;border-bottom:1px solid #DDD;color:#FFF;float:left;margin-left:15px;cursor:pointer;"  id="closePop" value="Close" onClick="closeWindow();"/>
+            <span class="qq-drop-processing-selector qq-drop-processing">
+                <span>Processing dropped files...</span>
+                <span class="qq-drop-processing-spinner-selector qq-drop-processing-spinner"></span>
+            </span>
+            <ul class="qq-upload-list-selector qq-upload-list" style="clear:both;margin-top:5px;">
+                <li>
+                  <div class="qq-progress-bar-container-selector">
+                      <div class="qq-progress-bar-selector qq-progress-bar"></div>
+                  </div>
+                  <span class="qq-upload-spinner-selector qq-upload-spinner"></span>
+                  <span class="qq-edit-filename-icon-selector qq-edit-filename-icon"></span>
+                  <span class="qq-upload-file-selector qq-upload-file"></span>
+                  <input class="qq-edit-filename-selector qq-edit-filename" tabindex="0" type="text">
+                  <span class="qq-upload-size-selector qq-upload-size"></span>
+                  <a class="qq-upload-cancel-selector qq-upload-cancel" href="#">Cancel</a>
+                  <a class="qq-upload-retry-selector qq-upload-retry" href="#">Retry</a>
+                  <a class="qq-upload-delete-selector qq-upload-delete" href="#">Delete</a>
+                  <span class="qq-upload-status-text-selector qq-upload-status-text"></span>
+              </li>
+            </ul>
+        </div>
+    </script>      
+    </apex:form>
+</apex:page>

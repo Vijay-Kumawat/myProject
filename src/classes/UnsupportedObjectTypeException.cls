@@ -1,0 +1,31 @@
+/*
+   Copyright 2011 Mavens Consulting, Inc.
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+*/
+/**
+ *  Description :   This class having exception interface.
+ * 
+ *  Created By  :   Vijay Kumawat
+ *
+ *  Note        :   Apex class taken from SmartFactory Package.
+ * 
+ *  Created Date:   8/7/2013
+ * 
+ *  Revision Logs:  V1.0 - Created
+ *                  
+ *                  
+ **/ 
+
+public with sharing class UnsupportedObjectTypeException extends Exception {
+}

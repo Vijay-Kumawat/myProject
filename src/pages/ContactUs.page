@@ -1,0 +1,302 @@
+<apex:page sidebar="false" standardStyleSheets="false">
+	<html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<link rel="shortcut icon" href="http://www.amsunsolar.com/favicon.ico"/>
+			<title>Contact Us</title>
+			<meta name="keywords" content="Solar installations california, solar panels ca, solar panel ca, california solar panel installers, solar panels central coast, solar panels san luis obispo, solar panels paso robles, solar leasing" />
+			<meta name="description" content="Solar panels and solar panel installations for business and residential communities available in California and the central coast from A.M. Sun Solar." />
+			<script type="text/javascript" src="http://amsunsolar.com/wp-content/themes/amsunpowernew/js/jquery.js"></script>
+			<link rel="stylesheet" href="http://www.amsunsolar.com/wp-content/themes/amsunpowernew/style.css" type="text/css" media="screen" />
+	
+			<script language="javascript" type="text/javascript">
+			    $j = jQuery.noConflict();
+			</script>
+	
+			<script type="text/javascript" src="http://amsunsolar.com/wp-content/themes/amsunpowernew/js/galleria.js"></script> 
+			<script type="text/javascript" src="http://amsunsolar.com/wp-content/themes/amsunpowernew/js/galleria_settings.js"></script>
+			<script type="text/javascript" src="http://amsunsolar.com/wp-content/themes/amsunpowernew/js/jquery.hoverIntent.minified.js"></script>
+			<script type="text/javascript" src="http://amsunsolar.com/wp-content/themes/amsunpowernew/js/supersubs.js"></script>
+			<link rel="stylesheet" type="text/css" media="screen" href="http://amsunsolar.com/wp-content/themes/amsunpowernew/superfish.css" /> 
+			<script type="text/javascript" src="http://amsunsolar.com/wp-content/themes/amsunpowernew/js/superfish.js"></script> 
+			
+			<script type="text/javascript"> 
+	 
+			    $(document).ready(function(){ 
+				$("ul.sf-menu").supersubs({ 
+				    minWidth:    12,   // minimum width of sub-menus in em units 
+				    maxWidth:    27,   // maximum width of sub-menus in em units 
+				    extraWidth:  1     // extra width can ensure lines don't sometimes turn over 
+						       // due to slight rounding differences and font-family 
+				}).superfish();  // call supersubs first, then superfish, so that subs are 
+						 // not display:none when measuring. Call before initialising 
+						 // containing tabs for same reason. 
+			    });
+			 
+			</script>
+			<script type="text/javascript">
+				$(document).ready(
+				function(){
+				$('#promo').innerfade({ speed: 'slow', timeout: 8000, type: 'sequence', containerheight: '250px' }); } );
+			</script>
+	 
+			<link rel="alternate" type="application/rss+xml" title="Solar Energy &amp; Sun Powered Electricity in Paso Robles, Atascadero, Arroyo Grande, Santa Maria &amp; San Luis Obispo &raquo; Contact Us Comments Feed" href="http://www.amsunsolar.com/contact/feed/" />
+			<link rel='stylesheet' id='contact-form-7-css'  href='http://www.amsunsolar.com/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=3.5.3' type='text/css' media='all' />
+			<link rel='stylesheet' id='jquery.lightbox.min.css-css'  href='http://www.amsunsolar.com/wp-content/plugins/wp-jquery-lightbox/styles/lightbox.min.css?ver=1.4' type='text/css' media='all' />
+			<script type='text/javascript' src='http://www.amsunsolar.com/wp-includes/js/jquery/jquery.js?ver=1.8.3'></script>
+			<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.amsunsolar.com/xmlrpc.php?rsd" />
+			<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://www.amsunsolar.com/wp-includes/wlwmanifest.xml" /> 
+			<link rel='prev' title='Why Solar Power?' href='http://www.amsunsolar.com/why-solar/' />
+			<link rel='next' title='Technology Partners' href='http://www.amsunsolar.com/links/' />
+			<link rel='canonical' href='http://www.amsunsolar.com/contact/' />
+	
+			<!-- All in One SEO Pack 1.6.15.3 by Michael Torbert of Semper Fi Web Design[386,439] -->
+			<link rel="author" href="admin" />
+	
+			<!-- /all in one seo pack -->
+			<script type="text/javascript">
+	
+			  var _gaq = _gaq || [];
+			  _gaq.push(['_setAccount', 'UA-31038130-1']);
+			  _gaq.push(['_trackPageview']);
+	
+			  (function() {
+			    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			  })();
+	
+			</script>
+		
+			<script type="text/javascript">var _sf_startpt=(new Date()).getTime()</script>
+	
+				<!-- Google Ajax Search -->
+				
+				<link href="http://www.google.com/uds/css/gsearch.css" type="text/css" rel="stylesheet"/>
+				<style>	
+				
+				/* Width */
+				.gsc-control {
+					width: px;
+					overflow: hidden
+				}
+				.gs-result .gs-title,
+				.gs-result .gs-title * {
+					font-size: em;
+					color: #;
+				}
+				.gsc-results .gsc-trailing-more-results,
+				.gsc-results .gsc-trailing-more-results * {
+					color: #;
+				}
+				.gs-result a.gs-visibleUrl,
+				.gs-result .gs-visibleUrl {
+					color: #;
+				}
+				.gs-result a.gs-clusterUrl,
+				.gs-result .gs-clusterUrl {
+					color: #;
+				}
+				.gsc-resultsbox-visible {
+					display: table;
+					width: 100%;
+					overflow: hidden
+				}
+				</style>
+					
+				<script src='http://www.google.com/uds/api?file=uds.js&amp;v=1.0&key=' type='text/javascript'></script>
+				<!-- Google AjaxSearch Plugin for WordPress initialization -->
+				<script type='text/javascript'> 
+	
+					function OnLoad()
+					{
+						var searchControl = new GSearchControl();
+						searchControl .setLinkTarget(GSearch.LINK_TARGET_SELF); 
+						var webSearch = new GwebSearch();   
+						webSearch.setSiteRestriction("http://www.amsunsolar.com");
+						webSearch.setUserDefinedLabel("Results");
+						webSearch.setUserDefinedClassSuffix("webSearch");
+						var options = new GsearcherOptions();
+						options.setExpandMode(GSearchControl.EXPAND_MODE_);
+						searchControl.addSearcher(webSearch, options);
+														
+	
+						var drawOptions = new GdrawOptions();
+						drawOptions.setDrawMode(GSearchControl.DRAW_MODE_LINEAR);
+						searchControl.draw(document.getElementById("searchcontrol"),drawOptions);
+					}
+					GSearch.setOnLoadCallback(OnLoad);
+	
+				</script>
+				<!-- Google Maps Plugin for WordPress (end) -->
+	
+				<script type="text/javascript">
+					var _gaq = _gaq || [];
+					_gaq.push(['_setAccount', 'UA-39292297-1']);
+					_gaq.push(['_trackPageview']);
+					(function() {
+					var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+					ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+					var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+					})();
+				</script>
+		</head>
+		<body>
+			<div id="wrap">
+				<div id="header">      
+					<div id="top_logo">
+						<a href="/">
+							<img src="http://www.amsunsolar.com/wp-content/themes/amsunpowernew/images/top_logo.png" border="0"/>
+						</a>
+					</div>
+					<div id="top_right">
+						<div id="top_extras">
+							<span class="l_float" style="padding:3px;margin-top:1px;">
+								<img src="http://www.amsunsolar.com/wp-content/themes/amsunpowernew/images/login_icon.png"/>
+							</span>
+							<a href="http://www.amsunsolar.com/monthly-promo/" target="_new">Refer a Friend</a>&nbsp;&nbsp;
+							<span class="l_float" style="padding:3px;">
+								<img src="http://www.amsunsolar.com/wp-content/themes/amsunpowernew/images/quote_icon.png"/>
+							</span>
+							<a href="http://www.amsunsolar.com/get-a-quote/">Get a Quote</a>
+						</div>
+						<div id="top_phone">Call Us Today: 
+							<span class="top_number">805.77.AM.SUN</span>
+						</div>
+					</div>
+					<div id="menu">
+						<ul id="topnav" class="sf-menu sf-js-enabled sf-shadow">
+							<div class="l_float"><img src="http://www.amsunsolar.com/wp-content/themes/amsunpowernew/images/menubg_left.gif"/></div>
+							<li class="current"><a href="/">Home</a></li>
+							<li><a href="http://www.amsunsolar.com/why-solar/" class="sf-with-ul">Solutions <span class="sf-sub-indicator"></span></a>
+								<ul>
+									<li><a href="http://www.amsunsolar.com/am-sun-articles/">AM Sun Articles</a></li>
+									<li><a href="http://www.amsunsolar.com/why-solar/">Why Solar?</a></li>
+									<li><a href="http://www.amsunsolar.com/residential/">Residential Solar Gallery</a></li>
+									<li><a href="http://www.amsunsolar.com/commercial/">Commercial Solar Gallery</a></li>
+								</ul>
+							</li>
+							<li><a href="/about/" class="sf-with-ul">Company <span class="sf-sub-indicator"> �</span></a>
+								<ul>
+									<li><a href="http://www.amsunsolar.com/about/">About Us</a></li>
+									<li><a href="http://www.amsunsolar.com/careers/">Careers</a></li>
+									<li><a href="http://www.amsunsolar.com/testimonials/">Testimonials</a></li>
+								</ul>
+							</li>
+							<li><a href="http://www.amsunsolar.com/contact/" class="">Contact Us</a></li>
+							<li class=""><a href="http://www.amsunsolar.com/faq/">FAQ</a></li>
+							<li class=""><a href="http://www.amsunsolar.com/links/">Partners</a></li>
+							<div class="r_float"><img src="http://www.amsunsolar.com/wp-content/themes/amsunpowernew/images/menubg_right.gif"/></div>
+						</ul>
+					</div>
+				</div><!-- end header -->
+	            	
+				<div id="body_wrap">
+	
+					<div id="sidebar">
+						<div class="l_float"><img src="http://amsunsolar.com/wp-content/themes/amsunpowernew/images/sidebar_curve.gif"/></div>
+						<div class="sidebar_item sidebar_news">
+							<h2>Renewable Energy News</h2>
+							<div id="sidebar_news_entry">
+									
+								<!-- Start Google News code -->
+								<div id="google-news-inline">
+									<h3>Solar</h3>
+									<ul>
+										<li><a href="http://news.google.com/news/url?sa=t&fd=R&usg=AFQjCNF5rE2z333d4lFpe1Ev_-SGJ9cDVQ&url=http://www.nytimes.com/2013/11/15/business/energy-environment/bonds-backed-by-solar-power-payments-get-nod.html" target="_blank" title="New York Times">Bonds Backed by Solar Power Payments Get Nod - New York Times<br/></a></li>
+										<li><a href="http://news.google.com/news/url?sa=t&fd=R&usg=AFQjCNGDzi3T5wRJGGl8Ymlc-6Tcmu8Q5Q&url=http://abcnews.go.com/US/wireStory/arizona-regulators-raise-solar-rates-month-20895284" target="_blank" title="ABC15.com (KNXV-TV)">Arizona Regulators Adopt $5 Monthly Solar Fee - ABC News<br/></a></li>
+										<li><a href="http://news.google.com/news/url?sa=t&fd=R&usg=AFQjCNEkN_4syoxjLQiiOMXcpXyVJmdLpQ&url=http://abcnews.go.com/US/wireStory/utility-solar-company-battle-rooftop-panels-20875690" target="_blank" title="Utility, Solar Company Battle Over Rooftop PanelsABC NewsThe state's largest utility, Arizona Public Service, has spent more than $3.7 million to convince the public that homeowners using solar panels are costing other customers money, and it wants utility regulators to OK a proposal it says would make the ...">Utility, Solar Company Battle Over Rooftop Panels - ABC News<br/></a></li>
+										<li><a href="http://news.google.com/news/url?sa=t&fd=R&usg=AFQjCNGYeiSRSfqaiKaSKcRMyDgTEraWUQ&url=http://www.tampabay.com/news/business/energy/crowd-protests-duke-energy-coal-plants/2152217" target="_blank" title="Crowd protests Duke Energy coal plants, touts solarTampabay.comA crowd estimated at more than 120 people gathered across from Duke Energy Florida's headquarters in St. Petersburg on Wednesday, urging the utility to close two coal plants by 2016 and replace them with solar power. Led by the Sierra Club, which is&nbsp;...and more&nbsp;&raquo;">Crowd protests Duke Energy coal plants, touts solar - Tampabay.com<br/></a></li>
+										<li><a href="http://news.google.com/news/url?sa=t&fd=R&usg=AFQjCNGZtiRZl8bKlNThc4izc1vLNjEPgA&url=http://www.businessweek.com/articles/2013-11-14/2014-outlook-solar-energy-shakeout-concentrating-vs-dot-photovoltaic" target="_blank" title="Solar Energy Shakeout: Concentrating vs. PhotovoltaicBusinessweekSometime next year, BrightSource Energy's $2.2 billion Ivanpah solar power station will become fully operational and begin feeding enough green electricity to California's two largest utilities to power 140,000 homes. Located in the Mojave Desert, 45 ...">Solar Energy Shakeout: Concentrating vs. Photovoltaic - Businessweek<br/></a></li>
+									</ul>
+								</div>
+								<!-- End Google News code -->
+							</div>
+						</div>
+						<div class="sidebar_button" style="margin-top:20px;">
+							<a href="http://www.amsunsolar.com/monthly-promo/">
+								<img src="http://www.amsunsolar.com/wp-content/uploads/2013/09/Refer-A-friend-500.png" width="230" height="140" border="0"/>
+							</a>
+						</div>
+						<div class="sidebar_button" style="margin-top:20px;">
+							<a href="https://www.facebook.com/a.m.sun.solar">
+								<img src="http://amsunsolar.com/wp-content/themes/amsunpowernew/images/fbbutton.jpg" border="0"/>
+							</a>
+						</div>
+						<div class="sidebar_button">
+							<a href="http://twitter.com/amsunsolar">
+								<img src="http://amsunsolar.com/wp-content/themes/amsunpowernew/images/twitter.jpg" border="0"/>
+							</a>
+						</div>
+						<div class="sidebar_button">
+							<object type="application/x-shockwave-flash" data="https://clients4.google.com/voice/embed/webCallButton" width="230" height="85"><param name="movie" value="https://clients4.google.com/voice/embed/webCallButton" /><param name="wmode" value="transparent" />
+								<param name="FlashVars" value="id=86bd7e0d9d3d7f955485539be10e603c502257c1&style=0" />
+							</object>
+						</div>
+						<a href="http://www.solarreviews.com/installers/am_sun_solar" class="sr_link">
+							<div id="solar_prescreened"></div>
+						</a>
+						<script src="http://www.solarreviews.com/remote/widgetprescreened.php?id=163&key=28612" type="text/javascript"></script>
+	
+					</div><!-- end sidebar -->
+	  
+					<div id="main">
+		
+						<div class="entry"><!-- start entry -->
+		    				<h1 class="title">Contact Us</h1>
+							<div id="contact_form" style="float: left !important;"><div class="wpcf7" id="wpcf7-f306-p9-o1"><form action="http://www.amsunsolar.com/contact/#wpcf7-f306-p9-o1" method="post" class="wpcf7-form" novalidate="novalidate">
+								<div style="display: none;">
+									<input type="hidden" name="_wpcf7" value="306" />
+									<input type="hidden" name="_wpcf7_version" value="3.5.3" />
+									<input type="hidden" name="_wpcf7_locale" value="" />
+									<input type="hidden" name="_wpcf7_unit_tag" value="wpcf7-f306-p9-o1" />
+									<input type="hidden" name="_wpnonce" value="f8bab21244" />
+								</div>
+								<p>Name<br />
+								<span class="wpcf7-form-control-wrap your-name"><input type="text" name="your-name" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required" aria-required="true" /></span> </p>
+								<p>Email Address<br />
+								<span class="wpcf7-form-control-wrap your-email"><input type="email" name="your-email" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-email wpcf7-validates-as-required wpcf7-validates-as-email" aria-required="true" /></span> </p>
+								<p>Phone Number<br />
+								<span class="wpcf7-form-control-wrap your-phone"><input type="text" name="your-phone" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required" aria-required="true" /></span> </p>
+								<p>Message<br />
+								<span class="wpcf7-form-control-wrap your-address"><textarea name="your-address" cols="40" rows="10" class="wpcf7-form-control wpcf7-textarea"></textarea></span> </p>
+								<p><input type="hidden" name="_wpcf7_captcha_challenge_captcha-512" value="1415698885" /><img class="wpcf7-form-control wpcf7-captchac wpcf7-captcha-captcha-512" width="72" height="24" alt="captcha" src="http://www.amsunsolar.com/wp-content/uploads/wpcf7_captcha/1415698885.png" /> <span class="wpcf7-form-control-wrap captcha-512"><input type="text" name="captcha-512" value="" size="40" class="wpcf7-form-control wpcf7-captchar" /></span></p>
+								<p><input type="submit" value="Send" class="wpcf7-form-control wpcf7-submit" /></p>
+								<div class="wpcf7-response-output wpcf7-display-none"></div></form></div></div>
+								<div style="float: left !important; width: 200px; margin-left: 10px;">
+								<p>Business Address:</p>
+								<p>8793 Plata Lane<br />
+									Atascadero, CA 93422</p>
+								<p>(<a href="http://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=8793+Plata+Lane+93422&amp;sll=37.0625,-95.677068&amp;sspn=29.716225,63.984375&amp;ie=UTF8&amp;ll=35.474057,-120.654516&amp;spn=0.008231,0.01899&amp;t=h&amp;z=16&amp;iwloc=addr">View Map</a>)</p>
+								<p>Main Phone: 805.77.AM.SUN</p>
+								<p>Hours: Monday &#8211; Friday, 9:00 am to 5:00 pm</p>
+								<p>&nbsp;</p>
+							</div>
+						</div><!-- end entry -->
+		
+						<div id="main_foot"></div>
+					</div><!-- end main -->
+	
+					<div id="footer_wrap">
+		
+						<div id="footer">
+							<div class="links"><a href="http://www.amsunsolar.com">Home</a> | <a href="http://www.amsunsolar.com/about/">About Us</a> | <a href="http://www.amsunsolar.com/commercial/">Commercial</a> | <a href="http://www.amsunsolar.com/residential/">Residential</a> | <a href="http://www.amsunsolar.com/faq/">FAQ</a> | <a href="http://www.amsunsolar.com/privacy-policy/">Privacy Policy</a> | <a href="http://www.amsunsolar.com/contact/">Contact Us</a></div>
+							<div class="copyright">&#169;2012 AMSunSolar.com, a part of A.M.Sun Solar, Inc.<br/><span style="color:#317b8c;">All rights reserved.</span></div>
+							<div class="bbblogo"><a href="http://www.santabarbara.bbb.org/Business-Report/AM-Sun-Power-Inc-92003735"><img src="http://www.amsunsolar.com/wp-content/themes/amsunpowernew/images/bbblogo.png"/></a></div> 				
+						</div><!-- end footer -->
+					</div><!-- end footer wrap -->
+				</div><!-- end body wrap -->
+			</div><!-- end wrap -->
+	
+			<script type="text/javascript">
+				var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+				document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+				</script>
+				<script type="text/javascript">
+				try {
+				var pageTracker = _gat._getTracker("UA-15024525-1");
+				pageTracker._trackPageview();
+				} catch(err) {}
+			</script>
+		</body>
+	</html>
+</apex:page>

@@ -1,0 +1,3 @@
+<apex:page controller="IPAddress">
+<h1> Current Logged In User IP Address ::::: </h1> &nbsp;&nbsp;{!IpAddress}
+</apex:page>

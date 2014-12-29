@@ -1,0 +1,400 @@
+<!--
+* Description   :   This is Visualforce Page for displaying summary details in edit mode.
+* 
+* Created By    :   
+*
+* Created Date  :   09/17/2013
+*
+* Version       :   V_1.0 - Created 
+-->
+
+<apex:page StandardController="Account" showHeader="false" standardStylesheets="false">
+
+	<!-- CSS Include Here -->
+    <apex:stylesheet value="{!URLFOR($Resource.FLUPreorderCSS)}"/>
+
+    <apex:form >
+        <apex:pageBlock >
+        
+        	<div class="headerImageClass">
+				<apex:image value="/servlet/servlet.FileDownload?file=015900000026UXz"/>
+			</div>
+        
+            <div class="headerClass" id="div_summaryEdit">
+                {!$Label.Summary_Page_Header}
+                <span class="headerSubClass">     
+                    {!$Label.Confirm_Account_Page_Header_Season}
+                </span>
+            </div><br/>
+            
+            <div class="summaryEditDivInformationClass" id="div_summartEditInfo">
+                <table>
+                    <tr>   
+                        <td class="headerValue">
+                            Account Number
+                        </td>
+                        <td>
+                            <strong>123456789</strong>
+                        </td>
+                        <td class="summaryEditFontColorClass" colspan="2">
+                            Reference # SFDCONPTGS
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="headerValue">
+                            Account Name
+                        </td>
+                        <td>
+                            <strong>Besse Medical Test</strong>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <hr class="horizontalLineClass"/>
+                        </td>
+                    </tr>   
+                    <tr>
+                        <td class="addressHeaderClass">
+                            Shipping Address
+                        </td>
+                        <td>
+                        </td>
+                        <td class="addressHeaderClass">
+                            Billing Address
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="headerValue">
+                            Address1
+                        </td>
+                        <td>
+                            9075 Centre Pointe Drive, Suite 140
+                        </td>
+                        <td class="headerValue">
+                            Address1
+                        </td>
+                        <td>
+                            9075 Centre Pointe Drive, Ste 140
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="headerValue">
+                            Address2
+                        </td>
+                        <td>
+                        </td>
+                        <td class="headerValue">
+                            Address2
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="headerValue">
+                            City
+                        </td>
+                        <td>
+                            West Chester
+                        </td>
+                        <td class="headerValue">
+                            City
+                        </td>
+                        <td>
+                            West Chester
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="headerValue">
+                            State
+                        </td>
+                        <td>
+                            OH
+                        </td>
+                        <td class="headerValue">
+                            State
+                        </td>
+                        <td>
+                            OH
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="headerValue">
+                            ZIP
+                        </td>
+                        <td>
+                            45069
+                        </td>
+                        <td class="headerValue">
+                            ZIP
+                        </td>
+                        <td>
+                            45069
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="headerValue">
+                            Shipping Phone
+                        </td>
+                        <td>
+                            (800) 543-2111
+                        </td>
+                        <td class="headerValue">
+                            Billing Phone
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="headerValue">
+                            Shipping Fax
+                        </td>
+                        <td>
+                            (866) 883-2167
+                        </td>
+                        <td class="headerValue">
+                            Billing Fax
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="headerValue">
+                            Delivery Hours
+                        </td>
+                        <td>
+                            MTWRF 9-5
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                    <tr>
+                        <table class="summaryEditTableClass">
+                            <tr>
+                                <td colspan="5">
+                                    <div class="summaryEditPageMessageClass">
+                                        <apex:outputText value="{!$Label.Summary_Page_Message1}" escape="false"/>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="summaryEditPageHeaderValueClass">
+                                    PO
+                                </td>
+                                <td>
+                                    xxxxxxx
+                                </td>
+                                
+                            </tr>
+                            <tr>
+                                <td class="summaryEditPageHeaderValueClass">
+                                    Dates You Can’t<br/>Receive Shipments
+                                </td>
+                                <td>
+                                    Sept 6, Oct 12
+                                </td>
+                                <td colspan="3">
+                                    <div class="editButtonAlignmentClass">
+                                        <input type="submit" value="Edit" class="editButtonClass"/>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="5">
+                                    <div class="summaryEditPageMessageClass">
+                                        <apex:outputText value="{!$Label.Summary_Page_Message2}" escape="false"/>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="summaryEditPageHeaderValueClass">
+                                    Primary Contact
+                                </td>
+                                <td>
+                                    Eric Besse
+                                </td>
+                                <td class="summaryEditPageHeaderValueClass">
+                                    Email
+                                </td>
+                                <td>
+                                    eric.besse@besse.com
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="summaryEditPageHeaderValueClass">
+                                    Role
+                                </td>
+                                <td>
+                                    Flu Manager
+                                </td>
+                                <td class="summaryEditPageHeaderValueClass">
+                                    Phone
+                                </td>
+                                <td>
+                                    8888888888
+                                </td>
+                                <td>
+                                    <div class="editButtonAlignmentClass">
+                                        <input type="submit" value="Edit" class="editButtonClass"/>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="5">
+                                    <div class="summaryEditPageMessageClass">
+                                        <apex:outputText value="{!$Label.Summary_Page_Message3}" escape="false"/>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="summaryEditPageHeaderValueClass">
+                                    Contact
+                                </td>
+                                <td>
+                                    Mary Besse
+                                </td>
+                                <td class="summaryEditPageHeaderValueClass">
+                                    Email
+                                </td>
+                                <td>
+                                    mary.besse@besse.com
+                                </td>
+                                <td>
+                                    <div class="editButtonAlignmentClass">
+                                        <input type="submit" value="Edit" class="editButtonClass"/>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <div class="summaryEditMessageClass">
+                                {!$Label.Summary_Edit_Page_Message1}
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <div class="tableTdHeadingContentClass" id="div_summaryEditMessage">
+                                <apex:outputText value="{!$Label.Summary_Edit_Page_Message2}" escape="false"/>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <table class="innerTableClass">
+                            <tr class="summaryEditTableHeaderClass">
+                                <th>
+                                    Besse#
+                                </th>
+                                <th>
+                                    Product
+                                </th>
+                                <th>
+                                    Age Indication
+                                </th>
+                                <th>
+                                    Final Price<br/>
+                                    <span class="tableThSubHeaderClass">
+                                            (includes $7.50 excise tax)
+                                        </span>
+                                </th>
+                                <th>
+                                    Pre-Order Units On File
+                                </th>
+                                <th class="tableThHeaderClass">
+                                    ENTER ADDITIONAL UNITS
+                                </th>
+                                <th>
+                                    Additional Doses Calculated
+                                </th>
+                                <th>
+                                    Adjusted TOTAL Doses
+                                </th>
+                            </tr>
+                            <tr>
+                                <td colspan="9" class="tableTdHeadingClass">
+                                    MedImmune
+                                </td>
+                            </tr>
+                            <tr class="tableTdContentClass">
+                                <td>
+                                    40235
+                                </td>
+                                <td>
+                                    FluMist® Quadrivalent Intranasal Vaccine,
+                                    delivery in pack of 10 pre-filled,
+                                    single-use sprayers, P-free
+                                </td>
+                                <td>
+                                    2-49 years
+                                </td>
+                                <td>
+                                    $000000
+                                </td>
+                                <td>
+                                    100
+                                </td>
+                                <td class="summaryEditPageTdBackgroundClass">
+                                    <input id="theTextInput" type="text" name="theTextInput" class="inputBoxClass"/>
+                                </td>
+                                <td class="summaryEditPageTdBackgroundClass">
+                                    500
+                                </td>
+                                <td  class="tableTdFontBoldClass">
+                                    100
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="summaryEditPageFontColorClass">
+                                    Shipping<br/>Preference:<br/>(Additional Units)
+                                </td>
+                                <td class="tdFontColorClass" colspan="7">
+                                    July: <input id="theTextInput" type="text" name="theTextInput" class="inputBoxClass"/>
+                                            units &nbsp;&nbsp;&nbsp;&nbsp;
+                                    August: <input id="theTextInput" type="text" name="theTextInput" class="inputBoxClass"/>
+                                                units &nbsp;&nbsp;&nbsp;&nbsp;
+                                    September: <input id="theTextInput" type="text" name="theTextInput" class="inputBoxClass"/>
+                                                units &nbsp;&nbsp;&nbsp;&nbsp;
+                                    October: <input id="theTextInput" type="text" name="theTextInput" class="inputBoxClass"/>
+                                                units &nbsp;&nbsp;&nbsp;&nbsp;
+                                    November: <input id="theTextInput" type="text" name="theTextInput" class="inputBoxClass"/>
+                                                units &nbsp;&nbsp;&nbsp;&nbsp;
+                                </td>
+                            </tr>
+                        </table>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <div class="summaryEditButtonClass">
+                                <input type="submit" value="{!$Label.Summary_Edit_Page_Button_Cancel_Edit}" onClick="window.open('/apex/FLUPreorderSummary' , '_parent');return false;" class="summaryPageButton"/>
+                                <input type="submit" value="{!$Label.Summary_Edit_Page_Button_Save_Changes}" onClick="window.open('/apex/FLUPreorderSummary' , '_parent');return false;" class="saveChangesButtonClass"/>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <hr class="horizontalLineClass"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <apex:outputText value="{!$Label.Review_Submit_Page_Text_Content1}" escape="false"/>
+                            <apex:outputText value="{!$Label.Review_Submit_Page_Text_Content1_1}" escape="false"/>
+                            <apex:outputText value="{!$Label.Review_Submit_Page_Text_Content2}" escape="false"/>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            
+            <div id="footer"> 
+				<p> 
+					Copyright &copy; 2010 AmerisourceBergen Corporation. All rights reserved.
+				</p> 
+			</div>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

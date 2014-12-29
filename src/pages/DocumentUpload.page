@@ -1,0 +1,25 @@
+<apex:page id="page" controller="DoucmentUploadController">
+
+	<!-- Section Header -->
+	<apex:sectionHeader title="Upload Document"/>
+	
+	<apex:form id="form">
+	
+		<apex:pageBlock id="pB">
+		
+			<apex:pageMessages id="pageMsg"/>
+		
+			<apex:pageBlockButtons >
+				<apex:commandButton action="{!saveDocument}" value="Save"/>
+			</apex:pageBlockButtons>
+			<apex:pageBlockSection >
+				<apex:inputField value="{!document.Name}"/>
+				<apex:inputFile value="{!document.Body}"/>
+			</apex:pageBlockSection>
+			
+			<apex:outPutPanel id="image">
+				<apex:image url="{!uRL}" rendered="{!hasImage}"/>
+			</apex:outPutPanel>
+		</apex:pageBlock>
+	</apex:form>
+</apex:page>

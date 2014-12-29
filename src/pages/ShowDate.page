@@ -1,0 +1,62 @@
+<!--
+* Description   : This is Visualforce Page to Show Current Date.
+* 
+* Created By    : Vijay Kumar Kumawat
+*
+* Created Date  : 10/13/2012
+*
+* Version       : v1.0 - Create 
+-->
+<!-- Page -->
+<apex:page controller="ShowDate">
+
+    <!-- Form -->
+    <apex:form >
+    
+         <!-- Page Block -->
+         <apex:pageBlock >
+         
+             <!-- Page Block Section -->
+             <apex:pageBlockSection >
+             
+                  <!-- Output Label for Date -->
+                <apex:outputLabel value="Current Date"/>  
+                    
+                <!-- Input Text for date -->          
+                <apex:outputText value="{!date1}"/>
+                
+                <!-- Output Label for Date -->
+                <apex:outputLabel value="Current Date and Time"/>  
+                    
+                <!-- Input Text for date -->          
+                <apex:outputText value="{!dateTimeValue}"/>
+                
+                <!-- Output Label for Date -->
+                <apex:outputLabel value="Current Day"/>  
+                    
+                <!-- Input Text for date -->          
+                <apex:outputText value="{!day}"/>
+                
+                <!-- Output Label for Date -->
+                <apex:outputLabel value="Current Month"/>  
+                    
+                <!-- Input Text for date -->          
+                <apex:outputText value="{!month}"/>
+                
+                <!-- Output Label for Date -->
+                <apex:outputLabel value="Current Year"/>  
+                    
+                <!-- Input Text for date -->          
+                <apex:outputText value="{!year}"/>
+                
+                <!-- Output Label for Date -->
+                <apex:outputLabel value="Current Date Format"/>
+                    
+                <!-- Input Text for date -->          
+                <apex:outputText value="{!date3}"/>
+                
+             </apex:pageBlockSection>
+             
+         </apex:pageBlock>
+    </apex:form>
+</apex:page>

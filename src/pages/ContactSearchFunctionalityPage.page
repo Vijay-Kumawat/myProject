@@ -1,0 +1,96 @@
+<!--
+* Description   : This is Visualforce Page to perform Search Functionality For Contact.
+* 
+* Created By    : Vijay Kumar Kumawat
+*
+* Created Date  : 1/15/2013
+*
+* Version       : v1.0 - Create 
+-->
+
+<apex:page Standardcontroller="Contact" extensions="ContactSearchFunctionality">
+
+    <!-- block UI component -->
+    <c:BlockUI />
+
+    <!-- Form -->    
+    <apex:form id="form">
+    
+    <!-- Action Status -->
+    <apex:actionStatus onStart="blockMe();" onstop="unBlockMe();" id="waitMsg"/>
+        
+      <!-- Page Block -->
+      <apex:pageBlock > 
+          
+         <!-- Page Block Button  -->   
+         <apex:pageBlockButtons >    
+             
+             <apex:commandButton value="Search" action="{!search}" reRender="form" status="waitMsg"/>
+                   
+        </apex:pageBlockButtons>
+            
+        <!-- Page Block Section --> 
+        <apex:pageBlockSection columns="2">
+        
+            <apex:pageBlockSectionItem >
+            
+                <!-- Output Label for Conctact Name -->
+                <apex:outputLabel value="Contact Name"/>  
+                    
+                <!-- Input Text for contact Name -->          
+                <apex:inputText value="{!Contact.Name}"/>
+            
+            </apex:pageBlockSectionItem>
+                
+            <apex:pageBlockSectionItem >
+            
+                <!-- Output Label for Email -->
+                <apex:outputLabel value="Email"/>
+                
+                <!-- Input Test for email -->       
+                <apex:inputText value="{!Contact.Email}"/>
+            
+            </apex:pageBlockSectionItem>
+            
+            <apex:pageBlockSectionItem >
+            
+                <!-- Output Label for Account Name -->
+                <apex:outputLabel value="Account Name"/>  
+                    
+                <!-- Input Text for account Name -->          
+                <apex:inputText value="{!Contact.Account.Name}"/>
+            
+            </apex:pageBlockSectionItem>
+            
+            <apex:pageBlockSectionItem >
+            
+                <!-- Output Label for Account Number -->
+                <apex:outputLabel value="Account Number"/>  
+                    
+                <!-- Input Text for account Number -->          
+                <apex:inputText value="{!Contact.Account.AccountNumber}"/>
+            
+            </apex:pageBlockSectionItem>
+            
+        </apex:pageBlockSection>
+        
+        <!-- Output Panel-->
+        <apex:outputPanel id="out" >
+            
+            <!-- Page Block Section -->
+            <apex:pageBlockSection columns="1">   
+     
+                <apex:pageBlockTable value="{!contactList}" var="contact" rendered="{!IF(contactList.size>0, true, false)}">
+                    <apex:column value="{!contact.FirstName}"/>
+                    <apex:column value="{!contact.LastName}"/>
+                    <apex:column value="{!contact.Email}"/>
+                    <apex:column value="{!contact.Phone}"/>
+                    <apex:column value="{!contact.Account.AccountNumber}"/>
+                </apex:pageBlockTable>
+            
+            </apex:pageBlockSection>
+        </apex:outputPanel>
+            
+        </apex:pageBlock>
+    </apex:form> 
+</apex:page>

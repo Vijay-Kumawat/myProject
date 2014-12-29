@@ -1,0 +1,108 @@
+<!--
+* Description   :   This is Visualforce Page for FLU Pre-order Dashboard.
+* 
+* Created By    :   
+*
+* Created Date  :   09/12/2013
+*
+* Version       :   V_1.0 - Created 
+-->
+
+<apex:page StandardController="Account" extensions="FLUPreorderController" showHeader="false" standardStylesheets="false">
+
+   <!-- CSS Include Here -->
+   <apex:stylesheet value="{!URLFOR($Resource.FLUPreorderCSS)}"/>
+    
+    <apex:form >
+        <apex:pageBlock >
+        
+	    	<div class="headerImageClass">
+				<apex:image value="/servlet/servlet.FileDownload?file=015900000026UXz"/>
+			</div>
+			
+            <div class="dashboardHeaderClass">
+                {!$Label.Flu_Pre_book_Dashboard_Header}
+                <span class="headerSubClass">
+                    {!$Label.Confirm_Account_Page_Header_Season}
+                </span>
+            </div><br/>
+            
+            <table class="tableClass">
+                <tr>
+                    <td class="imageAlignmentClass">
+                        <apex:image value="/servlet/servlet.FileDownload?file=01590000001h5Mm" styleClass="tableImageClass"/>
+                    </td>
+                    <td class="tableTdHeadingContentClass">
+                        <apex:outputText value="{!$Label.Flu_Pre_book_Dashboard_Header_Content}" escape="false"/>
+                    </td>
+                    <td class="arrowSignAlignmentClass">
+                        <apex:image value="/servlet/servlet.FileDownload?file=01590000001h4gd" styleClass="arrowSignClass"/>
+                    </td>
+                </tr>
+                <tr>
+                	<td colspan="3">
+	                    <apex:pageBlockTable var="acc" value="{!accountList}" rowClasses="oddRowClass,evenRowClass">
+	                        <apex:column value="{!acc.AccountNumber}" headerValue="Account Number" headerClass="headerValue"/>
+	                        <apex:column value="{!acc.Name}" headerValue="Account Name" headerClass="headerValue"/>
+	                        <apex:column value="{!acc.BillingCity}" headerValue="City" headerClass="headerValue"/>
+	                        <apex:column value="{!acc.BillingState}" headerValue="State" headerClass="headerValue"/>
+	                        <apex:column value="{!acc.BillingPostalCode}" headerValue="Zip" headerClass="headerValue"/>
+	                        <apex:column value="{!acc.Phone}" headerValue="Phone" headerClass="headerValue"/>
+	                        <apex:column headerValue="Click to View/Edit/Order" headerClass="tableTdHeaderClass">
+	                            <input type="submit" value="{!$Label.Flu_Pre_book_Dashboard_Button_Place_Pre_order}" onclick="window.open('/apex/FLUPreorderConfirmAccount?Id={!acc.ID}', '_parent');return false;" class="dashboardButtonClass"/>
+	                        </apex:column>
+	                    </apex:pageBlockTable>               
+                    </td>
+                </tr>
+            </table><br/>
+                
+            <table>
+                <tr>
+                    <td width="25%">
+                        <div class="divLeftHeadingClass">
+                            <apex:outputText value="{!$Label.Flu_Pre_book_Dashboard_Left_Footer_Heading}" escape="false"/>
+                            <p class="divLeftHeadingContentClass">
+                                <apex:outputText value="{!$Label.Flu_Pre_book_Dashboard_Left_Footer_Heading_Content}" escape="false"/>
+                            </p>
+                        </div>
+                    </td>
+                    <td width="50%">
+                        <div class="divHeadingClass">
+                            {!$Label.Flu_Pre_book_Dashboard_Center_Footer_Heading}
+                            <span class="divHeadingSubClass">
+                                <apex:outputText value="{!$Label.Flu_Pre_book_Dashboard_Center_Footer_Sub_heading}" escape="false"/>
+                            </span>
+                        <div class="divHeadingContentClass">
+                            <apex:outputText value="{!$Label.Flu_Pre_book_Dashboard_Center_Footer_Heading_Content}" escape="false"/>
+                        </div>
+                        </div>
+                    </td>
+                    <td width="25%">
+                        <table>
+                            <tr>
+                                <td>
+                                    <div class="divRightHeadingClass">
+                                        <apex:outputText value="{!$Label.Flu_Pre_book_Dashboard_Center_Right_Footer_Heading_1}" escape="false"/>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="divRightHeadingSubClass">
+                                            <apex:outputText value="{!$Label.Flu_Pre_book_Dashboard_Right_Footer_Heading_2}" escape="false"/>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+            
+            <div id="footer"> 
+                <p> 
+                    Copyright &copy; 2010 AmerisourceBergen Corporation. All rights reserved.
+                </p> 
+            </div>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

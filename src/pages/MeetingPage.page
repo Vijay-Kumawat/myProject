@@ -1,0 +1,101 @@
+<!--
+* Description   : This is Visualforce Page for Meeting Object.
+* 
+* Created By    : 
+*
+* Created Date  : 06/24/2013
+*
+* Version       : v1.0 - Created 
+-->
+
+<apex:page Standardcontroller="Meeting__c" extensions="MeetingController" id="page">
+
+<style>
+    tr:hover {
+        background-color: #E3F0F2;
+    }
+</style>
+
+
+    <!-- Form -->    
+    <apex:form id="form">
+    
+        <!-- Page Block -->
+        <apex:pageBlock id="pb"> 
+        
+            <!-- Page Message -->
+            <apex:pagemessages />
+          
+            <!-- Page Block Button  -->   
+            <apex:pageBlockButtons id="pbb" location="top">    
+             
+                <apex:commandButton value="Save" action="{!saveMeeting}"/>
+                <apex:commandButton value="Save & New" action="{!saveAndNew}"/>
+                <apex:commandButton value="Cancel" action="{!cancel}"/>
+                                        
+            </apex:pageBlockButtons>
+            
+            <!-- Page Block Section for Informat3on --> 
+            <apex:pageBlockSection columns="2" title="Information" collapsible="false">
+        
+                <apex:inputField value="{!meeting.Name}"/>   
+                <apex:inputField value="{!meeting.Client__c}"/>
+                <apex:inputField value="{!meeting.Date_of_Meeting__c}"/><br/>
+                <apex:inputTextArea value="{!meeting.Notes__c}" cols="30" rows="2"/><br/>
+                <apex:inputField value="{!meeting.Dial_In_Info__c}"/>
+            
+            </apex:pageBlockSection>
+            
+            <!-- Page Block Section for Meeting topics --> 
+            <apex:pageBlockSection columns="1" title="Meeting Topics" collapsible="false">
+            </apex:pageBlockSection>
+            
+            <table width="70%" align="center">
+                <tr>
+                    <td align="left" width="40%">
+                        <apex:inputTextArea value="{!meeting.Agenda_Items__c}" cols="40" rows="20"/>
+                    </td>
+                    <td align="center" width="20%">
+                        <a href="javascript:submitMethod();" name="imageLink"><apex:image id="theImage" value="{!$Resource.ArrowSign}" width="50" height="50"/></a>
+                        <apex:actionFunction name="submitMethod" action="{!copyContent}" rerender="pb"/>
+                        <!--<apex:commandButton action="{!copyContent}" value="@@CopyContent@@" reRender="pb"/>-->
+                    </td>
+                    <td align="right" width="40%">
+                        <apex:inputTextArea value="{!meeting.Notes_on_Agenda_Topics__c}" cols="40" rows="20"/>
+                    </td>
+                </tr>
+            </table>
+            
+            <!-- Page Block Section for Custom Links --> 
+            <apex:pageBlockSection columns="2" title="Custom Links" collapsible="false">
+            
+                <div>
+                    <apex:commandButton value="Create tasks for another user" action="{!createTaskForAnotherUser}" reRender="pb"/>
+                </div>
+            </apex:pageBlockSection>
+            
+            <!-- Page Block Section--> 
+            <apex:repeat var="item" value="{!listOfTask}">
+                
+                <table width="100%">
+                    <tr>
+                        <td align="left" width="75%">
+                            <apex:inputTextArea value="{!item.InputTask__c}" cols="150" rows="4"></apex:inputTextArea>    
+                        </td>
+                        <td align="right"><table width="100%"><tr><td align="center">
+                            <apex:outputLabel value="Owner"/><br/>
+                            <apex:inputField value="{!item.Owner_Picklist__c}"></apex:inputField>
+                            </td></tr></table>
+                        </td>
+                    </tr>
+                </table>
+            </apex:repeat>
+            
+            <apex:pageBlockButtons location="bottom">
+                <apex:commandButton value="Save and Generate Tasks Now" action="{!saveAndGenerateTasksNow}"/>
+                <apex:commandButton value="Save" action="{!saveTask}"/>
+                <apex:commandButton value="Save and Generate Tasks Later" action="{!saveAndGenerateTasksLater}"/>
+            </apex:pageBlockButtons>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

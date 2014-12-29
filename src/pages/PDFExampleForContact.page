@@ -1,0 +1,76 @@
+<!-- 
+/** 
+ * Discription     :    This apex page will be used for List View Button which will create a PDF of selected fields.
+ *
+ * Created By      :    09/11/2013
+ *
+ * Created Date    :    Abhi Tripathi    
+ *
+ * Version         :    V1.0
+ *
+ * Revision Log    :    09/11/2013 Created
+*/
+ -->
+<apex:page standardController="Contact" extensions="ListViewButtonCreatePDF" recordSetVar="Contact">
+  
+  <!--section header-->
+  <apex:sectionHeader title="Select Your Fields To Print"/>
+  
+   <!-- CSS are include here -->
+   <apex:stylesheet value="{!URLFOR($Resource.MultiselectUI, '/css/common.css')}" />
+    
+   <apex:stylesheet value="{!URLFOR($Resource.MultiselectUI, '/css/jquery-ui.css')}" />
+    
+   <apex:stylesheet value="{!URLFOR($Resource.MultiselectUI, '/css/ui.multiselect.css')}" /> 
+    
+    <!-- Jquery file include here from static resource -->
+   <apex:includeScript value="{!URLFOR($Resource.MultiselectUI, '/js/jquery.min.js')}" />   
+    
+   <apex:includeScript value="{!URLFOR($Resource.MultiselectUI, '/js/jquery-ui.min.js')}" />  
+    
+    <apex:includeScript value="{!URLFOR($Resource.MultiselectUI, '/js/plugins/localisation/jquery.localisation-min.js')}" />
+    
+    <apex:includeScript value="{!URLFOR($Resource.MultiselectUI, '/js/plugins/scrollTo/jquery.scrollTo-min.js')}" />
+    
+    <apex:includeScript value="{!URLFOR($Resource.MultiselectUI, '/js/ui.multiselect.js')}" /> 
+
+       <!-- Script Starts here function  -->
+       <script type= "text/javascript" >
+           $(function(){
+               $.localise('ui-multiselect', {language: 'en'});
+               $('.multiselect').multiselect();    
+           });
+        </script>  
+        
+        <script>
+           function showPDF() {
+                window.open("{!showPDF}");    
+                
+           }
+        </script> 
+        
+   <apex:form >
+       
+        <!--error messages-->  
+        <apex:pageMessages />
+                 
+           <!--page block-->   
+           <apex:pageblock >
+            
+            <!--button-->
+            <Apex:pageblockButtons >
+                <apex:commandButton value="Get Records" action="{!pdfGenerator}" onclick="showPDF();"/>    
+            </Apex:pageblockButtons>
+           
+           <!--select List of unslelected-->
+           <apex:selectList id="sel1" value="{!leftselected}" multiselect="true" style="width:700px; height:400px " size="25" styleClass="multiselect">
+                <apex:selectOptions value="{!selectFields}" />
+            </apex:selectList>
+            
+            <apex:outputLink value="/apex/CreatePDFDynaminTable">
+                Search Google
+            </apex:outputLink>
+  
+        </apex:pageblock>
+   </apex:form>
+</apex:page>

@@ -1,0 +1,115 @@
+<!--
+* Description   : This is Visualforce Page to perform Search Functionality For Account Using FieldSet.
+* 
+* Created By    : Vijay Kumar Kumawat
+*
+* Created Date  : 1/22/2013
+*
+* Version       : v1.0 - Create 
+-->
+
+
+<!-- Page -->
+<apex:page standardController="Account" extensions="AccountAdvanceSearchController">
+
+    <apex:includeScript value="{!URLFOR($Resource.JSCalendar,'calendar.js')}"/>
+<apex:stylesheet value="{!URLFOR($Resource.JSCalendar,'calendar_blue.css')}" />
+
+
+     <script>
+function fnSetDateFormat(oDateFormat)
+{
+ oDateFormat['FullYear'];  //Example = 2007
+ oDateFormat['Year'];   //Example = 07
+ oDateFormat['FullMonthName']; //Example = January
+ oDateFormat['MonthName'];  //Example = Jan
+ oDateFormat['Month'];   //Example = 01
+ oDateFormat['Date'];   //Example = 01
+ oDateFormat['FullDay'];   //Example = Sunday
+ oDateFormat['Day'];    //Example = Sun
+ oDateFormat['Hours'];   //Example = 01
+ oDateFormat['Minutes'];   //Example = 01
+ oDateFormat['Seconds'];   //Example = 01
+  
+ var sDateString;
+  
+ // Use dd/mm/yyyy format
+ sDateString = oDateFormat['Date'] +"/"+ oDateFormat['Month'] +"/"+ oDateFormat['FullYear'];
+ return sDateString;
+}
+   
+     
+function initialiseCalendar(obj, eleId)
+{
+ var element=document.getElementById(eleId);
+ var params='close=true';
+ if (null!=element)
+ {
+  if (element.value.length>0)
+  {
+   // date is formatted dd/mm/yyyy - pull out the month and year
+   var month=element.value.substr(3,2);
+   var year=element.value.substr(6,4);
+   params+=',month='+month;
+   params+=',year='+year;
+  }
+ }
+ fnInitCalendar(obj, eleId, params);
+}
+ </script>
+
+    <apex:sectionheader title="Account Search Funcitonality" subtitle="Test" help="You trying ur best....." printUrl="Hi......."/>
+
+<head>
+    <c:Overlay style="processing" />
+</head>
+
+    <!-- Form -->
+    <apex:form >
+    
+    <apex:actionStatus id="overlayStatus" onStart="showOverlay();" onstop="hideOverlay();">
+    </apex:actionstatus>
+    
+        <!-- Page Block -->
+        <apex:pageBlock >    
+        
+            <apex:pageBlockSection columns="1" title=" Account Search Functionality" collapsible="false">
+            </apex:pageblocksection>
+            
+            <!--Page Block Buttons -->
+            <apex:pageBlockButtons >
+                <apex:commandbutton action="{!search}" status="overlayStatus" value="Search" rerender="pbs"/> 
+            </apex:pageBlockButtons>             
+              
+            <!-- Page Block Section for Input fields -->
+            <apex:pageblocksection columns="2" id="pbsIs">  
+                
+                <!-- Loop for the input fields -->
+                <apex:repeat value="{!$ObjectType.Account.FieldSets.FieldSetSearch}" var="f">  
+                    <apex:inputfield value="{!account[f]}"/>  
+                </apex:repeat>  
+            </apex:pageblocksection>   
+            
+            <apex:pageBlockSection >
+                <apex:inputText id="startdate" size="10" value="{!Account.SLAExpirationDate__c}" onmouseover="initialiseCalendar(this, '{!$Component.startdate}')"/>
+                
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection columns="1" title=" Search" collapsible="false" id="pbs">
+            
+                <apex:outputLabel rendered="{!IF(accounts.size > 0 , false, true)}">No record(s) to display.</apex:outputLabel>
+    
+                <!-- Page Block Table for Accounts Records -->
+                <apex:pageBlockTable value="{!accounts}" var="acc" columns="5" id="pbd" rendered="{!IF(accounts.size > 0 , true , false)}">
+                    <apex:column value="{!acc.Name}"/>
+                    <apex:column value="{!acc.BillingCountry}"/>
+                    <apex:column value="{!acc.BillingStreet}"/>
+                    <apex:column value="{!acc.BillingCity}"/>
+                    <apex:column value="{!acc.AccountNumber}"/>
+                </apex:pageBlockTable> 
+            </apex:pageBlockSection>
+        </apex:pageBlock> 
+    </apex:form>
+<div id="overlay">
+</div>
+</apex:page>

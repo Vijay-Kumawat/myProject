@@ -1,0 +1,241 @@
+<!--
+* Description	:	This is Visualforce Page for FLU Pre-order Contact Preferences.
+* 
+* Created By    :	
+*
+* Created Date  :	09/13/2013
+*
+* Version       :	V_1.0 - Created
+-->
+
+<apex:page StandardController="Account" extensions="FLUPreorderController" showHeader="false" standardStylesheets="false" action="{!showContacts}">
+
+	<!-- CSS Include Here -->
+    <apex:stylesheet value="{!URLFOR($Resource.FLUPreorderCSS)}"/>
+    
+    <!-- Java Script Code for disable or enable field -->
+	<script>
+		function fieldDisableOrEnable(idParameter) {
+		
+			var editId = idParameter.getAttribute('Id');
+			document.getElementById(editId).style.display = 'none';
+			
+			var firstNameId = editId.replace("editId","firstName");
+			document.getElementById(firstNameId).style.display = 'block';
+			
+			firstNameId = editId.replace("editId","textFirstName");
+			document.getElementById(firstNameId).style.display = 'none';
+			
+			var lastsNameId = editId.replace("editId","lastName");
+			document.getElementById(lastsNameId).style.display = 'block';
+	        
+	        var lastsNameId = editId.replace("editId","textLastName");
+			document.getElementById(lastsNameId).style.display = 'none';
+	        
+	        var roleId = editId.replace("editId","role"); 
+	        document.getElementById(roleId).style.display = 'block';
+	        
+	        var roleId = editId.replace("editId","textRole"); 
+	        document.getElementById(roleId).style.display = 'none';
+	        
+	        var phoneId = editId.replace("editId","phone"); 
+	        document.getElementById(phoneId).style.display = 'block';
+	        
+	        var phoneId = editId.replace("editId","textPhone"); 
+	        document.getElementById(phoneId).style.display = 'none';
+	        
+	        var emailId = editId.replace("editId","email"); 
+	        document.getElementById(emailId).style.display = 'block';
+	        
+	        var emailId = editId.replace("editId","textEmail"); 
+	        document.getElementById(emailId).style.display = 'none';
+	        
+	        var saveId = editId.replace("editId","saveId");
+			document.getElementById(saveId).style.display = 'block';
+      	}
+      
+		//Method for enable or disable fields
+		function fieldEnableOrDisable(idParameter) {
+      
+			var saveId = idParameter.getAttribute('Id');
+			document.getElementById(saveId).style.display = 'block';
+			
+			var firstNameId = saveId.replace("saveId","firstName");
+			document.getElementById(firstNameId).style.display = 'none';
+			
+			firstNameId = saveId.replace("saveId","textFirstName");
+			document.getElementById(firstNameId).style.display = 'block';
+			
+			var lastsNameId = saveId.replace("saveId","lastName");
+			document.getElementById(lastsNameId).style.display = 'none';
+			      
+			var lastsNameId = saveId.replace("saveId","textLastName");
+			document.getElementById(lastsNameId).style.display = 'block';
+			      
+			var roleId = saveId.replace("saveId","role"); 
+			document.getElementById(roleId).style.display = 'none';
+			
+			var roleId = saveId.replace("saveId","textRole"); 
+			document.getElementById(roleId).style.display = 'block';
+			
+			var phoneId = saveId.replace("saveId","phone"); 
+			document.getElementById(phoneId).style.display = 'none';
+			      
+			var phoneId = saveId.replace("saveId","textPhone"); 
+			document.getElementById(phoneId).style.display = 'block';
+			
+			var emailId = saveId.replace("saveId","email"); 
+			document.getElementById(emailId).style.display = 'none';
+			
+			var emailId = editId.replace("editId","textEmail"); 
+			document.getElementById(emailId).style.display = 'block';
+			
+			var saveId = editId.replace("editId","saveId");
+			document.getElementById(saveId).style.display = 'none';
+       	}
+	</script>
+    
+	<apex:form >
+		<apex:pageBlock >
+		
+			<div class="headerImageClass">
+				<apex:image value="/servlet/servlet.FileDownload?file=015900000026UXz"/>
+			</div>
+		
+         	<div class="headerClass">
+         		{!$Label.Confirm_Account_Page_Header}
+         		<span class="headerSubClass">     
+         			{!$Label.Confirm_Account_Page_Header_Season}
+         		</span>
+         	</div>
+         	
+         	<div class="panelAlignmentClass">
+         		<apex:image value="/servlet/servlet.FileDownload?file=01590000001hBMv" styleClass="panalClass"/>
+         	</div><br/>
+         	
+         	<table>
+       			<tr>
+       				<td class="imageTdAlignmentClass">
+       					<apex:image value="/servlet/servlet.FileDownload?file=01590000001hBN5" styleClass="imageClass"/>
+		    		</td>
+		    		<td>
+		    			<div class="mainHeadingClass"> 
+					    	{!$Label.Contact_Preferences_Page}
+				    	</div>
+				    	<div class="mainHeadingContentClass">
+				    		<apex:outputText value="{!$Label.Contact_Preferences_Page_Heading_Content}" escape="false"/>
+						</div>
+					</td>
+			    </tr>
+		    </table>
+		    
+		    <div class="contactPreferencesDivInformationClass">
+		    	<table id="contactPreferencesTableClass">
+		    		<tr>
+		    			<td class="headerValue">
+		    				{!$ObjectType.Account.fields.AccountNumber.Label}
+		    			</td>
+		    			<td class="textBoldClass">
+                            <apex:outputField value="{!Account.AccountNumber}"/>
+                        </td>
+		    			<td class="headerValue">
+		    				Shipping Address
+		    			</td>
+		    			<td rowspan="2">
+		    				<apex:outputField value="{!Account.Shipping_Address1__c}"/><br/>
+		    				<apex:outputField value="{!Account.ShippingCity}"/>,&nbsp;
+		    				<apex:outputField value="{!Account.ShippingState}"/>&nbsp;
+		    				<apex:outputField value="{!Account.ShippingPostalCode}"/>
+		    			</td>
+		    		</tr>
+		    		<tr>
+		    			<td class="headerValue">
+		    				{!$ObjectType.Account.fields.Name.Label}
+		    			</td>
+		    			<td class="textBoldClass">
+                            <apex:outputField value="{!Account.Name}"/>
+                        </td>
+		    		</tr>
+		    		<tr>
+		    			<table class="contactPreferencesTableClass" id="tableContactPreferences">
+							<tr>
+		    					<td class="tableTdPageMessageClass" colspan="8">
+		    						<apex:outputText value="{!$Label.Contact_Preferences_Page_Message}" escape="false"/>
+		    					</td>
+		    				</tr>
+		    				<tr class="contactPreferencesPageTableHeaderClass">
+		    					<td class="tableHeadingFontColorClass">
+		    						{!$ObjectType.Contact.fields.PRIMARY_CONTACT__c.Label}
+		    					</td>
+		    					<td class="tableHeadingFontColorClass1">
+		    						{!$ObjectType.Contact.fields.ADDTL_CONTACT__c.Label}
+		    					</td>
+		    					<td>
+		    						{!$ObjectType.Contact.fields.FirstName.Label}
+		    					</td>
+		    					<td>
+		    						{!$ObjectType.Contact.fields.LastName.Label}
+		    					</td>
+		    					<td>
+		    						Role (best match)
+		    					</td>
+		    					<td>
+		    						Phone
+		    					</td>
+		    					<td colspan="2">
+		    						Email (REQUIRED if SELECT box checked)*
+		    					</td>
+		    				</tr>
+		    				
+		    				<apex:repeat value="{!contactList}" var="item">
+						        <tr class="contactPreferencesTdContentClass">
+			    					<td>
+			    						<apex:inputField value="{!item.PRIMARY_CONTACT__c}"/>
+			    					</td>
+			    					<td>
+			    						<apex:inputField value="{!item.ADDTL_CONTACT__c}"/>
+			    					</td>
+			    					<td>
+			    						<apex:outputText value="{!item.FirstName}" id="textFirstName" style="display:block;"/>
+			    						<apex:inputField value="{!item.FirstName}" id="firstName" style="display:none;"/>
+			    					</td>
+			    					<td>
+			    						<apex:outputText value="{!item.LastName}" id="textLastName" style="display:block;"/>
+			    						<apex:inputField value="{!item.LastName}" id="lastName" style="display:none;"/>
+			    					</td>
+			    					<td>
+			    						<apex:outputText value="{!item.Role__c}" id="textRole" style="display:block;"/>
+			    						<apex:inputField value="{!item.Role__c}" id="role" style="display:none;"/>
+			    					</td>
+			    					<td>
+			    						<apex:outputText value="{!item.Phone}" id="textPhone" style="display:block;"/>
+			    						<apex:inputField value="{!item.Phone}" id="phone" style="display:none;"/>
+			    					</td>
+			    					<td>
+			    						<apex:outputText value="{!item.Email}" id="textEmail" style="display:block;"/>
+			    						<apex:inputField value="{!item.Email}" id="email" style="display:none;"/>
+			    					</td>
+			    					<td>
+		    							<apex:commandButton value="Edit" styleClass="editButtonClass" onClick="fieldDisableOrEnable(this);return false;" id="editId" style="display:block;"/>
+		    							<apex:commandButton value="Save" styleClass="saveButtonClass" onClick="fieldEnableOrDisable(this);return false;" id="saveId" style="display:none;"/>
+		    						</td>
+		    					</tr>
+		    				</apex:repeat>
+		    			</table>
+		    		</tr>
+		    	</table>
+		    </div>
+		    
+		    <div class="buttonClass">
+    			<input type="submit" value="{!$Label.Contact_Preferences_Page_Button_Return_to_Step3}" onClick="window.open('/apex/FLUPreorderScheduleShipping?Id={!$CurrentPage.Parameters.Id}' , '_parent');return false;" class="returnPageButtonClass"/>
+    			<apex:commandButton value="{!$Label.Enter_Quantities_Page_Button_Continue}" action="{!updateContacts}" styleClass="forwardPageButtonClass"/>
+		    </div>
+		    
+		    <div id="footer"> 
+				<p> 
+					Copyright &copy; 2010 AmerisourceBergen Corporation. All rights reserved.  
+				</p> 
+			</div>
+     	</apex:pageBlock>
+	</apex:form>
+</apex:page>

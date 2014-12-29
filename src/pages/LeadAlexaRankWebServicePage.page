@@ -1,0 +1,65 @@
+<!-- 
+    Description   :   Page for holding the Alexa web service reponse parsed data for leads.
+    
+    Created Date  :   06/18/2013
+    
+    Revision Logs :   v1.0 - Created
+ -->
+<apex:page standardcontroller="Lead" id="page" showHeader="false" sidebar="false" extensions="LeadsAlexaRankWebServiceController">
+        
+	<apex:form id="form">       
+        
+    	<!-- Page Block -->
+        <apex:pageBlock title="Alexa Service Ranks" id="pageBlock">  
+        
+            <!-- Page Message -->
+            <apex:pageMessages id="validationMsg" />
+            
+            <apex:pageBlockButtons >
+                <apex:commandButton value="Back" action="{!backNavigation}" rendered="{!IF(isRequestValid == false, true, false)}"/>
+                <apex:commandButton value="Save Information on Lead" action="{!saveInformationToLead}" rendered="{!isRequestValid}"/>
+            </apex:pageBlockButtons>
+            
+            <apex:outputPanel id="myPanel" rendered="{!isRequestValid}">  
+                
+                <!-- Page Block Section for Basic Information -->
+                <apex:pageBlockSection title="Basic Information's and Stats" columns="1" collapsible="false">
+                      
+                      <!-- Status -->
+                      <apex:pageBlockSectionItem >
+                          <apex:outputLabel value="Status"/>
+                          <apex:outputText value="{!alexaWrapperInstance.statusString}"/>
+                      </apex:pageBlockSectionItem>
+                      
+                      <!-- URL -->
+                      <apex:pageBlockSectionItem >
+                          <apex:outputLabel value="URL"/>
+                          <apex:outputText value="{!alexaWrapperInstance.urlString}"/>
+                      </apex:pageBlockSectionItem>
+                      
+                      <!-- World Wide Rank -->
+                      <apex:pageBlockSectionItem >
+                          <apex:outputLabel value="World Wide Rank"/>
+                          <apex:outputText value="{!alexaWrapperInstance.worldWideRank}"/>
+                      </apex:pageBlockSectionItem>
+                      
+                </apex:pageBlockSection>
+                
+                <!-- Page Block Section for Country wise Rank Details-->
+                <apex:pageBlockSection title="Country Wise Stats" columns="1" collapsible="false" >
+                
+                    <!-- Table to hold country wise rank data -->
+                    <apex:pageBlockTable value="{!alexaWrapperInstance.alexaServiceWrapper}" var="alexaWrap">
+                        
+                        <!-- Page Block Table Columns -->
+                        <apex:column value="{!alexaWrap.countryName}" headervalue="Country Name"/>
+                        <apex:column value="{!alexaWrap.countryCode}" headervalue="Country Code"/>
+                        <apex:column value="{!alexaWrap.countryWiseRank}" headervalue="Country Wise Rank"/>
+                    
+                    </apex:pageBlockTable>
+                
+                </apex:pageBlockSection>
+            </apex:outputPanel>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

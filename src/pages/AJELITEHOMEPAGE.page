@@ -1,0 +1,369 @@
+<apex:page showHeader="false" standardStyleSheets="false">
+
+<head>
+
+<apex:stylesheet value="{!URLFOR($Resource.AJELITE,'css/CSS1.css')}" />
+<apex:includeScript value="{!URLFOR($Resource.AJELITE,'js/JS1.js')}" />
+<apex:includeScript value="{!URLFOR($Resource.AJELITE,'js/JS2.js')}" />
+<apex:includeScript value="{!URLFOR($Resource.AJELITE,'js/JS3.js')}" />
+<apex:includeScript value="{!URLFOR($Resource.AJELITE,'js/JS4.js')}" />
+<apex:includeScript value="{!URLFOR($Resource.AJELITE,'js/JS5.js')}" />
+<apex:includeScript value="{!URLFOR($Resource.AJELITE,'js/JS6.js')}" />
+<apex:includeScript value="{!URLFOR($Resource.AJELITE,'js/JS7.js')}" />
+<apex:stylesheet value="{!URLFOR($Resource.AJELITE,'css/CSS2.css')}" />
+<script type="text/javascript" >
+$(window).load(function () {
+    
+    $("#preloader_text>p,#preloader_text>h1").fadeOut(200, function(){
+                    $("#preloader_text").animate( { height:"10px", width:"50px",opacity:"0", marginLeft:"-25px",marginTop:"-5px" }, 500,  function(){
+                        $("#preloader").fadeOut(300, function(){
+                            $("#preloader").css("display", "none");
+                            
+                        });                     
+    
+                    }); 
+                });
+    }); 
+</script>
+
+
+<title>AJ Elite</title>
+</head>
+<body>
+<div id="preloader">
+        <div id="preloaderInner">
+            <span id="preloader_text"><p>&nbsp;</p><p>&nbsp;</p><h1></h1><p></p></span>
+        </div>
+    </div>
+        
+        
+<div class="canvas">
+    <div class="content-frame">
+        <div class="panel panel-home">
+            <div id="myCarousel" class="carousel slide"> 
+                <!-- Carousel items -->
+                <div class="carousel-inner">
+                    <div class="active item item-slide crop-bg" data-src="http://www.ajelite.com/images/homepage/home-slide-1.jpg" data-size="1920*822">
+                        <div class="carousel-caption left" style="background:rgba(140,113,32,0.55); box-shadow: inset 0px 0px 30px rgba(0, 0, 0, 0.2)">
+                            <h2><large style=" text-transform:uppercase;">A<span style="font-size:55px">chieve</span></large><small>the success you’ve only imagined</small></h2>
+                            <p>Truly elite agents are few and far between. They are the ones who have achieved incredible wealth and success, the ones who every agent aspires to become. Allison James Estates Homes Elite is a national real estate company specializing in transforming great agents into those elite agents. If you are committed to being substantially more successful than you are today; if you want to close more volume, streamline your business, and be more profitable; if you want to become one of the exceptional individuals who raise the bar in real estate and inspire others, then Elite is the right company for&nbsp;you. </p>
+                        </div>
+                    </div>
+                    <div class="item item-collage crop-bg" data-src="http://www.ajelite.com/images/homepage/team-background.jpg" data-size="1920*822">
+                        <div class="carousel-caption" style="background:rgba(140,113,32,0.55);">
+                            <div class="caption-text">
+                                <h2>Training<br/>Partnering<br/>Mentoring</h2>
+                                <p class="lead">Upon joining the Elite family, you will be personally trained by and partnered with proven, experienced world-class agents and experts, professionals who have achieved Elite status and want to help you achieve it for yourself, professionals&nbsp;like:</p>
+                            </div>
+                        </div>
+                        <div class="collage-data home-collage">
+                            <div class="padder">
+                                <div class="row-fluid">
+                                    <div class="span4">
+                                        <ul class="thumbs">
+                                            <li><a data-size="60"><span class="title"><h3>Marc Carpenter<br/><small>Founder</small></h3></span><span class="image crop-bg" data-src="http://www.ajelite.com/images/homepage/marc-carpenter.jpg" data-size="429*362"></span><span class="detail scrollable"><hr/>
+                                            <ul>
+                                                <li>From 2011 to 2012, in one of the most competitive markets in the world, closed 50 percent more deals than the #2 agent out of approximately 8,000&nbsp;agents</li>
+                                                <li>During this same period, he closed more listings by himself than all 3,300 offices in his market&nbsp;area</li>
+                                                <li>Nationally-recognized industry leader and advisor to many Fortune 500&nbsp;companies.</li>
+                                                <li>Speaks at numerous real estate conferences yearly and has been featured on ABC’s Nightline and in the Wall Street&nbsp;Journal</li>
+                                            </ul>
+                                            
+                                            </span></a></li>
+                                            <li><a data-size="40"><span class="title"><h3>Jason Harper<small>National Director, Rental Acquisition</small></h3></span><span class="image crop-bg" data-src="http://www.ajelite.com/images/homepage/jason-harper.jpg" data-size="428*250"></span><span class="detail scrollable"><div><hr/> 
+                                            <ul>
+                                                <li>Has closed more than 600 REOs in current five year&nbsp;period</li>
+                                                <li>Has closed more than 200 residential flips since&nbsp;2009</li>
+                                                <li>Has closed more than 150 rental acquisitions in the past six&nbsp;months</li>
+                                                <li>Has sold more than 1,500 properties in last 10&nbsp;years</li>
+                                            </ul></div>
+                                            </span></a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="span4">
+                                        <ul class="thumbs">
+                                        <li><a data-size="60"><span class="title"><h3>Mary Martin<small>EVP, Agent and Client Relations</small></h3></span><span class="image crop-bg" data-src="http://www.ajelite.com/images/homepage/mary-martin.jpg" data-size="429*362"></span><span class="detail scrollable"><hr/>
+                                        <ul>
+                                            <li> Former National Director of Vendor Management and Client Development for CoreLogic’s REO Default Services&nbsp;Division</li>
+                                            <li>Led retail operations and business development for Superior Lending Mortgage and held senior executive roles in REO, wholesale sales, and operations with ResMAE Mortgage, Accredited Home Lenders and CitFinancial&nbsp;Mortgage</li>
+                                            <li>Managed and trained more than 10,000 REO agents per month on multiple client&nbsp;guidelines</li>
+                                            <li>Has been involved in excess of 155,000 transactions in her&nbsp;career</li>
+                                        </ul>
+                                        </span></a></li>
+                                        <li><a data-size="40"><span class="title"><h3>Mitch Pomeroy<small>National Director, Investor Acquisition</small></h3></span><span class="image crop-bg" data-src="http://www.ajelite.com/images/homepage/mitch-pomcroy.jpg" data-size="428*250"></span><span class="detail scrollable"><hr/>
+                                        <ul>
+                                            <li>Closes an annual average of 400&nbsp;transactions</li>
+                                            <li>Works directly with some of the largest funds in the world to acquire both rentals and&nbsp;flips</li>
+                                            <li>Develops and manages real estate investment funds that provide investors annualized profits of 30 to 60&nbsp;percent</li>
+                                            <li>Analyzes and develops real estate investor rental cap for multiple U.S.&nbsp;markets</li>
+                                            <li>Was a construction and renovation manager for 10 years prior to being a&nbsp;realtor</li>                                           
+                                        </ul>
+                                        </span></a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="span4">
+                                        <ul class="thumbs">
+                                        <li><a class="crop-bg" data-src="http://www.ajelite.com/images/logo-thumbnail.jpg" data-size="428*250"></a></li> 
+                                        <li><a data-size="60"><span class="title"><h3>Ed Giovanola<small>VP, Agent Relations and Recruiting</small></h3></span><span class="image crop-bg" data-src="http://www.ajelite.com/images/homepage/ed.jpg" data-size="429*362"></span><span class="detail scrollable"><hr/>
+                                        <ul>
+                                            <li>Successful real estate career as a broker and top-performing agent</li>
+                                            <li>Specialized in REO sales and managing agents in multiple offices while driving more than 40 million in sales</li>
+                                            <li>High-energy sales leader who is passionate about coaching, teaching, teamwork, and delivering agents to outstanding results</li>
+                                            
+                                        </ul>
+                                        </span></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item item-collage crop-bg" data-src="http://www.ajelite.com/images/advantages/advantages-background.jpg" data-size="1920*822">
+                        <div class="carousel-caption" style="background:rgba(49,128,178,0.65);">
+                            <div class="caption-text">
+                                <h2>Elite Advantages</h2>
+                                <p>Elite utilizes best-in-class training, marketing, technology, and systems to help you build the kind of business that most agents can only dream of&nbsp;having.</p>
+                            </div>
+                        </div>
+                        <div class="collage-data advantages-collage">
+                            <div class="padder">
+                                <div class="row-fluid">
+                                    <div class="span4">
+                                        <ul class="thumbs">
+                                            <li><a data-size="33" href="advantages-slides.html#slide#1">
+                                                <span class="image crop-bg" data-src="http://www.ajelite.com/images/advantages/business-optimization.jpg" data-size="428*234"></span>
+                                                <span style="background:rgba(138,167,172,0.79);" class="title"><h3>Business Optimization</h3></span>
+                                            </a></li>
+                                            <li><a data-size="33" href="advantages-slides.html#slide#2">
+                                                <span style="background:rgba(63,44,24,0.56);" class="title"><h3>A Culture of Ownership</h3></span>
+                                                <span class="image crop-bg" data-src="http://www.ajelite.com/images/advantages/a-culture-of-ownership.jpg" data-size="880*242"></span>
+                                            </a></li>
+                                            <li class="colspan" data-col="2"><a data-size="33" href="advantages-slides.html#slide#4">
+                                                <span class="title" style="background:rgba(34,115,167,0.71);"><h3>Customized Marketing Branding</h3></span>
+                                                <span class="image crop-bg" data-src="http://www.ajelite.com/images/advantages/customized-marketing-and-branding.jpg" data-size="879*234"></span>
+                                            </a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="span4">
+                                        <ul class="thumbs">                                         
+                                            <li><a data-size="33" href="advantages-slides.html#slide#5">
+                                                <span class="title" style="background:rgba(111,129,156,0.70);"><h3>Personalized, Elite Training</h3></span>
+                                                <span class="image crop-bg" data-src="http://www.ajelite.com/images/advantages/personlized-elite-training.jpg" data-size="426*243"></span>
+                                            </a></li>                                       
+                                            <li><a data-size="33" href="advantages-slides.html#slide#6">
+                                                <span class="title" style="background:rgba(104,105,126,0.70);"><h3>High Volume Agents</h3></span>
+                                                <span class="image crop-bg" data-src="http://www.ajelite.com/images/advantages/high-volume-agents.jpg" data-size="426*243"></span>
+                                            </a></li>                                       
+                                            <li><a data-size="33" href="">
+                                                
+                                            </a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="span4">
+                                        <ul class="thumbs">
+                                            <li><a data-size="33" href="advantages-slides.html#slide#3">
+                                                <span class="title" style="background:rgba(110,160,219,0.70);"><h3>Income Opportunities</h3></span>
+                                                <span class="image crop-bg" data-src="http://www.ajelite.com/images/advantages/income-opportunities.jpg" data-size="428*234"></span>
+                                            </a></li>
+                                            <li><a data-size="33" href="advantages-slides.html#slide#7">
+                                                <span class="title" style="background:rgba(57,90,128,0.70);"><h3>Recognized Industry Experts</h3></span>
+                                                <span class="image crop-bg" data-src="http://www.ajelite.com/images/advantages/system-and-resources.jpg" data-size="428*234"></span>
+                                            </a></li>
+                                            <li><a data-size="33" href="advantages-slides.html#slide#8">
+                                                <span class="title" style="background:rgba(99,180,210,0.65);"><h3>Systems and Resources</h3></span>
+                                                <span class="image crop-bg" data-src="http://www.ajelite.com/images/advantages/reconized-industry-experts.jpg" data-size="428*234"></span>
+                                            </a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item item-collage crop-bg" data-src="http://www.ajelite.com/images/advantages/advantages-background.jpg" data-size="1920*822">
+                        <div class="carousel-caption" style="background:rgba(49,128,178,0.60);">
+                            <div class="caption-text">
+                                <h2>Income Opportunities</h2>
+                                <p>Elite enriches your professional and personal life by offering multiple outlets for lucrative 
+    income&nbsp;opportunities.</p>
+                            </div>
+                        </div>
+                        <div class="collage-data advantages-collage">
+                            <div class="padder">
+                                <div class="row-fluid">
+                                    <div class="span4">
+                                        <ul class="thumbs">
+                                            <li class="colspan" data-col="2"><a data-size="50" href="income-opportunities-slides.html#slide#1">
+                                                <span class="image crop-bg" data-src="http://www.ajelite.com/images/income-opportunities/team-income.jpg" data-size="779*369" style="background-size:cover !important;"></span>
+                                                <span style="background:rgba(137,152,173,0.79);" class="title"><h3>Team Income</h3></span>
+                                            </a></li>
+                                            <li class="colspan" data-col="2"><a data-size="50" href="#">
+                                                <span style="background:rgba(108,108,108,0.64);" class="title"><h3>Revenue Sharing</h3></span>
+                                                <span class="image crop-bg" data-src="http://www.ajelite.com/images/income-opportunities/profit-sharing.jpg" data-size="779*369" style="background-size:cover !important;"></span>
+                                            </a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="span4">
+                                        <ul class="thumbs">
+                                            <li><a data-size="33" href="#">
+                                            </a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="span4">
+                                        <ul class="thumbs">
+                                            <li><a data-size="50" href="income-opportunities-slides.html#slide#3">
+                                                <span style="background:rgba(34,115,167,0.30);" class="title"><h3>Retirement Income</h3></span>
+                                                <span class="image crop-bg" data-src="http://www.ajelite.com/images/income-opportunities/retirement-income.jpg" data-size="508*367"></span>
+                                            </a></li>
+                                            <li><a data-size="50" href="income-opportunities-slides.html#slide#2">
+                                                <span style="background:rgba(32,98,140,0.31);" class="title"><h3>Passive Income</h3></span>
+                                                <span class="image crop-bg" data-src="http://www.ajelite.com/images/income-opportunities/passive-income.jpg" data-size="508*367"></span> 
+                                            </a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item item-collage crop-bg" data-src="http://www.ajelite.com/images/advantages/advantages-background.jpg" data-size="1920*822">
+                        <div class="carousel-caption" style="background:rgba(127,127,127,0.60);">
+                            <div class="caption-text">
+                                <h2>Elite Agents</h2>
+                                <p>Elite's vast reach within the industry, specialized resources, and innovative training program enable you to attract more clients and generate more income, no matter what market niche you're involved&nbsp;in.</p>
+                            </div>
+                        </div>
+                        <div class="collage-data agents-collage">
+                            <div class="padder">
+                                <div class="row-fluid">
+                                    <div class="span4">
+                                        <ul class="thumbs">
+                                            <li><a data-size="33" href="agents-slides.html#slide#1">
+                                                <span class="image crop-bg" data-src="http://www.ajelite.com/images/agents/reo.jpg" data-size="429*496"></span>
+                                                <span class="title" style="background: rgba(161,171,79,0.71);"><h3>REO</h3></span>
+                                            </a></li>
+                                            <li><a data-size="33" href="agents-slides.html#slide#2">
+                                                <span class="title" style="background: rgba(110,160,219,0.71);"><h3>Residential Flip</h3></span>
+                                                <span class="image crop-bg" data-src="http://www.ajelite.com/images/agents/residential-flip.jpg" data-size="428*509"></span>
+                                            </a></li>
+                                            <li><a data-size="34" href="agents-slides.html#slide#3">
+                                                <span class="title" style="background: rgba(186,179,172,0.60);"><h3>Luxury</h3></span>
+                                                <span class="image crop-bg" data-src="http://www.ajelite.com/images/agents/luxury-homes.jpg" data-size="426*243"></span>
+                                            </a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="span4">
+                                        <ul class="thumbs">
+                                            <li><a data-size="33" href="agents-slides.html#slide#4">
+                                                <span class="title" style="background: rgba(133,144,82,0.71);"><h3>Short Sales</h3></span>
+                                                <span class="image crop-bg" data-src="http://www.ajelite.com/images/agents/short-sales.jpg" data-size="879*234"></span>
+                                            </a></li>
+                                            <li><a data-size="33" href="agents-slides.html#slide#5">
+                                                <span class="title" style="background: rgba(99,91,70,0.71);"><h3>Rental Acquisition</h3></span>
+                                                <span class="image crop-bg" data-src="http://www.ajelite.com/images/agents/rental-aquisition.jpg" data-size="880*242"></span>
+                                            </a></li>
+                                            <li><a data-size="34" href="agents-slides.html#slide#6">
+                                                <span class="title" style="background: rgba(167,120,85,0.70);"><h3>Team Agents</h3></span>
+                                                <span class="image crop-bg" data-src="http://www.ajelite.com/images/agents/team-agents.jpg" data-size="426*243"></span>
+                                            </a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="span4">
+                                        <ul class="thumbs">
+                                            <li><a data-size="32" href="agents-slides.html#slide#7">
+                                                <span class="title" style="background: rgba(158,158,158,0.71);"><h3>HUD</h3></span>
+                                                <span class="image crop-bg" data-src="http://www.ajelite.com/images/agents/hud-llb.jpg" data-size="426*243"></span>
+                                            </a></li>
+                                            <li><a data-size="68" href="agents-slides.html#slide#8">
+                                                <span class="title" style="background: rgba(166,158,156,0.71);"><h3>Retail</h3></span>
+                                                <span class="image crop-bg" data-src="http://www.ajelite.com/images/agents/retail.jpg" data-size="428*509"></span> 
+                                            </a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <!-- Carousel nav --> 
+                <a class="carousel-control left" href="#myCarousel" data-slide="prev"><span class="icon"></span></a>
+                <a class="carousel-control right" href="#myCarousel" data-slide="next"><span class="icon"></span><br/>
+</a> 
+            </div>
+        </div>      
+    </div>
+    <div class="navigation"> 
+        <a href="index.html" class="brand"><img src="http://www.ajelite.com/images/logo.jpg" alt="Ajelite"/></a>
+        <div class="menu">
+            <div>
+                <ul>                
+                    <li><a class="active" href="index.html">HOME</a></li>
+                    <li>
+                        <a href="advantages.html">Advantages</a>
+                        <ul>
+                            <li><a href="advantages-slides.html#slide#1">Business Optimization</a></li>
+                            <li><a href="advantages-slides.html#slide#2">A Culture of Ownership</a></li>
+                            <li class="drop">
+                                <a href="advantages-slides.html#slide#3">Income Opportunities</a>
+                                <ul>
+                                    <li><a href="income-opportunities-slides.html#slide#1">Team Income</a></li>
+                                    <li><a href="income-opportunities-slides.html#slide#2">Passive Income</a></li>
+                                    <li><a href="income-opportunities-slides.html#slide#3">Retirement Income</a></li>                                   
+                                </ul>
+                            </li>
+                            <li><a href="advantages-slides.html#slide#4">Customized Marketing and Branding</a></li>
+                            <li><a href="advantages-slides.html#slide#5">Personalized, Elite Training</a></li>
+                            <li><a href="advantages-slides.html#slide#6">High Volume Agents</a></li>
+                            <li><a href="advantages-slides.html#slide#7">Recognized Industry Experts</a></li>
+                            <li><a href="advantages-slides.html#slide#8">Systems and Resources</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="agents.html">Agents</a>
+                        <ul>
+                            <li><a href="agents-slides.html#slide#1" class="active">REO</a></li>
+                            <li><a href="agents-slides.html#slide#2" class="active">Short Sales</a></li>
+                            <li><a href="agents-slides.html#slide#3" class="active">HUD</a></li>
+                            <li><a href="agents-slides.html#slide#4" class="active">Residential Flip</a></li>
+                            <li><a href="agents-slides.html#slide#5" class="active">Rental Acquisition</a></li>
+                            <li><a href="agents-slides.html#slide#6" class="active">Luxury</a></li>
+                            <li><a href="agents-slides.html#slide#7" class="active">Retail</a></li>
+                            <li><a href="agents-slides.html#slide#8" class="active">Team Agents</a></li>
+                            <li><a href="listing-agents.html" class="ex">Listing Agents</a></li>
+                            <li><a href="buyers-agents.html" class="ex">Buyer’s Agents</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="company.html">Company</a>
+                        <ul>
+                            <li><a href="company.html#slide#1">Our Company</a></li>
+                            <li><a href="company.html#slide#2">Our Mission</a></li>
+                            <li><a href="company.html#slide#3">Our Territories</a></li>
+                            <li class="">
+                                <a href="company.html#slide#4">Elite Leadership</a>
+                                <ul style="display:none;">
+                                    <li><a href="team-slides.html#slide#1">Marc Carpenter</a></li>
+                                    <li><a href="team-slides.html#slide#2">Jason Harper</a></li>
+                                    <li><a href="team-slides.html#slide#3">Mary Martin</a></li>
+                                    <li><a href="team-slides.html#slide#4">Mitch Pomeroy</a></li>
+                                    <!--<li><a href="team-slides.html#slide#5">Doug Fisher</a></li>-->
+                                    <li><a href="team-slides.html#slide#5">Mary Martin</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="apply.php">Apply</a></li>
+                    <li><a href="contact.php">Connect</a></li>
+                    <li><a href="#" class="login"><span>Login<img src="http://www.ajelite.com/images/arrow.gif" class="icon"/></span></a></li>
+                    <ul class="list">
+                    <li><a href="https://www.facebook.com/AJEliteHomes" target="_blank"><img src="http://www.ajelite.com/images/fb-logo.png" alt="facebook"/></a><span><img src="http://www.ajelite.com/images/border.png"/></span></li>
+                    <li><a href="https://twitter.com/AJEliteHomes/" target="_blank"><img src="http://www.ajelite.com/images/tw-logo.png" alt="twitter"/></a><span><img src="http://www.ajelite.com/images/border.png"/></span></li>
+                    <li><a href="https://plus.google.com/114535749812281502218" rel="publisher" target="_blank"><img src="http://www.ajelite.com/images/g+-logo.png" alt="google+"/></a></li>
+                    </ul>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</apex:page>

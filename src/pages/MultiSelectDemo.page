@@ -1,0 +1,43 @@
+<apex:page controller="MutiselectController" id="pageId">
+            
+            <title>jQuery UI Autocomplete - Remote datasource</title>
+                <apex:stylesheet value="{!URLFOR($Resource.jQueryMultiselect, 'css/jquery-ui.css')}"/>
+    <apex:stylesheet value="{!URLFOR($Resource.jQueryMultiselect, 'css/jquery.multiselect.css')}"/>
+    <apex:stylesheet value="{!URLFOR($Resource.jQueryMultiselect, 'assets/style.css')}"/>
+    <apex:stylesheet value="{!URLFOR($Resource.jQueryMultiselect, 'assets/prettify.css')}"/>
+    <apex:stylesheet value="{!URLFOR($Resource.jqueryTableSorter, 'themes/blue/style.css')}" />
+    
+    <apex:includeScript value="{!URLFOR($Resource.jQueryMultiselect, 'js/jquery.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.jQueryMultiselect, 'js/jquery-ui.min.js')}"/>       
+    <apex:includeScript value="{!URLFOR($Resource.jQueryMultiselect, 'js/jquery.multiselect.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.jQueryMultiselect, 'assets/prettify.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.jqueryTableSorter, 'jquery.tablesorter.js')}" />
+    
+          
+           <script>
+            $(function(){
+            $("select").multiselect({
+                    selectedList: 2,
+                    minWidth : 400,
+                    position: {
+                  my: 'left bottom',
+                  at: 'left top'
+               }
+            });
+        });
+    </script>   
+          
+    <apex:form id="ACCForm">
+    <apex:pageBlock id="filterBlock">
+            <apex:pageBlockSection columns="1" title="Filters">
+                
+                <apex:pageBlockSectionItem >
+                        <apex:outputLabel value="Select Account Customer Priority" />
+                        <apex:selectList value="{!getSelectedValue}" multiselect="true" id="mSP">
+                                <apex:selectOptions value="{!SelectOptionListByField}" />
+                        </apex:selectList>
+                </apex:pageBlockSectionItem>
+                </apex:pageBlockSection>
+   </apex:pageBlock>
+   </apex:form>
+</apex:page>

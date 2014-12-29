@@ -1,0 +1,100 @@
+<!--
+* Description   : This is Visualforce Page to perform Search Functionality.
+* 
+* Created By    : Vijay Kumar Kumawat
+*
+* Created Date  : 10/08/2012
+*
+* Version       : v1.0 - Create 
+-->
+
+<apex:page controller="MyAccountSearchController">
+
+    <!-- Form -->    
+    <apex:form id="form">
+        
+      <!-- Page Block -->
+      <apex:pageBlock > 
+          
+         <!-- Page Block Button  -->   
+         <apex:pageBlockButtons >    
+             
+            <!-- Command Button for search  --> 
+            <apex:commandButton value="Search" action="{!search}" reRender="out" />
+                   
+        </apex:pageBlockButtons>
+            
+        <!-- Page Block Section --> 
+        <apex:pageBlockSection columns="2">
+        
+            <apex:pageBlockSectionItem >
+            
+                <!-- Output Label for Account Name -->
+                <apex:outputLabel value="Account Name"/>  
+                    
+                <!-- Input Text for account Name -->          
+                <apex:inputText value="{!accountName}"/>
+            
+            </apex:pageBlockSectionItem>
+                
+            <apex:pageBlockSectionItem >
+            
+                <!-- Output Label for Billing City -->
+                <apex:outputLabel value="Billing City"/>
+                
+                <!-- Input Test for billing City -->       
+                <apex:inputText value="{!billingCity}"/>
+            
+            </apex:pageBlockSectionItem>
+            
+            <apex:pageBlockSectionItem >
+            
+                <!-- Output Label for Billing State -->
+                <apex:outputLabel value="Billing State"/>
+                
+                <!-- Input Text for billing State  -->      
+                <apex:inputText value="{!billingState}"/>
+            
+            </apex:pageBlockSectionItem>
+            
+            <apex:pageBlockSectionItem >
+            
+                <!-- Output Label for Account Number -->
+                <apex:outputLabel value="Account Number"/>
+                
+                <!-- Input Text for account Number -->        
+                <apex:inputText value="{!accountNumber}"/>
+           
+           </apex:pageBlockSectionItem>
+           
+           <apex:pageBlockSectionItem >
+                
+                <!-- Output Label for Billing Country -->
+                <apex:outputLabel value="Billing Country"/>
+                
+                <!-- Input Text for billing Country -->        
+                <apex:inputText value="{!billingCountry}"/>
+            
+            </apex:pageBlockSectionItem>
+            
+        </apex:pageBlockSection>
+            
+        <!-- Output Panel-->
+        <apex:outputPanel id="out">
+            
+            <!-- Page Block Section -->
+            <apex:pageBlockSection rendered="{!isRender}">   
+     
+                <apex:pageBlockTable value="{!accounts}" var="acc">
+                    <apex:column value="{!acc.Name}"/>
+                    <apex:column value="{!acc.AccountNumber}"/>
+                    <apex:column value="{!acc.BillingCity}"/>
+                    <apex:column value="{!acc.BillingState}"/>
+                    <apex:column value="{!acc.BillingCountry}"/>
+                </apex:pageBlockTable>
+            
+            </apex:pageBlockSection>
+        </apex:outputPanel>
+        </apex:pageBlock>
+    </apex:form> 
+</apex:page>

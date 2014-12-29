@@ -1,0 +1,22 @@
+<apex:page controller="OverlayDemoController">
+<head>
+<c:Overlay style="processing" />
+</head>
+<apex:form >
+    <apex:actionStatus id="overlayStatus" onStart="showOverlay();" onstop="hideOverlay();"></apex:actionstatus>
+    <apex:sectionHeader title="Contact Save" subtitle="Overlay Demo" />
+    <apex:pageBlock id="pBlock">
+        <apex:pageMessages ></apex:pageMessages>
+        <apex:pageBlockButtons >
+            <apex:commandButton action="{!saveRecord}" status="overlayStatus" value="Save" reRender="pBlock"/>
+        </apex:pageBlockButtons>
+        <apex:pageBlockSection >
+                <apex:inputField value="{!cnt.FirstName}" />                
+                <apex:inputField value="{!cnt.LastName}" />
+                <apex:inputField value="{!cnt.Phone}" />
+                <apex:inputField value="{!cnt.Email}" />
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+</apex:form>
+<div id="overlay"></div>
+</apex:page>

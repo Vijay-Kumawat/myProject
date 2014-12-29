@@ -1,0 +1,29 @@
+<!--
+/**
+ *  Description     :   Page of records having this Months records as pdf
+ * 
+ *  Created By      :   Abhi Tripathi(Simplyforce Technology)
+ *
+ *  Created Date    :   04/05/2013
+ *
+ *  Version         :   v1.0 - Created  
+**/
+-->
+<apex:page controller="MonthlyTimeSheetUpdate" renderAs="pdf">
+  
+  <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    </head>
+  
+  <!--page block -->
+  <apex:pageblock title="This Months Work Status">
+    <apex:pageBlockTable value="{!companies}" var="comp" border="1">
+                    <apex:column value="{!comp.Project__c}"/>
+                    <apex:column value="{!comp.Task_Date__c}"/>
+                     <apex:column value="{!comp.Task_Detail__c}"/>
+                     <apex:column value="{!comp.Status__c}"/>
+                     <apex:column value="{!comp.Hours__c}"/>
+    </apex:pageBlockTable>
+    </apex:pageblock>
+         
+</apex:page>

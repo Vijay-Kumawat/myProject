@@ -1,0 +1,17 @@
+<apex:page controller="MonthlyTimeSheetUpdate" renderAs="pdf">
+
+        <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    </head>
+
+       <!--page block -->
+  <apex:pageblock title="This Weeks Work Status">
+    <apex:pageBlockTable value="{!companyList}" var="comp" border="1">
+                    <apex:column value="{!comp.Project__c}"/>
+                    <apex:column value="{!comp.Task_Date__c}"/>
+                     <apex:column value="{!comp.Task_Detail__c}"/>
+                     <apex:column value="{!comp.Status__c}"/>
+                     <apex:column value="{!comp.Hours__c}"/>
+    </apex:pageBlockTable>
+    </apex:pageblock>
+</apex:page>

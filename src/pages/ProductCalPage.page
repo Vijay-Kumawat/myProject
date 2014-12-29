@@ -1,0 +1,38 @@
+<apex:page id="ProductCalculator" controller="ProductCalculator">
+
+    <script>
+        function calTotal() {
+            
+            var quan = document.getElementById("ProductCalculator:pbProdCalc:fProdCalc:dtProdCalc:0:Qty").value;
+            var proPrice = document.getElementById("ProductCalculator:pbProdCalc:fProdCalc:dtProdCalc:0:Price").value;
+            var total = quan * proPrice;
+            console.log('##########' + quan);
+            console.log('##########' + total);
+            console.log('##########' + proPrice);
+            document.getElementById("ProductCalculator:pbProdCalc:fProdCalc:dtProdCalc:0:Total").innerText = total;
+        }
+    </script>
+
+  <apex:pageBlock id="pbProdCalc">
+      <apex:form id="fProdCalc">
+          <apex:dataTable id="dtProdCalc" columns="4" value="{!Products}" var="con" styleclass="list">
+              <apex:column id="prodList" headerValue="Product">
+                  <apex:selectList id="slProdList" value="{!product}" size="1" multiselect="false">
+                      <apex:selectOptions id="soProdList" value="{!items}"/>
+                  </apex:selectList>
+              </apex:column>
+              <apex:column id="prodQuantity" headerValue="Quantity">
+                     <apex:inputText id="Qty" value="{!quantity}"/>
+              </apex:column>
+              <apex:column id="prodPrice" headerValue="Price">
+                  <apex:inputText id="Price" value="{!prodPrice}" onblur="calTotal();">
+                      
+                  </apex:inputText>
+              </apex:column>
+              <apex:column id="prodTotal" headerValue="Total">
+                  <apex:outputText id="Total" value="{!prodTotal}"/>
+              </apex:column>
+          </apex:dataTable>
+      </apex:form>
+  </apex:pageBlock>
+</apex:page>

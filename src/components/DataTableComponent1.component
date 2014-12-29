@@ -1,0 +1,40 @@
+<apex:component controller="DataTableComponentController">
+    <apex:attribute name="listOfSobjectRecords" type="sobject[]" required="true" description=""/>
+    <apex:attribute name="listOfSObjectAPIName" type="String" required="true" description="" assignTo="{!fieldName}"/>
+    <apex:attribute name="sobjectName" type="String" required="true" description=""/>
+     
+    <apex:stylesheet value="{!URLFOR($Resource.DataTable , 'css/CSS2.css')}"/>
+    <apex:stylesheet value="{!URLFOR($Resource.DataTable , 'css/CSS3.css')}"/>
+    <apex:stylesheet value="{!URLFOR($Resource.DataTable , 'css/CSS1.css')}"/>
+    <apex:stylesheet value="{!URLFOR($Resource.DataTable , 'css/CSS4.css')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.JavaScript , 'js/JS1.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.JavaScript , 'js/JS2.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.JavaScript , 'js/JS3.js')}"/>
+       
+    <apex:sectionHeader title="Data Table Demo"/>
+    <body id="index" class="grid_2_3">
+     
+        <div class="full_width">
+            <table cellpadding="0" cellspacing="0" border="0" class="display" id="example" style="width:980px">
+                <thead>
+                    <tr>
+                        <apex:repeat value="{!columnTableHeader}" var="f">
+                            <th>{!$ObjectType[sobjectName].fields[f].Label}</th>
+                        </apex:repeat>
+                    </tr>
+                </thead>
+                
+                <tbody>
+                    <apex:repeat value="{!listOfSobjectRecords}" var="records">
+                        <tr class="gradeX">
+                            <apex:repeat value="{!columnHeader}" var="field">
+                                <td><apex:outputlink value="/{!records['Id']}" rendered="{!IF(contains(field, "."), "true", "false")}">{!records[field]}</apex:outputlink>
+                                <apex:outputField value="{!records[field]}" rendered="{!IF(!contains(field, "."), "true", "false")}"/></td>
+                            </apex:repeat>
+                        </tr>
+                    </apex:repeat>
+                </tbody>
+            </table>
+        </div>
+    </body>
+</apex:component>

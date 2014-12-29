@@ -1,0 +1,260 @@
+<!--
+* Description	:	This is Visualforce Page for FLU Pre-order Schedule Shipping.
+* 
+* Created By    :	
+*
+* Created Date  :	09/16/2013
+*
+* Version       :	V_1.0 - Created 
+-->
+
+<apex:page StandardController="Account" extensions="FLUPreorderController" showHeader="false" standardStylesheets="false">
+    
+	<!-- CSS Include Here -->
+    <apex:stylesheet value="{!URLFOR($Resource.FLUPreorderCSS)}"/>
+    
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+	<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+	<link rel="stylesheet" href="/resources/demos/style.css" />
+	
+    <script>
+		$(function() {
+		    $('#datepicker1').datepicker();
+		    $('#datepicker2').datepicker();
+		    $('#datepicker3').datepicker();
+		    $('#datepicker4').datepicker();
+		    $('#datepicker5').datepicker();
+		    $('#datepicker6').datepicker();
+		    $('#imageId1').click(function() {
+		        $('#datepicker1').datepicker('show');
+		    });
+		    	$('#imageId2').click(function() {
+		        	$('#datepicker2').datepicker('show');
+		    });
+		    	$('#imageId3').click(function() {
+		        	$('#datepicker3').datepicker('show');
+		    });
+		    	$('#imageId4').click(function() {
+		        	$('#datepicker4').datepicker('show');
+		    });
+		    	$('#imageId5').click(function() {
+		        	$('#datepicker5').datepicker('show');
+		    });
+		    	$('#imageId6').click(function() {
+		        	$('#datepicker6').datepicker('show');
+		    });
+		});
+	</script>
+    
+	<apex:form >
+		<apex:pageBlock >
+		
+			<div class="headerImageClass">
+				<apex:image value="/servlet/servlet.FileDownload?file=015900000026UXz"/>
+			</div>
+		
+         	<div class="headerClass">
+         		{!$Label.Confirm_Account_Page_Header}
+         		<span class="headerSubClass">     
+         			{!$Label.Confirm_Account_Page_Header_Season}
+         		</span>
+         	</div>
+         	
+         	<div class="panelAlignmentClass">
+         		<apex:image value="/servlet/servlet.FileDownload?file=01590000001h8ZR" styleClass="panalClass"/>
+         	</div><br/>
+         	
+         	<table>
+       			<tr>
+       				<td class="imageTdAlignmentClass">
+       					<apex:image value="/servlet/servlet.FileDownload?file=01590000001h8ZW" styleClass="imageClass"/>
+		    		</td>
+		    		<td>
+		    			<div class="mainHeadingClass"> 
+					    	{!$Label.Schedule_Shipping_Page_Heading}
+				    	</div>
+				    	<div class="mainHeadingContentClass">
+				    		<apex:outputText value="{!$Label.Enter_Quantities_Page_Heading_Content}" escape="false"/>
+						</div>
+					</td>
+			    </tr>
+		    </table><br/>
+		    
+		    <div class="scheduleShippingDivInformationClass" id="div_scheduleShipping">
+		    	<table id="scheduleShippingInnerTableClass">
+		    		<tr>
+		    			<td class="headerValue">
+		    				{!$ObjectType.Account.fields.AccountNumber.Label}
+		    			</td>
+		    			<td class="textBoldClass">
+                            <apex:outputField value="{!Account.AccountNumber}"/>
+                        </td>
+		    			<td class="headerValue">
+		    				Shipping Address
+		    			</td>
+		    			<td rowspan="2">
+		    				<apex:outputField value="{!Account.Shipping_Address1__c}"/><br/>
+		    				<apex:outputField value="{!Account.ShippingCity}"/>,&nbsp;
+		    				<apex:outputField value="{!Account.ShippingState}"/>&nbsp;
+		    				<apex:outputField value="{!Account.ShippingPostalCode}"/>
+		    			</td>
+		    		</tr>
+		    		<tr>
+		    			<td class="headerValue">
+		    				{!$ObjectType.Account.fields.Name.Label}
+		    			</td>
+		    			<td class="textBoldClass">
+                            <apex:outputField value="{!Account.Name}"/>
+                        </td>     
+		    		</tr>
+		    		<tr>
+		    			<td colspan="4">
+		    				<hr class="horizontalLineClass"/>
+		    			</td>
+		    		</tr>
+		    		<tr>
+		    			<td class="headerValue">
+		    				{!$ObjectType.Account.fields.Delivery_Hours__c.Label}
+		    			</td>
+		    			<td>
+		    				<apex:outputField value="{!Account.Delivery_Hours__c}"/>
+		    			</td>
+		    			<td class="textMessageClass" colspan="2">
+		    				<apex:outputText value="{!$Label.Schedule_Shipping_Page_Message1}" escape="false"/>
+		    			</td>
+		    		</tr>
+		    		<tr>
+		    			<td class="headerValue">
+		    				Dates You Can’t<br/>
+		    				Receive Shipments
+		    			</td>
+		    			<td>
+		    				9/1/14, 11/27/14, 11/28/14
+		    			</td>
+		    			<td colspan="2">
+		    				<input type="text" id="datepicker1" class="scheduleShippingInputBoxClass"/>
+							<img src="/servlet/servlet.FileDownload?file=015900000026R8c" id="imageId1" class="scheduleShippingImageClass"/>
+							<input type="text" id="datepicker2" class="scheduleShippingInputBoxClass"/>
+							<img src="/servlet/servlet.FileDownload?file=015900000026R8c" id="imageId2" class="scheduleShippingImageClass"/>
+							<input type="text" id="datepicker3" class="scheduleShippingInputBoxClass"/>
+							<img src="/servlet/servlet.FileDownload?file=015900000026R8c" id="imageId3" class="scheduleShippingImageClass"/>
+							<input type="text" id="datepicker4" class="scheduleShippingInputBoxClass"/>
+							<img src="/servlet/servlet.FileDownload?file=015900000026R8c" id="imageId4" class="scheduleShippingImageClass"/>
+							<input type="text" id="datepicker5" class="scheduleShippingInputBoxClass"/>
+							<img src="/servlet/servlet.FileDownload?file=015900000026R8c" id="imageId5" class="scheduleShippingImageClass"/>
+							<input type="text" id="datepicker6" class="scheduleShippingInputBoxClass"/>
+							<img src="/servlet/servlet.FileDownload?file=015900000026R8c" id="imageId6" class="scheduleShippingImageClass"/>
+		    			</td>
+		    		</tr>
+		    		<tr>
+		    			<td>
+		    			</td>
+		    			<td colspan="3" class="textMessageClass">
+		    				<apex:outputText value="{!$Label.Schedule_Shipping_Page_Message2}" escape="false"/>
+		    			</td>
+		    		</tr>
+		    		<tr>
+		    			<table class="scheduleShippingTableClass">
+		    				<tr class="scheduleShippingPageTableHeaderClass">
+		    					<th>
+		    						{!$ObjectType.Product2.fields.Besse__c.Label}
+		    					</th>
+		    					<th>
+		    						{!$ObjectType.Product2.fields.Name.Label}
+		    					</th>
+		    					<th>
+		    						{!$ObjectType.Product2.fields.Age_Indication__c.Label}
+		    					</th>
+		    					<th>
+		    						List Price
+		    					</th>
+		    					<th>
+		    						{!$ObjectType.Product2.fields.Final_Price__c.Label}
+		    						<span class="tableThSubHeaderClass">
+	    								(includes $7.50 excise tax)
+	    							</span>
+		    					</th>
+		    					<th class="tableThHeaderClass">
+		    						YOUR PRE-ORDER UNITS
+		    					</th>
+		    					<th>
+		    						{!$ObjectType.Product2.fields.Dose_Unit__c.Label}
+		    					</th>
+		    					<th>
+		    						{!$ObjectType.Product2.fields.Total_Doses__c.Label}
+		    					</th>
+		    				</tr>
+		    				
+		    				<apex:repeat value="{!mapProductFamilyWithPriceBookEntryUpdated}" var="key">
+		    					<tr>
+			    					<td colspan="8" class="tableTdHeadingClass">
+			    						<apex:outputText value="{!key}"/>
+			    					</td>
+			    				</tr>
+								<apex:repeat value="{!mapProductFamilyWithPriceBookEntryUpdated[key]}" var="keyValue" >
+							        <tr class="tableTdContentClass">
+				    					<td>
+				    						<apex:outputText value="{!keyValue.Product2.Besse__c}"/>
+				    					</td>
+				    					<td>
+				    						<apex:outputText value="{!keyValue.Product2.Name}"/>
+				    					</td>
+				    					<td>
+				    						<apex:outputText value="{!keyValue.Product2.Age_Indication__c}"/>
+				    					</td>
+				    					<td>
+				    						$<apex:outputText value="{!keyValue.UnitPrice}"/>
+				    					</td>
+				    					<td>
+				    						$<apex:outputText value="{!keyValue.Product2.Final_Price__c}"/>
+				    					</td>
+						    			<td class="tableTdFontColorClass">
+				    						<apex:outputText value="{!keyValue.Product2.ENTER_YOUR_PRE_ORDER_UNITS__c}" id="preOrderUnit"/>
+				    					</td>
+				    					<td>
+				    						<apex:outputText value="{!keyValue.Product2.Dose_Unit__c}"/>
+				    					</td>
+				    					<td>
+				    						<apex:outputField value="{!keyValue.Product2.Total_Doses__c}"/>
+				    					</td>
+				    				</tr>
+				    				<tr>
+				    					<td class="scheduleShippingFontColorClass">
+				    						Shipping <br/>Preference:
+				    					</td>
+				    					<td class="tdFontColorClass" colspan="7">
+				    						July: <apex:inputField value="{!keyValue.Product2.July__c}" styleClass="inputBoxClass"/> units &nbsp;&nbsp;&nbsp;
+				    						August: <apex:inputField value="{!keyValue.Product2.August__c}" styleClass="inputBoxClass"/> units &nbsp;&nbsp;&nbsp;
+				    						September: <apex:inputField value="{!keyValue.Product2.September__c}" styleClass="inputBoxClass"/> units &nbsp;&nbsp;&nbsp;
+				    						October: <apex:inputField value="{!keyValue.Product2.October__c}" styleClass="inputBoxClass"/> units &nbsp;&nbsp;&nbsp;
+				    						November: <apex:inputField value="{!keyValue.Product2.November__c}" styleClass="inputBoxClass"/> units
+				    					</td>
+				    				</tr>
+				    				<tr>
+				    					<td>
+				    					</td>
+				    					<td colspan="7">
+				    						<apex:outputText value="{!$Label.Schedule_Shipping_Page_Error_Message}" escape="false" styleClass="errorMessageColorClass" rendered="{!isUnitPriceEqual}"/>
+				    					</td>
+				    				</tr>
+							   	</apex:repeat>
+							</apex:repeat>
+		    			</table>
+		    		</tr>
+		    	</table>
+		    </div>
+		    
+		    <div class="buttonClass">
+    			<input type="submit" value="{!$Label.Schedule_Shipping_Page_Button_Return_to_Step2}" onClick="window.open('/apex/FLUPreorderEnterQuantities?Id={!$CurrentPage.Parameters.Id}' , '_parent');return false;" class="returnPageButtonClass"/>
+    			<apex:commandButton value="{!$Label.Enter_Quantities_Page_Button_Continue}" action="{!validateUnitPrice}" styleClass="forwardPageButtonClass"/>
+		    </div>
+		    
+		    <div id="footer"> 
+				<p> 
+					Copyright &copy; 2010 AmerisourceBergen Corporation. All rights reserved. 
+				</p> 
+			</div>
+     	</apex:pageBlock>
+	</apex:form>
+</apex:page>

@@ -1,0 +1,170 @@
+<apex:page showHeader="false" sidebar="false" id="page" controller="ReportSummaryController">
+
+	<style>
+		table {
+			width:70%;
+		}
+		p {
+			font-size:18px;
+			font-weight:bold;
+		}
+		.filterDiv {
+			margin-left:100px;
+		}
+		.listClass {
+			width:300px;
+		}
+		.runReportClass {
+			margin-top: 15px;
+			margin-left: 421px;
+			font-size: 15px;
+			margin-bottom:15px;
+		}
+	</style>
+	
+ 	<!-- Section Header -->
+	<apex:sectionHeader title="Reports"/>
+	
+	<!-- Block UI component -->
+    <c:BlockUI />
+   
+	<!-- Form -->
+	<apex:form >
+	
+	<!-- Page Block -->
+	<apex:pageBlock >
+			
+		<!-- Background Processing Message -->
+	    <apex:actionStatus onStart="blockMe();" onstop="unBlockMe();" id="waitMsg" />
+    
+			<p>Filter By:</p>
+			<div class="filterDiv">
+				<table>
+					<tr>
+						<td>
+							<b>Case</b>
+						</td>
+						<td>
+							<apex:selectList value="{!selectedCaseField}" size="1" styleClass="listClass">
+				            	<apex:selectOptions value="{!caseFields}"/>
+				            </apex:selectList>
+						</td>
+						<td>
+							<apex:selectList value="{!selectedCaseOperator}" size="1">
+				            	<apex:selectOptions value="{!OperationType}"/>
+				            </apex:selectList>
+						</td>
+						<td>
+							<apex:inputText value="{!selectedCaseFieldValue}"/>
+						</td>
+						<td>
+							<apex:commandButton value="Add" action="{!addRows}"/>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<b>Expert</b>
+						</td>
+						<td>
+							<apex:selectList value="{!selectedExpertField}" size="1" styleClass="listClass">
+				            	<apex:selectOptions value="{!expertFields}"/>
+				            </apex:selectList>
+						</td>
+						<td>
+							<apex:selectList value="{!selectedExpertOperator}" size="1">
+				            	<apex:selectOptions value="{!OperationType}"/>
+				            </apex:selectList>
+						</td>
+						<td>
+							<apex:inputText value="{!selectedExpertFieldValue}"/>
+						</td>
+						<td>
+							<apex:commandButton value="Add" action="{!addRows}"/>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<b>Program</b>
+						</td>
+						<td>
+							<apex:selectList value="{!selectedProgramField}" size="1" styleClass="listClass">
+				            	<apex:selectOptions value="{!programFields}"/>
+				            </apex:selectList>
+						</td>
+						<td>
+							<apex:selectList value="{!selectedProgramOperator}" size="1">
+				            	<apex:selectOptions value="{!OperationType}"/>
+				            </apex:selectList>
+						</td>
+						<td>
+							<apex:inputText value="{!selectedProgramFieldValue}"/>
+						</td>
+						<td>
+							<apex:commandButton value="Add" action="{!addRows}"/>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<b>Case Category</b>
+						</td>  
+						<td>
+							<apex:selectList value="{!selectedCaseCategoryField}" size="1" styleClass="listClass">
+				            	<apex:selectOptions value="{!caseCategoryFields}"/>
+				            </apex:selectList>
+						</td>
+						<td>
+							<apex:selectList value="{!selectedCaseCategoryOperator}" size="1">
+				            	<apex:selectOptions value="{!OperationType}"/>
+				            </apex:selectList>
+						</td>
+						<td>
+							<apex:inputText value="{!selectedCaseCategoryFieldValue}"/>
+						</td>
+						<td>
+							<apex:commandButton value="Add" action="{!addRows}"/>
+						</td>
+					</tr>
+	            </table>
+                <div class="runReportClass">
+	            	<apex:commandButton value="Run Report" action="{!searchRecords}" status="waitMsg" reRender="pBS"/>
+	            </div>
+            </div>
+            
+            <!-- Page Block Section displaying case records -->
+            <apex:pageBlockSection title="Result" columns="5" id="pBS">
+            
+            	<apex:outPutText value="No Records to display." rendered="{!cases.size == 0}"/>
+            	
+            	<apex:pageBlockTable value="{!cases}" var="c" rendered="{!cases.size > 0}">
+            	
+            		<apex:column value="{!c.CaseNumber}"/>
+            		<apex:column value="{!c.Type}"/>
+            		<apex:column value="{!c.Origin}"/>
+            		<apex:column value="{!c.Status}"/>
+            		<apex:column value="{!c.Reason}"/>
+            	
+            	<apex:pageBlockTable value="{!c.Experts__r}" var="c1" rendered="{!c.Experts__r.size > 0}">
+            	
+            		<apex:column value="{!c1.Name}"/>
+            		<apex:column value="{!c1.Description__c}"/>
+            		<apex:column value="{!c1.Phone__c}"/>
+            	</apex:pageBlockTable>
+            	
+            	<apex:pageBlockTable value="{!c.Programs__r}" var="c2" rendered="{!c.Programs__r.size > 0}">
+            	
+            		<apex:column value="{!c2.Name}"/>
+            		<apex:column value="{!c2.Description__c}"/>
+            		<apex:column value="{!c2.Title__c}"/>
+            	</apex:pageBlockTable>
+            	
+            	<apex:pageBlockTable value="{!c.Case_Categories__r}" var="c3" rendered="{!c.Case_Categories__r.size > 0}">
+            	
+            		<apex:column value="{!c3.Name}"/>
+            		<apex:column value="{!c3.Description__c}"/>
+            		<apex:column value="{!c3.Count__c}"/>
+            	</apex:pageBlockTable>
+            	</apex:pageBlockTable>
+            </apex:pageBlockSection>
+	</apex:pageBlock>
+	</apex:form>
+</apex:page>

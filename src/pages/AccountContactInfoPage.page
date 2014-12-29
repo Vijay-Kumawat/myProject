@@ -1,0 +1,295 @@
+<apex:page StandardController="Account" extensions="AccountContactInfoController" tabStyle="Account" id="page" showHeader="false">
+
+    <script>
+        
+        //This method is for copy shipping address to billing address
+        function copyShippingToBiling(obj) {
+        
+            //Check if checkbox is true
+            if(obj.checked) {
+            
+                document.getElementById("page:form:pB:pBS:bStreet").value = document.getElementById("page:form:pB:pBS:sStreet").value;
+                document.getElementById("page:form:pB:pBS:bCity").value = document.getElementById("page:form:pB:pBS:sCity").value;
+                document.getElementById("page:form:pB:pBS:bState").value = document.getElementById("page:form:pB:pBS:sState").value;
+                document.getElementById("page:form:pB:pBS:bCountry").value = document.getElementById("page:form:pB:pBS:sCountry").value;
+                document.getElementById("page:form:pB:pBS:bCode").value = document.getElementById("page:form:pB:pBS:sCode").value;
+            }
+            else {
+            
+                document.getElementById("page:form:pB:pBS:bStreet").value = '';
+                document.getElementById("page:form:pB:pBS:bCity").value = '';
+                document.getElementById("page:form:pB:pBS:bState").value = '';
+                document.getElementById("page:form:pB:pBS:bCountry").value = '';
+                document.getElementById("page:form:pB:pBS:bCode").value = '';
+            }
+        }
+        
+        //This method is for copy shipping address to billing address
+        function copyMailingToOther(obj) {
+        
+            //Check if checkbox is true
+            if(obj.checked) {
+            
+                document.getElementById("page:form:pB2:pBS2:oStreet").value = document.getElementById("page:form:pB2:pBS2:mStreet").value;
+                document.getElementById("page:form:pB2:pBS2:oCity").value = document.getElementById("page:form:pB2:pBS2:mCity").value;
+                document.getElementById("page:form:pB2:pBS2:oState").value = document.getElementById("page:form:pB2:pBS2:mState").value;
+                document.getElementById("page:form:pB2:pBS2:oCountry").value = document.getElementById("page:form:pB2:pBS2:mCountry").value;
+                document.getElementById("page:form:pB2:pBS2:oCode").value = document.getElementById("page:form:pB:pBS2:mCode").value;
+            }
+            else {
+            
+                document.getElementById("page:form:pB2:pBS2:oStreet").value = '';
+                document.getElementById("page:form:pB2:pBS2:oCity").value = '';
+                document.getElementById("page:form:pB2:pBS2:oState").value = '';
+                document.getElementById("page:form:pB2:pBS2:oCountry").value = '';
+                document.getElementById("page:form:pB2:pBS2:oCode").value = '';
+            }
+        }
+        
+        //This method is for copy description
+        function populateData() {
+        
+            document.getElementById("page:form:pB:pBS:des2").value = document.getElementById("page:form:pB:pBS:des1").value;
+        }
+        
+        //This method is for copy description
+        function populateDataForMailing() {
+        
+            document.getElementById("page:form:pB2:pBS2:cdes2").value = document.getElementById("page:form:pB2:pBS2:cdes1").value;
+        }
+        
+        //This method is for enter only numeric value
+        function isNumberKey(evt){
+            var charCode = (evt.which) ? evt.which : event.keyCode
+                if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+                return false;
+                }
+            return true;
+        }
+        
+        //This method is to validate the Email Address
+        function emailAddressValidator() {
+    
+            var email = document.getElementById('page:form:pB2:pBS2:cEmail');
+            alert(email);
+            if(email.value.length > 0) {
+                var emailfilter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+    
+                if (!emailfilter.test(email.value)) {
+             
+                    jQuery("#valid_email_address").html('Please enter a valid email address (i.e. yourname@host.com)');
+                    email.focus;
+                    return false;
+                }
+                else {
+                  jQuery("#valid_email_address").html('');
+                }
+            }
+            return true;
+        }
+        
+        //This method is to validate the Phone Number
+        function phoneAddressValidator() {
+            
+            var phone = document.getElementById('page:form:pB2:pBS2:cPhone');
+            var phonefilter = /^([0-9]{3})?[-.]?([0-9]{3})[-.]?([0-9]{4})$/;
+    
+            if(phone.value.length > 0) {
+                if (phonefilter.test(phone.value) == false){
+                    jQuery("#valid_phone_no").html('Please enter a valid phone #(i.e. 1234567890)');
+                    phone.focus;
+                    return false;
+                }
+                else {
+                  jQuery("#valid_phone_no").html('');
+                }
+            }
+            return true;
+        }
+        
+        function updateAccountInfo() {
+        
+            document.getElementById("page:form:pB4").style.display='block';
+            document.getElementById("page:form:pB3").style.display='none';
+        }
+        
+        function saveAccountInfo() {
+            document.getElementById("page:form:pB4").style.display='none';
+            document.getElementById("page:form:pB3").style.display='block';
+        }
+    </script>
+    
+    <style>
+        .errorDiv1 {
+            color: red;
+            position: absolute;
+            margin-top: 74px;
+            margin-left: 410px;
+        }
+        .errorDiv2 {
+            color: red;
+            position: absolute;
+            margin-top: 94px;
+            margin-left: 914px;
+        }
+    </style>
+    
+    <!-- block UI component -->
+    <c:BlockUI />
+    <apex:pageMessages id="pageMeg"/>
+
+    <apex:sectionHeader title="Account/Contact Wizard"/>
+    
+    <!-- Action Status -->
+    <apex:actionStatus onStart="blockMe();" onstop="unBlockMe();" id="waitMsg"/>
+
+    <apex:form id="form">
+        <apex:pageBlock id="pB" rendered="{!isAccountCreated}">
+        
+            <apex:pageBlockButtons location="bottom">
+                <apex:commandButton value="Save" action="{!saveAccount}" status="waitMsg" reRender="form,pageMeg"/>
+                <apex:commandButton value="Cancel" action="{!returnToAccount}"/>
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection title="Create New Account" collapsible="false" id="pBS">
+            
+                <apex:inputText value="{!account.Name}"/>
+                <apex:inputText value="{!account.AccountNumber}"/>
+                <apex:inputField value="{!account.Type}"/>
+                <apex:inputText value="{!account.Phone}"/>
+                
+                <apex:outPutText value="Shipping Address" styleClass="margin-left:100px;"/>
+                <apex:outPutText value="Billing Address" styleClass="margin-left:100px;"/>
+                <apex:pageBlockSectionItem >
+                    <br/>
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem >
+                    <apex:inputCheckbox onChange="copyShippingToBiling(this);"/>
+                    Same as Shipping Address
+                </apex:pageBlockSectionItem>
+                
+                <apex:inputText value="{!account.ShippingStreet}" id="sStreet"/>
+                <apex:inputText value="{!account.BillingStreet}" id="bStreet"/>
+                <apex:inputText value="{!account.ShippingCity}" id="sCity"/>
+                <apex:inputText value="{!account.BillingCity}" id="bCity"/>
+                <apex:inputText value="{!account.ShippingState}" id="sState"/>
+                <apex:inputText value="{!account.BillingState}" id="bState"/>
+                <apex:inputText value="{!account.ShippingCountry}" id="sCountry"/>
+                <apex:inputText value="{!account.BillingCountry}" id="bCountry"/>
+                <apex:inputText value="{!account.ShippingPostalCode}" id="sCode" onKeyPress="return isNumberKey(event);" maxLength="5"/>
+                <apex:inputText value="{!account.BillingPostalCode}" id="bCode" onKeyPress="return isNumberKey(event);" maxLength="5"/>
+                <apex:inputTextArea value="{!account.Description}" rows="7" cols="50" onBlur="populateData();" id="des1"/>
+                <apex:inputTextArea value="{!account.Description}" rows="7" cols="50" id="des2"/>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+        
+        <apex:pageBlock id="pB2" rendered="{!isContactCreated}">
+        
+            <apex:pageBlockButtons location="bottom">
+                <apex:commandButton value="Save" action="{!saveContact}" status="waitMsg" reRender="form,pageMeg"/>
+                <apex:commandButton value="Cancel" action="{!returnToAccount}"/>
+            </apex:pageBlockButtons>
+            <div class="errorDiv1" id="valid_email_address"></div>
+                <div class="errorDiv2" id="valid_phone_no"></div>
+            <apex:pageBlockSection title="Create New Contact" collapsible="false" id="pBS2">
+                
+                <apex:inputText value="{!contact.FirstName}"/>
+                <apex:inputText value="{!contact.LastName}"/>
+                <apex:inputField value="{!contact.Email}" id="cEmail" onblur="emailAddressValidator();"/>
+                <apex:inputText value="{!contact.Phone}" id="cPhone" onBlur="phoneAddressValidator();"/>
+                
+                <apex:outPutText value="Mailing Address" styleClass="margin-left:100px;"/>
+                <apex:outPutText value="Other Address" styleClass="margin-left:100px;"/>
+                <apex:pageBlockSectionItem >
+                    <br/>
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem >
+                    <apex:inputCheckbox onChange="copyMailingToOther(this);"/>
+                    Same as Mailing Address
+                </apex:pageBlockSectionItem>
+                
+                <apex:inputText value="{!contact.MailingStreet}" id="mStreet"/>
+                <apex:inputText value="{!contact.OtherStreet}" id="oStreet"/>
+                <apex:inputText value="{!contact.MailingCity}" id="mCity"/>
+                <apex:inputText value="{!contact.OtherCity}" id="oCity"/>
+                <apex:inputText value="{!contact.MailingState}" id="mState"/>
+                <apex:inputText value="{!contact.OtherState}" id="oState"/>
+                <apex:inputText value="{!contact.MailingCountry}" id="mCountry"/>
+                <apex:inputText value="{!contact.OtherCountry}" id="oCountry"/>
+                <apex:inputText value="{!contact.MailingPostalCode}" id="mCode" onKeyPress="return isNumberKey(event);" maxLength="5"/>
+                <apex:inputText value="{!contact.OtherPostalCode}" id="oCode" onKeyPress="return isNumberKey(event);" maxLength="5"/>
+                <apex:inputTextArea value="{!contact.Description}" rows="7" cols="50" onBlur="populateDataForMailing();" id="cdes1"/>
+                <apex:inputTextArea value="{!contact.Description}" rows="7" cols="50" id="cdes2"/>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+        
+        <apex:outputPanel id="pB3" style="display:block;">
+        <apex:pageBlock rendered="{!isPreview}">
+        
+            <apex:pageBlockSection title="Account/Contact Info" collapsible="false" id="pBS3">
+            
+                <apex:outputText value="{!newlyInsertedContact.Account.Name}"/>
+                <apex:outputText value="{!newlyInsertedContact.Account.AccountNumber}"/>
+                <apex:outputText value="{!newlyInsertedContact.Account.Type}"/>
+                <apex:outputText value="{!newlyInsertedContact.Account.Phone}"/>
+                
+                <apex:outPutText value="Shipping Address" styleClass="margin-left:100px;"/>
+                <apex:outPutText value="Billing Address" styleClass="margin-left:100px;"/>
+                
+                <apex:outputText value="{!newlyInsertedContact.Account.ShippingStreet}"/>
+                <apex:outputText value="{!newlyInsertedContact.Account.BillingStreet}"/>
+                <apex:outputText value="{!newlyInsertedContact.Account.ShippingCity}" />
+                <apex:outputText value="{!newlyInsertedContact.Account.BillingCity}"/>
+                <apex:outputText value="{!newlyInsertedContact.Account.ShippingState}"/>
+                <apex:outputText value="{!newlyInsertedContact.Account.BillingState}"/>
+                <apex:outputText value="{!newlyInsertedContact.Account.ShippingCountry}"/>
+                <apex:outputText value="{!newlyInsertedContact.Account.BillingCountry}"/>
+                <apex:outputText value="{!newlyInsertedContact.Account.ShippingPostalCode}"/>
+                <apex:outputText value="{!newlyInsertedContact.Account.BillingPostalCode}"/>
+                <apex:outputText value="{!newlyInsertedContact.Account.Description}"/>
+                
+                <apex:commandButton value="Edit Account Info" onClick="updateAccountInfo();"/>
+                
+                <apex:outputText value="{!newlyInsertedContact.FirstName}"/>
+                <apex:outputText value="{!newlyInsertedContact.LastName}"/>
+                <apex:outputText value="{!newlyInsertedContact.Email}"/>
+                <apex:outputText value="{!newlyInsertedContact.Phone}"/>
+                
+                <apex:outPutText value="Mailing Address" styleClass="margin-left:100px;"/>
+                <apex:outPutText value="Other Address" styleClass="margin-left:100px;"/>
+                
+                <apex:outputText value="{!newlyInsertedContact.MailingStreet}"/>
+                <apex:outputText value="{!newlyInsertedContact.OtherStreet}"/>
+                <apex:outputText value="{!newlyInsertedContact.MailingCity}"/>
+                <apex:outputText value="{!newlyInsertedContact.OtherCity}"/>
+                <apex:outputText value="{!newlyInsertedContact.MailingState}"/>
+                <apex:outputText value="{!newlyInsertedContact.OtherState}"/>
+                <apex:outputText value="{!newlyInsertedContact.MailingCountry}"/>
+                <apex:outputText value="{!newlyInsertedContact.OtherCountry}"/>
+                <apex:outputText value="{!newlyInsertedContact.MailingPostalCode}"/>
+                <apex:outputText value="{!newlyInsertedContact.OtherPostalCode}"/>
+                <apex:outputText value="{!newlyInsertedContact.Description}"/>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+        </apex:outputPanel>
+        
+        <apex:outputPanel id="pB4" style="display:none;">
+        <apex:pageBlock >
+        
+            <apex:pageBlockButtons location="bottom">
+                <apex:commandButton value="Save" action="{!updateAccount}" onClick="saveAccountInfo();" status="waitMsg" reRender="form,pageMeg"/>
+                <apex:commandButton value="Cancel" onClick="cancelAccountInfo();"/>
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection title="Update Account Info" collapsible="false" id="pBS4">
+            
+                <apex:inputField value="{!newlyInsertedContact.Account.Name}" id="uAName"/>
+                <apex:inputField value="{!newlyInsertedContact.Account.AccountNumber}" id="uANumber"/>
+                <apex:inputField value="{!newlyInsertedContact.Account.Type}" id="uAType"/>
+                <apex:inputField value="{!newlyInsertedContact.Account.Phone}" id="uAPhone"/>
+                
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+        </apex:outputPanel>
+    </apex:form>
+</apex:page>

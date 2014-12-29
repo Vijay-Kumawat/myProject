@@ -1,0 +1,20 @@
+<!--
+* Description   : This is Visualforce Page to Display Table of Class with Name and No of students wit No of STudent field and roll up summary concept.
+* 
+* Created By    : Vijay Kumar Kumawat
+*
+* Created Date  : 10/20/2012
+*
+* Version       : v1.0 - Create 
+-->
+
+<apex:page controller="ClassContactAccount">
+    <apex:form >
+        <apex:pageBlock >
+            <apex:pageBlockTable value="{!listContactWrapper }" var="sm">
+                <apex:column value="{!sm.contactName}" headerValue="Contact Name"/>
+                <apex:column value="{!sm.totalContacts}" headerValue="No. of Contacts"/>
+            </apex:pageBlockTable>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

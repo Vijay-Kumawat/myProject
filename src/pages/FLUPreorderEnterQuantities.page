@@ -1,0 +1,200 @@
+<!--
+* Description	:	This is Visualforce Page for FLU Pre-order Enter Quantities.
+* 
+* Created By    :	
+*
+* Created Date  :	09/14/2013
+*
+* Version       :	V_1.0 - Created 
+-->
+
+<apex:page StandardController="Account" extensions="FLUPreorderController" showHeader="false" standardStylesheets="false" action="{!showProducts}" id="page">
+
+	<!-- Java Script Code for calculate total doses -->
+	<script>
+		function CalculateTotalDoses(idParameter) {
+		 
+		var preOrderId = idParameter.getAttribute('Id');
+		var PreOrderUnit = idParameter.value;
+		
+		var doseUnitId = preOrderId.replace("inputField","doseId");
+		var DoseUnit = document.getElementById(doseUnitId).innerHTML;
+        
+        var TotalDoses =  PreOrderUnit * DoseUnit;
+        
+        var totalDosesId = preOrderId.replace("inputField","total_Doses"); 
+        document.getElementById(totalDosesId).innerHTML = TotalDoses;
+        
+      }
+	</script>
+
+	<!-- CSS Include Here -->
+    <apex:stylesheet value="{!URLFOR($Resource.FLUPreorderCSS)}"/>
+    
+	<apex:form id="form">
+		<apex:pageBlock id="pB">
+		
+			<div class="headerImageClass">
+				<apex:image value="/servlet/servlet.FileDownload?file=015900000026UXz"/>
+			</div>
+		
+         	<div class="headerClass" id="div4">
+         		{!$Label.Confirm_Account_Page_Header}
+         		<span class="headerSubClass">      
+         			{!$Label.Confirm_Account_Page_Header_Season}
+         		</span>
+         	</div>
+         	
+         	<div class="panelAlignmentClass">
+         		<apex:image value="/servlet/servlet.FileDownload?file=01590000001h8BF" styleClass="panalClass"/>
+         	</div><br/>
+         	
+         	<table>
+       			<tr>
+       				<td class="imageClass">
+       					<apex:image value="/servlet/servlet.FileDownload?file=01590000001h8BA"/>
+		    		</td>
+		    		<td>
+		    			<div class="mainHeadingClass"> 
+					    	{!$Label.Enter_Quantities_Page_Heading}
+				    	</div>
+				    	<div class="mainHeadingContentClass">
+				    		<apex:outputText value="{!$Label.Enter_Quantities_Page_Heading_Content}" escape="false"/>
+						</div>
+					</td>
+			    </tr>
+		    </table><br/>
+		    <apex:variable value="{!Account.Delivery_Hours__c}" var="c"/>
+		    
+		    <div class="divInformationClass" id="div_Info">
+		    	<table id="table_Id">
+		    		<tr id="dataRow1">
+		    			<td class="headerValue">
+		    				{!$ObjectType.Account.fields.AccountNumber.Label}
+		    			</td>
+		    			<td class="textBoldClass">
+                            <apex:outputField value="{!Account.AccountNumber}"/>
+                        </td>
+		    			<td class="headerValue">
+		    				Shipping Address
+		    			</td>
+		    			<td rowspan="2">
+		    				<apex:outputField value="{!Account.Shipping_Address1__c}"/><br/>
+		    				<apex:outputField value="{!Account.ShippingCity}"/>,&nbsp;
+		    				<apex:outputField value="{!Account.ShippingState}"/>&nbsp;
+		    				<apex:outputField value="{!Account.ShippingPostalCode}"/>
+		    			</td>
+		    		</tr>
+		    		<tr>
+		    			<td class="headerValue">
+		    				{!$ObjectType.Account.fields.Name.Label}
+		    			</td>
+		    			<td class="textBoldClass">
+                            <apex:outputField value="{!Account.Name}"/>
+                        </td>     
+                        <td>
+		    			</td>
+		    		</tr>
+		    		<tr>
+		    			<td colspan="4">
+		    				<hr class="scheduleShippingHorizontalLineClass"/>
+		    			</td>
+		    		</tr>
+		    		<tr>
+		    			<td class="headerValue">
+		    				{!$ObjectType.Account.fields.PO_Number__c.Label}
+		    			</td>
+		    			<td>
+		    				<apex:inputText value="{!pONumber}" styleClass="tableInputBoxClass"/>
+		    			</td>
+		    		</tr>
+		    		<tr>
+		    			<td>
+		    				<br/>
+		    			</td>
+		    		</tr>
+		    		<tr>
+		    			<table class="enterQuantityTableClass" id="table_Id2">
+		    				<tr class="enterQuantitiesPageTableHeaderClass" id="dataRow2">
+		    					<th>
+		    						{!$ObjectType.Product2.fields.Besse__c.Label}
+		    					</th>
+		    					<th>
+		    						{!$ObjectType.Product2.fields.Name.Label}
+		    					</th>
+		    					<th>
+		    						{!$ObjectType.Product2.fields.Age_Indication__c.Label}
+		    					</th>
+		    					<th>
+		    						List Price
+		    					</th>
+		    					<th>
+		    						{!$ObjectType.Product2.fields.Final_Price__c.Label}
+		    						<span class="tableThSubHeaderClass">
+	    								(includes $7.50 excise tax)
+	    							</span>
+		    					</th>
+		    					<th class="tableThHeaderClass">
+		    						{!$ObjectType.Product2.fields.ENTER_YOUR_PRE_ORDER_UNITS__c.Label}
+		    					</th>
+		    					<th>
+		    						{!$ObjectType.Product2.fields.Dose_Unit__c.Label}
+		    					</th>
+		    					<th>
+		    						{!$ObjectType.Product2.fields.Total_Doses__c.Label}
+		    					</th>
+		    				</tr>
+		    				
+		    				<apex:repeat value="{!mapProductFamilyWithPriceBookEntry}" var="key" id="innerTable">
+		    					<tr>
+			    					<td colspan="8" class="tableTdHeadingClass">
+			    						<apex:outputText value="{!key}"/>
+			    					</td>
+			    				</tr>
+							    <apex:repeat value="{!mapProductFamilyWithPriceBookEntry[key]}" var="keyValue" id="innerTable1">
+							        <tr class="tableTdContentClass" id="dataRow3">
+				    					<td>
+				    						<apex:outputText value="{!keyValue.Product2.Besse__c}"/>
+				    					</td>
+				    					<td>
+				    						<apex:outputText value="{!keyValue.Product2.Name}"/>
+				    					</td>
+				    					<td>
+				    						<apex:outputText value="{!keyValue.Product2.Age_Indication__c}"/>
+				    					</td>
+				    					<td>
+				    						$<apex:outputText value="{!keyValue.UnitPrice}"/>
+				    					</td>
+				    					<td>
+				    						$<apex:outputText value="{!keyValue.Product2.Final_Price__c}"/>
+				    					</td>
+				    					<td class="tableTdBackgroundClass">
+				    						<apex:inputField value="{!keyValue.Product2.ENTER_YOUR_PRE_ORDER_UNITS__c}" id="inputField" onblur="CalculateTotalDoses(this);return false;" styleClass="tableInputBoxBackgroundClass"/>
+				    					</td>
+				    					<td>
+				    						<apex:outputText value="{!keyValue.Product2.Dose_Unit__c}" id="doseId"/>
+				    					</td>
+				    					<td>
+				    						<apex:outputField value="{!keyValue.Product2.Total_Doses__c}" id="total_Doses"/>
+				    					</td>
+		    						</tr>
+							   </apex:repeat>
+							</apex:repeat>
+		    			</table>
+		    		</tr>
+		    	</table>
+		    </div>
+		    
+		    <div class="buttonClass">
+    			<input type="submit" value="{!$Label.Enter_Quantities_Page_Button_Return_to_Step_1}" onClick="window.open('/apex/FLUPreorderConfirmAccount?Id={!$CurrentPage.Parameters.Id}' , '_parent');return false;" class="returnPageButtonClass"/>
+    			<apex:commandButton value="{!$Label.Enter_Quantities_Page_Button_Continue}" styleClass="forwardPageButtonClass" action="{!saveProducts}"/>
+		    </div>
+		    
+		    <div id="footer"> 
+				<p> 
+					Copyright &copy; 2010 AmerisourceBergen Corporation. All rights reserved.  
+				</p> 
+			</div>
+     	</apex:pageBlock>
+	</apex:form>
+</apex:page>

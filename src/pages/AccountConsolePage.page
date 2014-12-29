@@ -1,0 +1,99 @@
+<!--
+* Description   : This is Visualforce Page to display Account records.
+* 
+* Created By    : 
+*
+* Created Date  : 03/26/2013
+*
+* Version       : v1.0 - Create 
+-->
+<apex:page controller="AccountConsoleController" title="Account Console" sidebar="false" tabStyle="Account" id="pageId">
+        
+    <apex:stylesheet value="{!URLFOR($Resource.jQueryMultiselect, 'css/jquery-ui.css')}"/>
+    <apex:stylesheet value="{!URLFOR($Resource.jQueryMultiselect, 'css/jquery.multiselect.css')}"/>
+    <apex:stylesheet value="{!URLFOR($Resource.jQueryMultiselect, 'assets/style.css')}"/>
+    <apex:stylesheet value="{!URLFOR($Resource.jQueryMultiselect, 'assets/prettify.css')}"/>
+    <apex:stylesheet value="{!URLFOR($Resource.jqueryTableSorter, 'themes/blue/style.css')}" />
+    
+    <apex:includeScript value="{!URLFOR($Resource.jQueryMultiselect, 'js/jquery.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.jQueryMultiselect, 'js/jquery-ui.min.js')}"/>       
+    <apex:includeScript value="{!URLFOR($Resource.jQueryMultiselect, 'js/jquery.multiselect.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.jQueryMultiselect, 'assets/prettify.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.jqueryTableSorter, 'jquery.tablesorter.js')}" />
+    
+    <style>
+        .tablesorter {
+            font-size : 9pt !important;
+        }
+    </style>
+        
+    <script>
+        //var j$ = jQuery.noConflict();
+        $(function(){
+            $("select").multiselect({
+                    selectedList: 20,
+                    minWidth : 650,
+                    position: {
+                  my: 'left bottom',
+                  at: 'left top'
+               }
+            });
+            applyTableSorting();
+        });
+        
+        function applyTableSorting() {
+            $("#pageId\\:ACCForm\\:resultsBlock\\:AccBlock\\:accTableId").tablesorter();
+        }
+    </script>
+    <apex:sectionHeader title="Account Console" />
+    <apex:form id="ACCForm">
+        <apex:pageMessages id="msg"/>
+        <apex:pageBlock id="filterBlock" mode="edit">
+            <apex:pageBlockSection columns="1" title="Filters">
+ 
+                <apex:pageBlockSectionItem >
+                        <apex:outputLabel value="Select Account Customer Priority" />
+                        <apex:selectList value="{!selectedAccstatus}" multiselect="true">
+                                <apex:selectOptions value="{!sirStatusOptions}" />
+                        </apex:selectList>
+                </apex:pageBlockSectionItem>
+                </apex:pageBlockSection>
+                
+            <apex:pageBlockButtons location="bottom"  >
+                <apex:commandButton action="{!filterData}" value="Filter" rerender="AccBlock,msg" status="processStatus" oncomplete="applyTableSorting();"/>
+                    
+                &nbsp; &nbsp;
+               <apex:actionStatus id="processStatus">
+                    <apex:facet name="start">
+                        <apex:outputPanel id="savingId" >
+                            &nbsp;
+                            <apex:image value="/img/loading.gif" width="16" height="16" alt="saving..." />
+                        </apex:outputPanel>
+                    </apex:facet>
+                </apex:actionStatus>
+            </apex:pageBlockButtons>
+        </apex:pageBlock>
+
+        <apex:pageBlock id="resultsBlock" title="Results">
+            <apex:pageBlockButtons location="top">
+                <apex:commandLink value="Create New Account" action="{!createNewAcc}" target="_blank" styleClass="btn" style="text-decoration:none;"/>
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection title="Account" columns="1" id="AccBlock">
+                <apex:dataTable value="{!accList}" var="sir" id="accTableId" cellspacing="0" cellpadding="0" border="0" styleClass="list tablesorter" >
+                    <apex:column headerValue="Name">
+                        <apex:outputLink value="/{!sir.Id}" target="_blank">
+                            {!sir.Name}
+                        </apex:outputLink>
+                    </apex:column>
+                    <apex:column headerValue="Name" value="{!sir.Name}" />
+                    <apex:column headerValue="Phone" value="{!sir.Phone}" />
+                    <apex:column headerValue="Account Number" value="{!sir.AccountNumber}" />
+                    <apex:column headerValue="Customer Priority" value="{!sir.CustomerPriority__c}" />
+                </apex:dataTable>
+                <apex:outputPanel rendered="{!accList.size == 0}">
+                    No records returned.
+                </apex:outputPanel>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+        </apex:form>
+</apex:page>

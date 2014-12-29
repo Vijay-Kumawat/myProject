@@ -1,0 +1,49 @@
+<!--
+/** 
+  * Description     :   This is to send monthly records to the Admin.
+  *
+  * Created By      :   
+  *
+  * Created Date    :   2/12/2014    
+  *
+  * Revision Log    :   V1.0      
+  **/
+-->
+<apex:page controller="LoginController"  cache="true" contentType="application/x-excel#TimeSheet.xls">
+    
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    </head>
+    
+        <table border="1" id="table">
+            <tr>
+            <thead>
+                <th>Project</th>
+                <th>Task Date</th>
+                <th>Task Detail</th>
+                <th>Status</th>
+                <th>Hours</th>
+            </thead>
+            </tr>
+        <apex:repeat value="{!companiesList}" var="comp" >
+            <tr>
+                <td>
+                    <apex:outputField value="{!comp.Project__c}"/>
+                </td>
+                <td>
+                    <apex:outputField value="{!comp.Task_Date__c}"/>
+                </td>
+                <td>
+                    <apex:outputField value="{!comp.Task_Detail__c}"/>
+                </td>
+                <td>
+                    <apex:outputField value="{!comp.Status__c}"/>
+                </td>
+                <td>
+                    <apex:outputField value="{!comp.Hours__c}"/>
+                </td>
+            </tr>        
+        </apex:repeat>
+        </table>
+</apex:page>

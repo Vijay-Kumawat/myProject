@@ -1,0 +1,107 @@
+<!--
+* Description   : This is Visualforce Page to perform Search Functionality For Contact.
+* 
+* Created By    : Vijay Kumar Kumawat
+*
+* Created Date  : 03/5/2013
+*
+* Version       : v1.0 - Create 
+-->
+
+<apex:page Standardcontroller="Account" extensions="AccountSearch">
+
+    <!-- Section Header -->
+    <apex:sectionheader title="Account Search Functionality"/>
+    
+    <style>
+        .buttonStyle {
+            background-color:green;color:white;font-size:15px;font-weight:bold;
+        }
+    </style>
+
+<head>
+    <c:Overlay style="processing"/>
+</head>
+
+    <!-- Form -->    
+    <apex:form id="form">
+    
+    <apex:actionStatus id="overlayStatus" onStart="showOverlay();" onstop="hideOverlay();">
+    </apex:actionstatus>
+    
+    <!-- Message -->
+    <apex:pageMessages />
+        
+      <!-- Page Block -->
+      <apex:pageBlock > 
+          
+         <!-- Page Block Button  -->   
+         <apex:pageBlockButtons >    
+             
+             <apex:commandButton value="Search" action="{!search}" status="overlayStatus" reRender="form" style="background-color:green;color:white;font-size:15px;font-weight:bold;"/>
+                   
+        </apex:pageBlockButtons>
+            
+        <!-- Page Block Section -->
+        <apex:pageBlockSection columns="2" title="Search" collapsible="false">
+                    
+                <!-- Input Field for Account Name -->          
+                <apex:inputText value="{!Account.Name}"/>
+                
+                <!-- Input Field for account Phone -->          
+                <apex:inputField value="{!Account.Phone}"/>
+            
+                <!-- Input Field for account Number -->          
+                <apex:inputField value="{!Account.AccountNumber}"/>
+                
+                <!-- Input Field for account customer priority -->
+                <apex:inputfield value="{!Account.CustomerPriority__c}"/>
+                
+                 <!-- Input Field for account Brand Customer -->
+                <apex:inputfield value="{!Account.Brand_Customer__c}"/>
+                
+                 <!-- Input Field for account Brand Choose Option -->
+                <apex:inputfield value="{!Account.ChooseOption__c}"/>
+                
+                <!-- Input Field for account Created Date field -->
+                <apex:inputfield value="{!Account.Account_Created_Date__c}"/>
+                
+                <!-- Input Field for account Owner Email -->
+                <apex:inputField value="{!Account.Account_Owner_Email__c}"/> 
+            
+        </apex:pageBlockSection>
+        
+        <!-- Output Panel-->
+        <apex:outputPanel id="out" >
+            
+            <!-- Page Block Section -->
+            <apex:pageBlockSection columns="1" title="Search" collapsible="false">   
+            
+                <!-- Message for no records -->
+                <apex:outputLabel rendered="{!IF(accountList.Size > 0, false, true)}">No record(s) to display.</apex:outputLabel> 
+     
+                <!-- Page Block Table -->
+                <apex:pageBlockTable value="{!accountList}" var="account" rendered="{!IF(accountList.size>0, true, false)}">
+                    <apex:column value="{!account.Name}"/>
+                    <apex:column value="{!account.Fax}"/>
+                    <apex:column value="{!account.Phone}"/>
+                    <apex:column value="{!account.AccountNumber}"/>
+                    
+                    <apex:outputpanel >
+                    <apex:commandLink action="{!previous}">Previous</apex:commandlink>
+                    <apex:commandLink action="{!next}">Next</apex:commandlink>
+                    </apex:outputpanel>
+                </apex:pageBlockTable>
+                
+                <apex:commandLink action="{!previous}">Previous</apex:commandlink> &nbsp;
+                <apex:commandLink action="{!next}">Next</apex:commandlink>
+            
+            </apex:pageBlockSection>
+        </apex:outputPanel>
+            
+        </apex:pageBlock>
+    </apex:form> 
+    
+    <div id="overlay">
+    </div>
+</apex:page>

@@ -1,0 +1,47 @@
+<!-- 
+/** 
+ * Discription     :    This apex page will be used for List View Button which will create a PDF of selected fields.
+ *
+ * Created By      :    09/11/2013
+ *
+ * Created Date    :    Abhi Tripathi    
+ *
+ * Version         :    V1.0
+ *
+ * Revision Log    :    09/11/2013 Created
+ **/
+ -->
+<apex:page standardController="Contact" extensions="ListViewButtonCreatePDF" recordSetVar="Contact" >
+    
+    {!contactList}
+    {!leftselected}
+    {!fieldAPINames}
+     <table BORDER="1" CELLSPACING="0" CELLPADDING="5">
+         <tbody>
+            <tr> 
+              <!-- Table for displaying field label -->
+              <apex:repeat value="{!fieldLabels}" var="itm">  
+
+                  <th bgcolor="#00FFFF"> 
+                     {!itm} 
+                  </th> 
+               </apex:repeat> 
+            </tr> 
+                  
+           <!-- Table for displaying Contact Records -->
+           <apex:repeat value="{!contactList}" var="item">
+                            
+               <!-- ListRow -->
+               <tr> 
+                                
+                <apex:repeat value="{!fieldAPINames}" var="itm">  
+                               
+                  <td>
+                  <apex:outputField value="{!item[itm]}"  style="background:yellow;"/>
+                   </td>
+               </apex:repeat>
+              </tr>
+             </apex:repeat>
+           </tbody>
+        </table>
+</apex:page>

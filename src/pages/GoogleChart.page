@@ -1,0 +1,86 @@
+<apex:page >
+
+    <html xmlns="http://www.w3.org/1999/xhtml">
+        <head>
+            <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+            <title>
+                Google Visualization API Sample
+            </title>
+        
+            <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+            <script type="text/javascript">
+                google.load('visualization', '1', {packages: ['corechart']});
+            </script>
+            <script type="text/javascript">
+      
+                function drawVisualization() {
+                
+                    //Some raw data (not necessarily accurate)
+                    var data = google.visualization.arrayToDataTable([
+                      ['Month', 'North', 'South', 'East', 'West', 'Total'],
+                      ['JAN',    165,     938,     522,    998,    450],
+                      ['FEB',    135,     1120,    599,    1268,   288],
+                      ['MAR',    157,     1167,    587,    807,    397]
+                    ]);
+
+                    var options = {
+                      title : 'Territory Flows',
+                      vAxis: {title: ""},
+                      hAxis: {title: ""},
+                      seriesType: "bars",
+                      series: {5: {type: "line"}}
+                    };
+
+                    var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
+                    chart.draw(data, options);
+                  }
+                  google.setOnLoadCallback(drawVisualization);
+            </script>
+            
+            <!-- Chart 2 -->
+            <script type="text/javascript">
+      
+                function drawVisualization() {
+                
+                    //Some raw data (not necessarily accurate)
+                    var dataValue = google.visualization.arrayToDataTable([
+                      ['Month',                        '8-Apr', '9-Apr', '10-Apr', '11-Apr', '12-Apr'],
+                      ['Core Fixed Income',             165,     938,     522,      998,      450],
+                      ['Emerging Markets Fixed....',    135,     1120,    599,      1268,     288],
+                      ['Equities Small Cap Growth',     157,     1167,    587,      807,      397],
+                      ['Low Duration Bond',             157,     1167,    587,      807,      397],
+                      ['Multi-Asset Growth',            157,     1167,    587,      807,      397],
+                      ['Total Return Bond',             157,     1167,    587,      807,      397]
+                    ]);
+
+                    var option = {
+                      title : 'Product Sales Trend',
+                      vAxis: {title: ""},
+                      hAxis: {title: ""},
+                      seriesType: "bars",
+                      series: {6: {type: "line"}}
+                    };
+
+                    var chrt = new google.visualization.ComboChart(document.getElementById('chart_div1'));
+                    chrt.draw(dataValue, option);
+                  }
+                  google.setOnLoadCallback(drawVisualization);
+            </script>
+        </head>
+        
+        <body>
+            <table width="100%">
+                <tr>
+                    <td>
+                        <div id="chart_div" style="width: 900px; height: 500px;"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div id="chart_div1" style="width: 900px; height: 500px;"></div>
+                    </td>
+                </tr>
+            </table>
+        </body>
+    </html>
+</apex:page>

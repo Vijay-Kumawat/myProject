@@ -1,0 +1,14 @@
+<apex:page standardController="Account">
+    <apex:form id="form">
+    <c:RecordTypeList value="{!Account.RecordTypeId}" ObjectType="Account"></c:RecordTypeList>
+    
+    <apex:pageBlock >
+        <apex:pageBlockButtons >
+            <apex:commandButton value="Go" reRender="form"/>
+        </apex:pageBlockButtons>
+    
+        <apex:detail />
+    
+    </apex:pageBlock>
+    </apex:form>
+</apex:page>

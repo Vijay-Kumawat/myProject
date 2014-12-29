@@ -1,0 +1,14 @@
+<apex:page controller="PagingController">
+    <apex:sectionHeader subtitle="There are a total of {!reccount} Records in this list" title="Account"/>
+    <apex:pageBlock >
+        <apex:form >
+            <apex:pageBlockTable value="{!account}" var="o">
+                <apex:column value="{!o.name}"/>
+                <apex:column value="{!o.Phone}"/>
+                <apex:column value="{!o.CreatedDate}"/>
+            </apex:pageBlockTable>
+            <apex:commandLink action="{!previous}">Previous</apex:commandlink> &nbsp;
+            <apex:commandLink action="{!next}">Next</apex:commandlink>
+        </apex:form>
+    </apex:pageBlock>
+</apex:page>

@@ -1,0 +1,33 @@
+<apex:page showHeader="false" renderAs="pdf" standardStylesheets="false" applyHtmlTag="false">
+<head>
+<style type="text/CSS">
+    .wrapword {
+        white-space: -moz-pre-wrap !important;
+        white-space: -pre-wrap;
+        white-space: -o-pre-wrap;
+        white-space: normal;
+        word-break: break-all;
+        
+    }
+</style>
+</head>
+    <body>
+      <table width="100%" border="1" style="table-layout:fixed;">
+      <thead>
+          <tr>
+              <th>Col 1</th>
+              <th>Col 2</th>
+              <th>Col 3</th>
+              <th>Col 4</th>
+          </tr>
+      </thead>
+      
+          <tr>
+              <td>Testing Going On</td>
+              <td class="wrapword">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</td>
+              <td>dfgdggdggdggdg</td>
+              <td>dgdggdgdgdggdgdggdgdgdggdgd</td>
+          </tr>
+      </table>
+ </body>
+</apex:page>

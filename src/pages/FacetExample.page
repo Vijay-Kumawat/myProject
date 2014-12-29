@@ -1,0 +1,28 @@
+<!--
+* Description   : This is Visualforce Page to perform Facet Functionality.
+* 
+* Created By    : Vijay Kumar Kumawat
+*
+* Created Date  : 1/19/2013
+*
+* Version       : v1.0 - Create 
+-->
+<!-- Page -->
+<apex:page standardController="Account">
+    
+    <!-- Page Block -->
+    <apex:pageBlock title="Contacts">
+    
+        <!-- Data Table -->
+        <apex:dataTable value="{!account.Contacts}" var="contact" cellPadding="4" border="1">
+            <apex:column >
+                <apex:facet name="header">Name</apex:facet>
+                        {!contact.Name}
+            </apex:column>
+            <apex:column >
+                <apex:facet name="header">Phone</apex:facet>
+                        {!contact.Phone}
+            </apex:column>
+        </apex:dataTable>
+    </apex:pageBlock>
+</apex:page>

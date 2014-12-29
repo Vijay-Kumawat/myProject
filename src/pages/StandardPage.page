@@ -1,0 +1,16 @@
+<apex:page controller="CustomStudentCon">
+    <apex:form >
+        <apex:pageBlock >
+            <apex:pageBlockButtons >
+                <apex:commandButton value="Search and Save" title="Save" action="{!save}"/>
+            </apex:pageBlockButtons>
+            <apex:pageBlockTable value="{!listContact}" var="con">
+                <apex:column value="{!con.LastName}"/>
+                <apex:column value="{!con.Fax}"/>
+                <apex:column >
+                    <apex:inputField value="{!con.Phone}"/>
+                </apex:column>
+            </apex:pageBlockTable>
+        </apex:pageBlock>
+    </apex:form> 
+</apex:page>

@@ -1,0 +1,13 @@
+<apex:page >
+    
+    
+    <script>
+       window.onload = function a() {
+           alert('$4444');
+           document.getElementById("browseId").click()
+           
+       }
+    </script>
+  <input type="file" value="Open" id="browseId"/>
+  <input type="button" value="submit" id="butt"/>
+</apex:page>

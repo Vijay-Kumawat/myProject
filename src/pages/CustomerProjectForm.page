@@ -1,0 +1,201 @@
+<!--
+* Description   : This is Visualforce Page to display general customer information form.
+* 
+* Created By    : 
+*
+* Created Date  : 05/20/2013
+*
+* Version       : v1.0 - Created 
+-->
+<!-- Page -->
+<apex:page Standardcontroller="Contact" extensions="CustomerProjectFormController" standardStylesheets="false" showHeader="false">
+    
+    <!-- block UI component -->
+    <c:BlockUI />
+    
+    <!-- Apex Image -->
+    <apex:image id="Image" value="{!$CurrentPage.parameters.imageURL}" width="1350" height="150"/>
+    
+    <!-- Style Sheet -->
+    <apex:stylesheet value="{!$CurrentPage.parameters.styleClass}"/>
+    
+    <!-- Section Header -->
+    <apex:sectionheader title="General Customer Information Form"/>
+    
+    <!-- Form -->    
+    <apex:form id="form">
+    
+      <!-- Action Status -->
+      <apex:actionStatus onStart="blockMe();" onstop="unBlockMe();" id="waitMsg"/>
+        
+      <!-- Page Block -->
+      <apex:pageBlock id="pb"> 
+          
+         <!-- Page Block Button  -->   
+         <apex:pageBlockButtons id="pbb"> 
+         
+             <apex:commandButton value="Submit Query" action="{!saveData}" status="waitMsg" reRender="pBlockSection"/> 
+         </apex:pageBlockButtons>
+         
+         <!-- Page Block Section -->
+         <apex:pageBlockSection columns="1" title="Primary Contact Person" id="pBlockSection">
+             
+             <apex:pageBlockSectionItem >
+             
+                <!-- Output Label for Company Name -->
+                <apex:outputLabel value="Company *" styleClass="boldFont"/>
+                    
+                <!-- Input Text for Company Name -->          
+                <apex:inputField value="{!Contact.AccountId}" required="true"/>
+            
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+            
+                <!-- Output Label for First Name -->
+                <apex:outputLabel value="First Name *" styleClass="boldFont"/>
+                    
+                <!-- Input Text for First Name -->          
+                <apex:inputField value="{!Contact.FirstName}" required="true"/>
+            
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+            
+                <!-- Output Label for Last Name -->
+                <apex:outputLabel value="Last Name *" styleClass="boldFont"/>
+                    
+                <!-- Input Text for Last Name -->          
+                <apex:inputField value="{!Contact.LastName}"/>
+            
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+            
+                <!-- Output Label for Title -->
+                <apex:outputLabel value="Title *" styleClass="boldFont"/>
+                    
+                <!-- Input Text for Title -->          
+                <apex:inputField value="{!Contact.Title}"/>
+            
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+            
+                <!-- Output Label for Email -->
+                <apex:outputLabel value="Email *" styleClass="boldFont"/>
+                    
+                <!-- Input Text for Email -->          
+                <apex:inputField value="{!Contact.Email}" required="true"/>
+            
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+            
+                <!-- Output Label for Phone -->
+                <apex:outputLabel value="Phone (Digits only) *" styleClass="boldFont"/>
+                    
+                <!-- Input Text for Phone -->          
+                <apex:inputText value="{!Contact.Phone}" required="true" maxlength="10"/>
+            
+            </apex:pageBlockSectionItem>
+        </apex:pageBlockSection>
+            
+        <!-- Page Block Section -->
+        <apex:pageBlockSection columns="1" title="Customer Company Information" > 
+        
+            <!-- Output Text -->
+            <apex:outputlabel value="Company's Primary Business Activity: Select all that apply. *" styleClass="normalFont"/>   
+    
+            <!-- Checkboxes -->
+            <apex:selectcheckboxes value="{!picklistValuesForBuildingPrimary}">
+                <apex:selectoptions value="{!BuildingPrimary}"/>
+            </apex:selectcheckboxes>
+                
+            <!-- Output Text -->
+            <Apex:outputtext value="Other: Please describe" styleClass="normalFont"/>
+            
+            <apex:inputtext size="30"/>
+            
+            <!-- Output Text -->
+            <Apex:outputtext value="Year Founded (approximate):" styleClass="normalFont"/>
+            
+            <apex:inputtext size="30"/>
+            
+            <!-- Page Block Section Item -->
+            <apex:pageBlockSectionItem >
+                
+                <!-- Output Panel -->
+                <apex:outputpanel >
+            
+                    <apex:outputlabel value="Tax Status of Company:" styleClass="normalFont"/><br/>
+                
+                    <!-- Radio Buttons -->
+                    <apex:selectradio value="{!Contact.Tax_Status__c}">
+                        <apex:selectoptions value="{!TaxStatus}"/>
+                    </apex:selectradio>
+                    
+                </apex:outputpanel>
+            
+            </apex:pageBlockSectionItem>
+            
+            <!-- Output Text -->
+            <Apex:outputlabel value="Building Ownership: *" styleClass="normalFont"/>
+            
+            <!-- Output Panel -->
+            <apex:outputpanel >
+        
+                <!-- Radio Buttons -->
+                <apex:selectradio value="{!Contact.Building_Ownership__c}">
+                    <apex:selectoptions value="{!BuildingOwnership}"/>
+                </apex:selectradio>
+            </apex:outputpanel>
+
+            <!-- Output Text -->
+            <Apex:outputlabel value="Number of Building Sites in U.S.:" styleClass="normalFont"/>
+            
+            <apex:inputtext />
+            
+            <!-- Output Text -->
+            <Apex:outputlabel value="Total Floorspace Owned/Leased/Managed: (Square Feet)" styleClass="normalFont"/>
+            
+            <!-- Output Panel -->
+            <apex:outputpanel >
+                
+                <!-- Radio Buttons -->
+                <apex:selectradio value="{!Contact.Building_Size__c}">
+                    <apex:selectoptions value="{!BuildingSize}"/>
+                </apex:selectradio>
+            </apex:outputpanel>
+            
+            <!-- Output Panel -->
+            <apex:outputpanel styleClass="normalFont">
+            
+                <!-- Output Text -->
+                <apex:outputlabel value="Company's Credit Quality:"/>
+                    <br/>Indicate any information that would help us better understand the credit quality of the company.
+                    <br/>Include data such as a public credit rating or any subjective factors that could be relevant to an 
+                    <br/>understanding of credit quality.<br/>
+            
+            </apex:outputpanel>
+            
+            <apex:inputtextarea cols="20"/>
+            
+            <!-- Output Panel -->
+            <Apex:outputpanel styleClass="normalFont">
+                If your company has worked with an Energy Services Company (ESCO) on projects,
+                <br/>currently or historically, please provide the name of that ESCO.
+            
+            </Apex:outputpanel> 
+            
+            <apex:inputtextarea cols="20"/>
+            
+            <!-- Output Text -->
+            <Apex:outputtext value="Has your company ever entered into a power purchase agreement (PPA) for the purchase of energy?" styleClass="normalFont"/>
+            <span>(i.e., solar pv, solar thermal, combined heat and power, etc.)</span>
+            
+            <apex:inputtextarea cols="20"/>
+            
+            <!-- Output Text -->
+            <Apex:outputtext value="Other comments about your company relevant to Metrus and energy efficiency projects." styleClass="normalFont"/>
+            
+            <apex:inputtextarea cols="20"/>
+         </apex:pageBlockSection>
+      </apex:pageBlock>
+    </apex:form>
+</apex:page>

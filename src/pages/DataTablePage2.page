@@ -1,0 +1,48 @@
+<apex:page controller="DataTableController">
+
+    <apex:stylesheet value="{!URLFOR($Resource.DataTable , 'css/CSS2.css')}"/>
+    <apex:stylesheet value="{!URLFOR($Resource.DataTable , 'css/CSS3.css')}"/>
+    <apex:stylesheet value="{!URLFOR($Resource.DataTable , 'css/CSS1.css')}"/>
+    <apex:stylesheet value="{!URLFOR($Resource.DataTable , 'css/CSS4.css')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.JavaScript , 'js/JS1.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.JavaScript , 'js/JS2.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.JavaScript , 'js/JS3.js')}"/>
+       
+    <apex:sectionHeader title="Data Table Demo"/>
+    <body id="index" class="grid_2_3">
+         <apex:image value="{!userImage}"/>
+        <div class="full_width">
+            <table cellpadding="0" cellspacing="0" border="0" class="display" id="example" style="width:980px">
+                <thead>
+                    <tr>
+                             <th>Id</th>
+                            <th>FirstName</th>
+                            <th>LastName</th>
+                            <th>Date</th>
+                            <th>Phone</th>
+                            <th>Fax</th>
+                             <th>Email</th>
+                        
+                    </tr>
+                </thead>
+                    
+                <tbody>
+                    <apex:repeat value="{!listContacts}" var="records">
+                        <tr class="gradeX">
+                            <td>{!records.Id}</td>
+                            <td>{!records.FirstName}</td>
+                            <td>{!records.LastName}</td>
+                            <td><apex:outputText value="{0,date,MM'/'dd'/'yyyy}">
+                                <apex:param value="{!records.Estimation_Start_Date__c}" /> 
+                            </apex:outputText></td>
+                            
+                            <td>{!records.Phone}</td>
+                            <td>{!records.Fax}</td>
+                            <td>{!records.Email}</td>
+                        </tr>
+                    </apex:repeat>
+                </tbody>
+            </table>
+        </div>
+    </body>
+</apex:page>

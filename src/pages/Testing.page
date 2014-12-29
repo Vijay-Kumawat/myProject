@@ -1,0 +1,5 @@
+<apex:page StandardController="Account" recordsetvar="accounts">
+    <apex:datalist value="{!accounts}" var="acc">
+    {!acc.Name}
+    </apex:datalist>
+</apex:page>

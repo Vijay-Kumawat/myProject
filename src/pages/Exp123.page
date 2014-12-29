@@ -1,0 +1,12 @@
+<apex:page controller="MyException123">
+    <apex:form id="form">
+    <apex:actionStatus onstart="Requesting...." onstop="Done" id="st"/>
+    <apex:pageMessage title="unlucky Number" severity="High"/>
+        <apex:pageblock >
+            <apex:pageBlockButtons >
+                <apex:commandButton value="Change" action="{!myInteger}" reRender="form" status="st"/>
+            </apex:pageBlockButtons>
+        </apex:pageblock>
+            <apex:inputText value="{!cnt}"/>
+    </apex:form>
+</apex:page>

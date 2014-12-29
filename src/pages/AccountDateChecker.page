@@ -1,0 +1,22 @@
+<apex:page StandardController="Account">
+  <script>
+      function validateDate(dateValue) {
+          var val = new Date(dateValue.value);
+          if(Object.prototype.toString.call(dateValue.value) === '[object Date]') {
+              alert("Right Date");
+              jQuery("#errorId").html('');
+          }
+          else if(Object.prototype.toString.call(dateValue.value) !== '[object Date]') {
+              jQuery("#errorId").html('Please enter a valid date');
+                return false;
+              
+          }
+          return true;
+      }
+  </script>
+  <apex:form >
+  <apex:inputField value="{!Account.SLAExpirationDate__c}" onchange="validateDate(this);"/>
+  <div id="errorId" style="color:red;font-size:19px;">
+  </div>
+  </apex:form>
+</apex:page>

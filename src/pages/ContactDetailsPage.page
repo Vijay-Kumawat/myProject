@@ -1,0 +1,35 @@
+<apex:page StandardController="Contact" extensions="ContactDetails">
+    <style>
+        .red
+        {
+        background-color:gold;
+        color:red;
+        }
+        .green
+        {
+        background-color:yellow;
+        }
+        .blue
+        {
+        background-color:pink;
+        }
+        .black
+        {
+        background-color:silver;
+        }
+    </style> 
+    <apex:form >
+     <apex:pageBlock >
+         <apex:pageBlockSection >
+             <apex:outputPanel layout="block" style="overflow:auto;width:750px;height:500px" >
+                        <apex:pageBlockTable value="{!contact}" var="con" border="1" cellspacing="3" columnClasses="red,green,blue,black">
+                             <apex:column value="{!con.FirstName}"/>
+                             <apex:column value="{!con.LastName}"/>
+                             <apex:column value="{!con.Email}"/>
+                             <apex:column value="{!con.Fax}"/>
+                        </apex:pageBlockTable>
+            </apex:OutputPanel> 
+         </apex:pageBlockSection>
+     </apex:pageBlock>
+     </apex:form>
+</apex:page>

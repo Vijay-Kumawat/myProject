@@ -1,0 +1,58 @@
+<apex:page controller="SelectOptionClass" showHeader="true">
+
+<style>
+        .vfHelpText a            {position:relative;}
+        .vfHelpText a span       {display: none;}
+        .vfHelpText a:hover span {display: block;
+                                  position:absolute;
+                                  top:1.25em;
+                                  padding:2px 5px;
+                                  left:-15em; width:15em;
+                                  z-index:100;
+                                  border:1px solid orange;
+                                  background-color:#FEFDB9;
+                                  color:black;
+                                 }
+    </style>
+
+    <apex:form >
+    <apex:pageBlock >
+    
+        <apex:pageBlockSection id="aaaaaaa">
+        
+            <apex:actionRegion >
+            <apex:selectList value="{!country}" size="1" style="height:28px;" required="true" id="p" multiselect="false">
+                <apex:selectOptions value="{!Countries}" />
+                    <apex:actionSupport event="onchange" action="{!Dummy}" reRender="listId">
+                </apex:actionSupport>
+            </apex:selectList>
+                
+                <apex:selectList value="{!state}" size="1" style="height:28px;width:152px;" id="listId"  multiselect="false">
+                    <apex:selectOptions value="{!States}"/>
+                </apex:selectList>
+                </apex:actionRegion>
+                <apex:pageblocksectionItem helpText="Testinggggggggg">
+                <apex:selectRadio value="{!item}"/>
+                    
+                    <apex:selectOption itemLabel="Test" itemValue="Test"/>
+                    
+                    </apex:pageblocksectionItem>
+                    
+                    <apex:pageblocksectionItem helpText="Testinggggggggg111111111111111">
+                <apex:selectRadio value="{!item}"/>
+                    
+                    <apex:selectOption itemLabel="Test11111111111111" itemValue="Test11111111111111111"/>
+                    
+                    </apex:pageblocksectionItem>
+                    
+                    <apex:pageblocksectionItem helpText="Testinggggggggg222222222222222222">
+                <apex:selectRadio value="{!item}"/>
+                    
+                    <apex:selectOption itemLabel="Test2222222222222222222" itemValue="Test2222222222222"/>
+                    
+                    </apex:pageblocksectionItem>
+                
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+    </apex:form>
+</apex:page>

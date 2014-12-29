@@ -1,0 +1,140 @@
+<apex:page showHeader="false" standardStyleSheets="false" id="page" controller="RegisterNewDealController">
+
+	<!--Include CSS and JavaScript here-->
+	<apex:stylesheet value="{!URLFOR($Resource.RegisterNewDeal,'css/RegisterNewDeal_CSS1.css')}" />
+	<apex:stylesheet value="{!URLFOR($Resource.RegisterNewDeal,'css/RegisterNewDeal_CSS2.css')}" />
+	<apex:stylesheet value="{!URLFOR($Resource.RegisterNewDeal,'css/RegisterNewDeal_CSS3.css')}" />
+	<apex:stylesheet value="{!URLFOR($Resource.RegisterNewDeal,'css/RegisterNewDeal_CSS4.css')}" />
+	
+	<style>
+		.navbar-header {
+			padding-left: 394px;
+		}
+		form {
+			clear: both;
+			border-radius: 5px;
+			border: 1px solid #9b9b9b;
+			background: #ececec;
+			padding: 15px 42px 35px;
+			width: 650px;   
+			margin: 15px auto 75px auto;
+		}
+		label {
+			margin-top: 5px;
+		}
+		.quartersize {
+			width: 198px !important;
+		}
+		input {
+			margin: 10px 205px;
+		}
+		.formDiv {
+			margin-left:285px;
+		}
+		.errorMsg {
+			color: red;
+			margin-bottom: -18px;
+		}
+		.quartersize > label {
+			margin-top: 19px;
+			margin-left: -183px;
+			padding-top: 21px;
+		}
+		.quartersize input {
+			width: 100% !important;
+			margin-top: -20px;
+		}
+		.resellerform input, .resellerform textarea, .resellerform select {
+			margin-top: -18px;
+			margin-left: 0px;
+		}
+		.redMark {
+			border: 2px solid red;
+			width: 0px;
+			height: 25px;
+			position: absolute;
+			margin-top: -18px;
+			margin-left: -14px;
+		}
+		ul {
+			color: red;
+			margin-left: 300px;
+			font-weight: bold;
+		}
+	</style>
+	
+		<!-- MalwareByte Header -->
+		<div id="headerbar" role="navigation">
+  			<center><div class="container">
+    			<div class="navbar-header"> 
+    				<a class="navbar-brand" href="http://www.malwarebytes.org/"><img src="http://images.cdn.static.malwarebytes.org/site_resources/20140204-9927ac8bf5d/images/header-logo.jpg" /></a> 
+    			</div>
+  			</div></center>
+		</div>
+		
+		<div id="wrapper" class="downloads">
+			<section style="padding-top:70px;">
+				<div class="container">
+		      		<h1 class="bold black center" style="font-size:36px; font-weight:bold; padding-top:30px;">Business Licensing</h1>
+		      		<p class="medium center">Malwarebytes provides licensing and support for all businesses including Enterprise, Government, Education, and Non-profit entities. To receive a custom quote or more information on how Malwarebytes can help your organization, please fill out the form below.</p>
+				</div>
+				<apex:Messages />
+				
+				<div class="container">
+					<apex:form id="businessform" styleClass="resellerform" style="position:relative;">
+						<div class="formDiv">
+			        		<h3>Tell us about your needs</h3>
+			
+			       		 	<div class="form-section">
+			       		 		<div class="halfsize quartersize">
+				            		<label>License Type</label>
+				            		<div class="redMark" id="redMark"></div>
+				                	<apex:inputField value="{!lead.License_Type__c}" id="licenseType" required="true" style="height: 29px;"/>
+				            	</div>
+			       		 		<div class="halfsize quartersize">
+				            		<label>Quantity</label>
+				            		<div class="redMark" id="redMark"></div>
+				            		<apex:inputField value="{!lead.Quantity__c}" id="quantity" required="true"/>
+				            	</div>
+				            	
+				            	<div class="halfsize quartersize">
+				            		<label>Do you want Paid Support</label>
+			            			<apex:inputField value="{!lead.Do_you_want_Paid_Support__c}" style="height: 17px;margin-left:-90px;" id="checkbox"/>
+				            	</div>
+			        		</div><br/>
+			
+			        		<h3 style="padding-top:19px;margin-left: 2px;">Tell us about your Customer</h3>
+			
+			        		<div class="form-section">
+			
+								<div class="halfsize quartersize">
+				            		<label>First Name</label>
+			            			<div class="redMark" id="redMark"></div>
+				                	<apex:inputField value="{!lead.FirstName}" id="first_name" required="true"/><br/>
+				            	</div>
+				            	
+								<div class="halfsize quartersize">
+				            		<label>Last Name</label>
+			            			<div class="redMark" id="redMark"></div>
+				                	<apex:inputField value="{!lead.LastName}" id="last_name" required="true"/><br/>
+				            	</div>
+				            	        
+				            	<div class="halfsize quartersize">
+				            		<label>Business Type</label>
+				            		<div class="redMark" id="redMark"></div>
+				                	<apex:inputField value="{!lead.Business_Type__c}" id="businessType" required="true"  style="height: 29px;"/>
+				            	</div>
+						    </div>
+				            
+			            	<div class="spacer"></div>
+		        
+				        	<div class="spacer"></div>
+				        		<apex:commandButton style="background: rgb(38,120,230); color:#fff;margin-top:35px;margin-left:-155px;height:36px;font-size:18px;" styleClass="submit" value="Submit" action="{!saveLeadInfo}"/>
+				        		<apex:commandButton style="background: rgb(38,120,230); color:#fff;margin-top:-41px;margin-left:105px;height:37px;font-size:18px;" styleClass="submit" value="Cancel" action="{!redirectToHome}" immediate="true"/>
+				        	<div style="clear: both; display: block;"></div>
+			        	</div>
+	      			</apex:form>
+				</div>
+			</section>
+		</div>
+</apex:page>

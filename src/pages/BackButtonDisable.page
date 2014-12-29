@@ -1,0 +1,8 @@
+<apex:page >
+<html>
+<head>
+<body oncontextmenu="return false;">
+</body>
+</head>
+</html>
+</apex:page>

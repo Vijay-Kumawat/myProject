@@ -1,0 +1,120 @@
+<apex:page >
+  
+  <script type="text/javascript">
+  var IndIds = new Array() ;
+  var selectedids ;
+  var selectidall ;
+  
+ 
+var j$ = jQuery.noConflict();
+j$(document).ready(function(){
+
+    j$(".btn-slide").click(function(){ 
+        j$("#panel").slideToggle("slow");
+        j$(this).toggleClass("active"); return false;
+    });
+    
+    j$(".btnslidea2").click(function(){  
+        j$("#panela2").slideToggle("slow");
+        j$(this).toggleClass("active"); return false;
+    });
+    
+    j$(".btnslidea3").click(function(){  
+        j$("#panela3").slideToggle("slow");
+        j$(this).toggleClass("active"); return false;
+    });
+    
+    j$(".btnslidea4").click(function(){  
+        j$("#panela4").slideToggle("slow");
+        j$(this).toggleClass("active"); return false;
+    });
+    
+    j$(".btnslidea5").click(function(){  
+        j$("#panela5").slideToggle("slow");
+        j$(this).toggleClass("active"); return false;
+    });
+    
+    j$(".btnslidea6").click(function(){  
+        j$("#panela6").slideToggle("slow");
+        j$(this).toggleClass("active"); return false;
+    });
+    
+    
+    j$(".btn-slide2").click(function(){
+        j$("panel2").show("slide", { direction: "down" }, 1000);
+       // j$("#panel2").slideToggle("slow");
+       // j$(this).toggleClass("active"); return false;
+   
+    
+    });
+    
+    j$(".addfilestyle").click(function(){
+      j$("#panel2").slideToggle("slow");
+        j$(this).toggleClass("active"); return false;
+    
+    });
+    
+    j$("#button Delete").click(function(){
+       alert('hi');
+   
+    });
+    
+    var selectedrows = '';
+    j$(':checkbox').click(function(){
+        var id = j$(this).attr('id');
+        var isChecked = j$(this).attr('checked');
+        //alert('hi : '+id +'='+isChecked );
+        if ( isChecked  == 'checked' ){
+            IndIds.push(id); 
+           // alert('if IndIds : '+IndIds);
+        } else {  
+             for(var i in IndIds){ 
+                 
+                 if( IndIds[i] == id ) {
+                   IndIds.splice(i,1);
+                   break;
+                 }
+               
+             }
+            // alert(' else IndIds : '+IndIds);
+        }
+       // alert('IndIds : '+IndIds);
+        selectedids = IndIds.toString();  
+        /*
+         
+         
+         var result = ","+value+",";
+        result = result.replace(","+replaceValue+",",",");
+        result = result.substr(1,result.length);
+        result = result.substr(0,result.length-1);
+        alert(result);*/
+    });  
+     
+      
+});
+
+     
+     function deleteJS() {
+         deletemethod(selectedids,selectidall);
+         j$('#panel3').fadeOut(900).load(j$('#panel3')).fadeIn(2500);
+     }
+     
+     function selectAll() {  
+          selectidall = 'True';    
+           j$("input[type='checkbox']").prop({
+              checked: true, 
+              disabled:true
+            });  
+       
+     }
+     
+     function refreshJS() {
+         refreshmethod();
+         j$('#panel3').fadeOut(900).load(j$('#panel3')).fadeIn(2500);
+     }
+    
+ j$('#iframe_id').bind('click', function(event) {  alert('hi'); });
+        
+  </script>
+  
+</apex:page>

@@ -1,0 +1,66 @@
+<!--
+* Description   : This is Visualforce Page to perform Search Functionality For Account Using FieldSet.
+* 
+* Created By    : Vijay Kumar Kumawat
+*
+* Created Date  : 05/10/2013
+*
+* Version       : v1.0 - Created
+-->
+
+<!-- Page -->
+<apex:page standardController="Contact" extensions="SalesforceImageViewerController" showHeader="false" sidebar="false" STandardStylesheets="false">
+
+    <!-- Style Sheet -->
+    <apex:stylesheet value="{!$CurrentPage.parameters.styleClass}"/>
+
+    <!-- Apex Form -->
+    <apex:form >
+        
+        <!-- Apex Image -->
+        <apex:image id="Image" value="{!$CurrentPage.parameters.imageURL}" width="1350" height="150"/>
+        
+        <div align = "center" style="background-color:#E2BEBE;">
+            
+            <!-- Output Panel -->
+            <apex:outputPanel >
+            
+                <!-- Page Block -->
+                <apex:pageBlock >
+                
+                    <!-- Command Buttons -->
+                    <apex:pageBlockButtons >
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <apex:commandButton value="Submit" action="{!save}"/>&nbsp;&nbsp;&nbsp;
+                        <apex:commandbutton value="Cancel" action="{!cancel}"/>
+                    </apex:pageBlockButtons><br/>
+                    
+                    <!-- Page Block Section -->
+                    <apex:pageBlockSection collapsible="true" columns="1">
+                    
+                        <!-- Page Block Section Item -->
+                        <apex:pageblocksectionItem >
+                            <apex:outputText value="First Name" styleClass="font"/>
+                            <apex:inputField value="{!Contact.FirstName}" styleClass="font"/>
+                        </apex:pageblocksectionItem>
+                        
+                        <apex:pageblocksectionItem >
+                            <apex:outputText value="Last Name" styleClass="font"/>
+                            <apex:inputField value="{!Contact.LastName}" styleClass="font" label="Last Name"/>
+                        </apex:pageblocksectionItem>
+                        
+                        <apex:pageblocksectionItem >
+                            <apex:outputText value="Email" styleClass="font"/>
+                            <apex:inputField value="{!Contact.Email}" styleClass="font" label="Email"/>
+                        </apex:pageblocksectionItem>
+                        
+                        <apex:pageblocksectionItem >
+                            <apex:outputText value="Phone" styleClass="font"/>
+                            <apex:inputField value="{!Contact.Phone}" styleClass="font" label="Phone"/>
+                        </apex:pageblocksectionItem><br/>
+                    </apex:pageBlockSection>
+                 </apex:pageBlock>
+            </apex:outputPanel>
+        </div>
+    </apex:form>
+</apex:page>

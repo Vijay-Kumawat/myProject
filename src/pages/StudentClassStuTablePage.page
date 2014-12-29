@@ -1,0 +1,37 @@
+<!--
+* Description   : This is Visualforce Page to Display Table of Class with Name and No of students.
+* 
+* Created By    : Vijay Kumar Kumawat
+*
+* Created Date  : 10/16/2012
+*
+* Version       : v1.0 - Create 
+-->
+
+<!-- Page -->
+<apex:page controller="StudentClassStuTable">
+    
+    <!-- Form -->
+    <apex:form id="form">
+        
+        <!-- Page Block  -->
+        <apex:pageBlock >
+
+            <!-- Page Block Section -->
+            <apex:pageBlockSection >
+            
+                <!-- Page Block Table -->
+                <apex:pageBlockTable value="{!listClass}" var="lc">
+                
+                    <!-- Populate Field Values -->
+                    <apex:column value="{!lc.Name}"/>
+                    <apex:column value="{!lc.No_of_Student__c}"/>
+                
+                </apex:pageblockTable>
+         
+            </apex:pageBlockSection>
+        
+        </apex:pageBlock>
+        
+    </apex:form>
+</apex:page>

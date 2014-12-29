@@ -1,0 +1,81 @@
+<!--
+* Description   : This is Visualforce Page to display account details with page details.
+* 
+* Created By    : Vijay Kumar Kumawat
+*
+* Created Date  : 02/24/2013
+*
+* Version       : v1.0 - Create 
+-->
+
+<apex:page Standardcontroller="Account" extensions="AccountDetailsWithPageReference">
+
+    <!-- Form -->    
+    <apex:form id="form">
+        
+      <!-- Page Block -->
+      <apex:pageBlock > 
+      
+                <!-- Output Text for Account Name -->
+                <apex:outputText value="Account Name  : "/>
+                    
+                <!-- Input Text for Account Name -->          
+                <apex:inputText value="{!Account.Name}"/>
+                <br/><br/>
+                
+                <!-- Output Text for Account Phone -->
+                <apex:outputText value="Account Phone  : "/>
+                  
+                <!-- Input Text for Account phone-->       
+                <apex:inputText value="{!Account.Phone}"/>
+            
+        <!-- Output Panel-->
+        <apex:outputPanel id="out" >
+            
+            <!-- Page Block Section -->
+            <apex:pageBlockSection columns="1">
+            
+                <apex:pageblocksectionItem >   
+            
+                    <!-- Output Text for URL -->
+                    <apex:outputText value="Page URL  : "/>
+                    
+                    <!-- Input Text for URL-->  
+                    <apex:inputText value="{!url}"/>
+                
+                </apex:pageblocksectionItem>
+                
+                <apex:pageblocksectionItem >
+                
+                    <!-- Output Text for Ancher -->
+                    <apex:outputText value="Ancher  : "/>
+                    
+                    <!-- Input Text for Ancher-->  
+                    <apex:inputText value="{!ancher}"/>
+                
+                </apex:pageblocksectionItem>
+     
+                <apex:pageBlockTable value="{!headerMap}" var="header">
+                    <apex:column headerValue="Header Name">
+                        {!header}
+                    </apex:column>
+                    <apex:column headerValue="Header Value">
+                        {!headerMap[header]}
+                    </apex:column>
+                </apex:pageBlockTable>
+                
+                <apex:pageBlockTable value="{!parameterMap}" var="param">
+                    <apex:column headerValue="Parameter Name">
+                        {!param}
+                    </apex:column>
+                    <apex:column headerValue="Parameter Value">
+                        {!parameterMap[param]}
+                    </apex:column>  
+                </apex:pageBlockTable>
+            
+            </apex:pageBlockSection>
+        </apex:outputPanel>
+            
+        </apex:pageBlock>
+    </apex:form> 
+</apex:page>

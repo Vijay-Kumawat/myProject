@@ -1,0 +1,30 @@
+<!--
+* Description   : This is Visualforce Page to Display List of Indian Cricket Team.
+* 
+* Created By    : Vijay Kumar Kumawat
+*
+* Created Date  : 10/22/2012
+*
+* Version       : v1.0 - Create 
+-->
+
+<!-- Page -->
+<apex:page controller="IndianTeam">
+
+    <!-- Section Header -->
+    <apex:sectionHeader title="Indian Team Batting Order"/>
+        
+        <!-- Page Block -->
+        <apex:pageBlock >
+                
+                <!-- Page Block Table -->
+                <apex:pageBlockTable value="{!mapTeam}" var="map">
+                    <apex:column headerValue="Order of Playing">
+                        {!map}
+                    </apex:column>
+                    <apex:column headerValue="Player Name">
+                        {!mapTeam[map]}
+                    </apex:column>  
+                </apex:pageBlockTable>
+        </apex:pageBlock>
+</apex:page>

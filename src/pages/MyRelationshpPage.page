@@ -1,0 +1,14 @@
+<apex:page standardController="Account" recordSetVar="accounts">
+    <apex:form >
+        <apex:pageBlock >
+            <apex:repeat value="{!accounts}" var="acc">
+                    <apex:outputText value="{!acc.Name}"/>  
+                        <apex:pageBlockTable value="{!acc.contacts}" var="con">
+                            <apex:column value="{!con.Name}"/>
+                            <apex:column value="{!con.Fax}"/>
+                            <apex:column value="{!con.Phone}"/>
+                        </apex:pageBlockTable>
+            </apex:repeat>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

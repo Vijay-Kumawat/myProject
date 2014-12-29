@@ -1,0 +1,225 @@
+<apex:component controller="fliptop.FliptopComponentCtlr" id="FliptopComponent" allowDML="true">
+	<apex:attribute name="object" type="SObject" required="true"
+									description="Object" assignTo="{!theObject}"/>
+	<apex:attribute name="debug" type="boolean" required="false" description="Show Debug Info"/>
+	<c:FliptopCSS />
+	<apex:form >
+		<apex:actionFunction name="refreshComponent" action="{!initialize}"
+			rerender="ComponentContainer" />
+			
+		<apex:actionFunction name="updateSObject" action="{!updateSObject}" reRender="false"/>
+	</apex:form>
+
+	<script type="text/javascript"
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script type="text/javascript">
+	$(document).ready(function() {
+		$('.ft-close-popup').on('click',function(){
+			$(this).parents('.ft-popup').hide();
+			$('#ft-fade').fadeOut();
+		});
+		$('#ft-toogle-box-btn .ft-close').bind('click',function(){
+			$(this).parent().slideUp();
+			$('#ft-show-accounts').show();
+		});
+		$('#ft-show-accounts').bind('click',function(){
+			$('#ft-toogle-box-btn').slideDown();
+			$(this).hide();
+		});
+		
+       	 updateSObject();
+	});
+	
+	function showMatcher(panel) {
+		var name = ""
+		var win = window.open('/apex/FliptopMatch?tab=' + panel + '&fliptop_id={!ftcontact.fliptop_id}&name={!ftcontact.escapedName}' +
+								'&curTwitter={!URLENCODE(ftcontact.twitter.url)}' + 
+								'&curFacebook={!URLENCODE(ftcontact.facebook.url)}' +
+								'&curLinkedin={!URLENCODE(ftcontact.linkedin.url)}',
+								'edit_window','width=810,height=470,location=no,toolbar=no,scrollbars=no');
+		var timer = setInterval(function() {
+	   	if(win.closed) {  
+	       clearInterval(timer);  
+	       setTimeout(function(){
+	       	 refreshComponent();
+	       },1000);
+	   	}
+		}, 500);
+	}
+	
+	function showAuthPage(url) {
+		if(url != '') {
+			var win = window.open(url, '','width=800,height=600,status=0,toolbar=0');   
+			var timer = setInterval(function() {
+	    	if(win.closed) {  
+	        clearInterval(timer);  
+	        setTimeout(function(){
+	       	 refreshComponent();
+	       },2000);
+	    	}  
+			}, 500);
+		}
+	}
+	
+</script>
+	<apex:outputPanel layout="block" styleclass="ft-wrapper" id="ComponentContainer">
+		<a href="javascript:void(0)" class="ft-logo"><img
+			src="{!URLFOR($Resource.Fliptop_Images,'s2/img_fliptop.png')}" alt="" /></a>
+		<div class="ft-box-top-right">
+			<button class="ft-btn2 ft-bnt-show-accounts" id="ft-show-accounts"></button>
+			<a href="https://fliptop.zendesk.com/categories/20060191-fliptop-social-profiles-for-salesforce" target="_blank">FAQ</a>
+			<a href="https://fliptop.zendesk.com/categories/20060191-fliptop-social-profiles-for-salesforce" class="ft-top-question"
+				target="_blank"><img
+				src="{!URLFOR($Resource.Fliptop_Images,'s2/icn_question.png')}" alt="" /></a> <a
+				href="http://twitter.com/home?status=I+am+using+the+@fliptop+Social+Contacts+app+for+Salesforce.+Get+it+here+http://www.fliptop.com/socialCRM"
+				target="_blank">
+				<button class="ft-btn2 ft-btn-twitter2"></button>
+			</a>
+		</div>
+		<div class="ft-divider"></div>
+		<apex:outputPanel layout="block" styleclass="ft-noemail" rendered="{!noEmail}">
+			<div>
+				Add an email address to the Lead or Contact to use Fliptop Social Profiles
+			</div>
+		</apex:outputPanel>
+		<apex:outputPanel layout="block" styleclass="ft-error" rendered="{!IF(hasError && !noApiKey && !noEmail,true,false)}">
+			<img src="{!URLFOR($Resource.Fliptop_Images,'s2/SDFC_robot.png')}" alt=""/>
+		</apex:outputPanel>
+		<apex:outputPanel layout="block" styleclass="ft-nokey" rendered="{!IF(noApiKey,true,false)}">
+			<p>
+			Please enter your API key on the&nbsp;
+			<apex:outputLink value="{!$Page.fliptop__FliptopSettings}" target="_parent">Fliptop Settings</apex:outputLink>
+			 page
+			</p>
+		</apex:outputPanel>
+		<apex:outputPanel layout="block" styleclass="ft-box-user" rendered="{!NOT(hasError)}">
+			<div class="ft-left">
+				<div class="ft-photo">
+					<img
+						src="{!BLANKVALUE(ftcontact.photo,URLFOR($Resource.Fliptop_Images,'s2/nophoto.png'))}"
+						alt="" id="photo" />
+				</div>
+				<div class="ft-content">
+					<div class="ft-top-box-inf">
+						<h3>
+							<apex:outputText value="{!BLANKVALUE(name,'Unknown Name')}" />
+						</h3>
+						<h4>
+							<apex:outputText value="{!title}"/>
+							<apex:outputPanel layout="none" rendered="{!ISBLANK(title)}">
+							&nbsp;
+							</apex:outputPanel>
+						</h4>
+						<p class="ft-city">
+							<apex:outputText value="{!company}"/>
+							<apex:outputPanel layout="none" rendered="{!ISBLANK(company) && ISBLANK(address)}">
+							&nbsp;
+							</apex:outputPanel>
+							<apex:outputPanel layout="none" rendered="{!NOT(ISBLANK(company)) && !ISBLANK(address)}">
+							&nbsp;|&nbsp;&nbsp;
+							</apex:outputPanel>
+							<apex:outputText value="{!BLANKVALUE(address,'&nbsp;')}" escape="false"/>
+							<apex:outputPanel layout="none" rendered="{!ISBLANK(address)}">
+							&nbsp;
+							</apex:outputPanel>
+						</p>
+						<img class="ft-top-right"
+							src="{!URLFOR($Resource.Fliptop_Images,'s2/icon_salesforce_small.png')}"
+							alt="" />
+					</div>
+					<ul>
+						<li class="ft-t">
+							<button class="ft-btn2 ft-btn-edit"
+								onclick="showMatcher('twitter')"></button> <apex:outputPanel rendered="{!IF(hasTwitter,true,false)}">
+									<button class="ft-btn2 ft-btn-follow" id="btn_follow" onclick="window.open('https://twitter.com/intent/follow?screen_name={!ftcontact.profileMap['twitter'].handle}')"></button>
+								<a href="{!ftcontact.profileMap['twitter'].url}" target="_blank">
+									<apex:outputText value="{!ftcontact.profileMap['twitter'].handle}" />
+								</a>
+							</apex:outputPanel> <apex:outputPanel rendered="{!IF(!hasTwitter,true,false)}">
+                                Not found. Click to edit
+                            </apex:outputPanel>
+						</li>
+						<li class="ft-in">
+							<button class="ft-btn2 ft-btn-edit"
+								onclick="showMatcher('linked_in')"></button> <apex:outputPanel rendered="{!IF(hasLinkedin,true,false)}">
+								<button class="ft-btn2 ft-btn-connect" id="btn_connect" onclick="window.open('{!ftcontact.profileMap['linkedin'].url}')"></button>
+								<a href="{!ftcontact.profileMap['linkedin'].url}"
+									target="_blank"> <apex:outputText value="{!ftcontact.profileMap['linkedin'].handle}" /></a>
+							</apex:outputPanel> <apex:outputPanel rendered="{!IF(!hasLinkedin,true,false)}">
+              	Not found. Click to edit
+              </apex:outputPanel>
+						</li>
+						<li class="ft-f">
+							<button class="ft-btn2 ft-btn-edit"
+								onclick="showMatcher('facebook')"></button> <apex:outputPanel rendered="{!IF(hasFacebook,true,false)}">
+							<button class="ft-btn2 ft-btn-friend" id="btn_friend" onclick="window.open('{!ftcontact.profileMap['facebook'].url}')"></button>
+								<a href="{!ftcontact.profileMap['facebook'].url}"
+									target="_blank"> <apex:outputText value="{!ftcontact.profileMap['facebook'].handle}" /></a>
+							</apex:outputPanel> <apex:outputPanel rendered="{!IF(!hasFacebook,true,false)}">
+                                Not found. Click to edit
+                            </apex:outputPanel>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="ft-wrapper-toogle-box-btn">
+				<div class="ft-box-write" id="ft-toogle-box-btn">
+					<h3>Connect Accounts</h3>
+					<h3>To Improve Results</h3>
+					<br/>
+					<apex:outputPanel styleclass="ft-box-btn-image" layout="block"
+						id="authPanel">
+						<apex:outputPanel layout="none"
+							rendered="{!IF(twitterAuthUrl != null,true,false)}">
+							<button
+								class="ft-btn2 ft-btn-twitter{!IF(authStatus['twitter'],' connected','')}"
+								onclick="showAuthPage('{!twitterAuthUrl}');"></button>
+						</apex:outputPanel>
+						<apex:outputPanel layout="none"
+							rendered="{!IF(linkedinAuthUrl != null,true,false)}">
+							<button
+								class="ft-btn2 ft-btn-linkedln{!IF(authStatus['linkedin'],' connected','')}"
+								onclick="showAuthPage('{!linkedinAuthUrl}');"></button>
+						</apex:outputPanel>
+						<apex:outputPanel layout="none"
+							rendered="{!IF(facebookAuthUrl != null,true,false)}">
+							<button
+								class="ft-btn2 ft-btn-facebook{!IF(authStatus['facebook'],' connected','')}"
+								onclick="showAuthPage('{!facebookAuthUrl}');"></button>
+						</apex:outputPanel>
+					</apex:outputPanel>
+<!-- 					<div class="ft-close"></div> -->
+				</div>
+			</div>
+			<div class="ft-right">
+				<h3>DETAILS</h3>
+				<ul>
+					<apex:outputPanel rendered="{!IF(linkedinStatus != null,true,false)}" layout="none">
+						<li class="ft-in"><apex:outputText value="{!IF(LEN(linkedinStatus) > 90,LEFT(linkedinStatus,90) & '...',linkedinStatus)}" escape="false"/>
+						</li>
+					</apex:outputPanel>
+					<apex:outputPanel rendered="{!IF(twitterStatus != null,true,false)}" layout="none">
+						<li class="ft-t">
+							<p>
+								<apex:outputText value="{!IF(LEN(twitterStatus) > 90,LEFT(twitterStatus,90) & '...',twitterStatus)}" />
+							</p>
+						</li>
+					</apex:outputPanel>
+					<apex:outputPanel rendered="{!IF(twitterStatus == null && linkedinStatus == null,true,false)}"
+						layout="none">
+						<li>
+							<p>None available</p>
+						</li>
+					</apex:outputPanel>
+				</ul>
+			</div>
+			<div style="clear: both;"></div>
+		</apex:outputPanel>
+	</apex:outputPanel>
+	<apex:outputPanel rendered="{!debug}">
+		DEBUG ENABLED<br/><br/>
+		AUTH: {!authRes}
+		<br/><br/>
+		RESULT: {!searchRes}
+	</apex:outputPanel>
+</apex:component>

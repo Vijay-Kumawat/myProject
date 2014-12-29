@@ -1,0 +1,216 @@
+<apex:page sidebar="false" showHeader="false" controller="fliptop.FliptopMatchCtlr" standardStylesheets="false">
+    <apex:form >
+    <c:FliptopCSS />
+    <script type="text/javascript"
+        src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script type="text/javascript">
+    function selectTab(){
+    	   var numberTab = $('ul.ft-tabs').find('li.selected').index();      
+           $('.ft-main').hide().eq(numberTab).show(); 
+           $('.ft-button-box').hide().eq(numberTab).show();
+          
+     	$('.spinner').hide();
+    	}
+    	
+    $(document).ready(function() {
+    	
+        $('.ft-close-popup').on('click',function(){
+            window.close();
+        });
+        
+         $('.searchField').keypress(function(e){
+           if(e.which == 13){//Enter key pressed
+           event.preventDefault();     
+            $('.searchButton').click();//Trigger search button click event
+        }
+    });
+        $('.ft-tabs li').bind('click', function(){
+            $(this).siblings('li').removeClass('selected');
+            $(this).addClass('selected');
+            var numberTab = $(this).index();            
+            $(this).parents('.ft-popup').find('.ft-main').hide().eq(numberTab).show();
+            $(this).parents('.ft-popup').find('.ft-button-box').hide().eq(numberTab).show();
+            
+        });
+        $('.ft-box-write-popup').bind('click', function(){
+            $(this).siblings('.ft-box-write-popup').removeClass('selected_write');
+            $(this).addClass('selected_write');
+            
+        });
+         $('.searchButton').bind('click', 
+        function(){
+        	$('.spinner').fadeIn();
+        	$('.ft-main .ft-box-write-popup, .ft-main ').fadeOut();
+        
+        });  
+        
+        /* imitating placeholder */ 
+      
+       $('.ft-label').bind('click', function(){
+			$(this).prev('.ft-txt-field').focus();
+		}); 
+        
+      $('.ft-txt-field').on({
+	focus : function(){
+		//Check if input is equal default
+			$(this).next('.ft-label').hide();
+		},
+
+	blur : function(){
+		//Check if input is blank
+		if($(this).val() == '') {
+				$(this).next('.ft-label').show();
+		}
+	}
+});
+
+        if('{!JSENCODE($CurrentPage.parameters.tab)}' != '') {
+            $('.icn_{!JSENCODE($CurrentPage.parameters.tab)}').click();
+        }
+    });
+</script>
+<apex:actionFunction name="setFacebook" action="{!addFacebook}" oncomplete="window.close()">
+    <apex:param name="url" value="" assignTo="{!facebookUrl}"/>
+</apex:actionFunction>
+<apex:actionFunction name="setTwitter" action="{!addTwitter}" oncomplete="window.close()">
+    <apex:param name="url" value="" assignTo="{!twitterUrl}"/>
+</apex:actionFunction>
+<apex:actionFunction name="setLinkedin" action="{!addLinkedin}" oncomplete="window.close()">
+    <apex:param name="url" value="" assignTo="{!linkedinUrl}"/>
+</apex:actionFunction>
+<apex:actionFunction name="removeFacebook" action="{!removeFacebook}" oncomplete="window.close()"/>
+<apex:actionFunction name="removeTwitter" action="{!removeTwitter}" oncomplete="window.close()"/>
+<apex:actionFunction name="removeLinkedin" action="{!removeLinkedin}" oncomplete="window.close()"/>
+    <apex:outputPanel id="dummy" layout="none"></apex:outputPanel>
+    <div class="ft-popup" id="ft-popup-single">
+    <div class="ft-header">
+			<h1>Select Match</h1>
+			<div class="ft-close-popup"></div>
+		</div>
+        <div class="ft-top">
+      
+            
+           
+            <div class="ft-input-box ft-search">
+                 
+                <!--  WINSTON: This is the search bar -->
+                <apex:inputText value="{!searchKeyword}" styleclass="ft-txt-field searchField" />
+                <span class="ft-label">Enter search terms or profile URL</span> 
+                <apex:commandButton action="{!repopulateSearchData}" styleClass="searchButton ft-btn ft-btn-gray" value="Search" id="searchButton" reRender="profile_display" oncomplete="selectTab();"> </apex:commandButton>
+            </div>
+            
+            <ul class="ft-tabs">
+                <li class="selected icn_facebook"><a href="javascript:void(0);">Facebook</a></li>
+                <li class="icn_twitter"><a href="javascript:void(0);">Twitter</a></li>
+                <li class="icn_linked_in"><a href="javascript:void(0);">LinkedIn</a></li>
+            </ul>
+          
+        </div>
+        
+        <apex:outputPanel id="profile_display">
+        <div class="ft-main-container">
+        	<div class="spinner" style="display: none;"><img src="http://s.telegraph.co.uk/graphics/html/Years/2012/DiamondJubileeTimeline2/images/loading.gif"/></div>
+        
+	    
+        	<div class="ft-main" style="display: block;">
+                    <div class="ft-header-main">Click on the profile you want or use search to find others</div>
+	            <apex:outputPanel rendered="{!IF(hasFacebook,true,false)}">
+	            <apex:repeat value="{!facebookList}" var="facebook">
+	<!--            <div class="ft-box-write-popup selected_write"> -->
+	            <div class="ft-box-write-popup {!IF(facebook == selFacebook,'selected_write','')}"
+	                 onclick="setFacebook('{!facebook.url}');">
+	                <img src="{!facebook.photo}"
+	                    class="ft-mini-user" alt="" />
+	                <div class="ft-content">
+	                    <div class="ft-head">
+	                        <span class="ft-h">{!facebook.name}</span> <img
+	                            src="{!$Resource.Fliptop_Images}/s2/icn_blue_ok.png"
+	                            class="ft-icn-blue-ok" alt="" /> <span class="ft-email">{!facebook.handle}</span>
+	                    </div>
+	                    <p>
+	                        {!facebook.description}
+	                    </p>
+	                    <a href="{!facebook.url}" class="ft-green" target="_blank">{!facebook.url}</a>
+	                </div>
+	            </div>
+	            </apex:repeat>
+	            </apex:outputPanel>
+	            <apex:outputPanel rendered="{!IF(!hasFacebook,true,false)}">
+	                <div class="ft-no-match"></div>
+	            </apex:outputPanel>
+	        </div>
+	        <div class="ft-main">
+	                <div class="ft-header-main">Click on the profile you want or use search to find others</div>
+	                
+	            <apex:outputPanel rendered="{!IF(hasTwitter,true,false)}">
+	            <apex:repeat value="{!twitterList}" var="twitter">
+	<!--            <div class="ft-box-write-popup selected_write"> -->
+	            <div class="ft-box-write-popup {!IF(twitter == selTwitter,'selected_write','')}"
+	                     onclick="setTwitter('{!twitter.url}');">
+	                <img src="{!twitter.photo}"
+	                    class="ft-mini-user" alt="" />
+	                <div class="ft-content">
+	                    <div class="ft-head">
+	                        <span class="ft-h">{!twitter.name}</span> <img
+	                            src="{!$Resource.Fliptop_Images}/s2/icn_blue_ok.png"
+	                            class="ft-icn-blue-ok" alt="" /> <span class="ft-email">{!twitter.handle}</span>
+	                    </div>
+	                    <p>
+	                        {!twitter.description}
+	                    </p>
+	                   
+	                </div>
+	            </div>
+	            </apex:repeat>
+	            </apex:outputPanel>
+	            <apex:outputPanel rendered="{!IF(!hasTwitter,true,false)}">
+	                <div class="ft-no-match"></div>
+	            </apex:outputPanel>
+	        </div>
+	        <div class="ft-main">
+	        <div class="ft-header-main">Click on the profile you want or use search to find others</div>
+	            <apex:outputPanel rendered="{!IF(hasLinkedin,true,false)}">
+	            <apex:repeat value="{!linkedinList}" var="linkedin">
+	<!--            <div class="ft-box-write-popup selected_write"> -->
+	            <div class="ft-box-write-popup {!IF(linkedin == selLinkedin,'selected_write','')}"
+	                     onclick="setLinkedin('{!linkedin.url}');">
+	                <img src="{!linkedin.photo}"
+	                    class="ft-mini-user" alt="" />
+	                <div class="ft-content">
+	                    <div class="ft-head">
+	                        <span class="ft-h">{!linkedin.name}</span> <img
+	                            src="{!$Resource.Fliptop_Images}/s2/icn_blue_ok.png"
+	                            class="ft-icn-blue-ok" alt="" /> <span class="ft-email">{!linkedin.handle}</span>
+	                    </div>
+	                    <p>
+	                        {!linkedin.description}
+	                    </p>
+	                    <a href="{!linkedin.url}" class="ft-green" target="_blank">{!linkedin.url}</a>
+	                </div>
+	            </div>
+	            </apex:repeat>
+	            </apex:outputPanel>
+	            <apex:outputPanel rendered="{!IF(!hasLinkedin,true,false)}">
+	                <div class="ft-no-match"></div>
+	            </apex:outputPanel>
+	        </div>
+	        
+	      </div>
+        </apex:outputPanel>
+        <div class="ft-bottom">
+         <div class="ft-button-box">
+                <button class="ft-btn ft-btn-gray ft-close-popup-test" onclick="removeFacebook()">No Match
+                    </button>
+            </div>
+             <div class="ft-button-box">
+                <button class="ft-btn ft-btn-gray ft-close-popup-test" onclick="removeTwitter()">No Match
+                    </button>
+            </div>
+            <div class="ft-button-box">
+                <button class="ft-btn ft-btn-gray ft-close-popup-test" onclick="removeLinkedin()">No Match
+                    </button>
+            </div>
+        </div>
+    </div>
+    </apex:form>
+</apex:page>

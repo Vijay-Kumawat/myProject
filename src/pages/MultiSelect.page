@@ -1,0 +1,9 @@
+<apex:page standardController="Account">
+    <apex:form >
+        <apex:pageBlock >
+            <apex:pageblocksection >
+                <apex:inputField value="{!Account.ChooseOption__c}"/>
+            </apex:pageblocksection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

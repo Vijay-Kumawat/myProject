@@ -1,0 +1,47 @@
+<!--
+* Description   : This is Visualforce Page to display margin field for update the contact.
+* 
+* Created By    : 
+*
+* Created Date  : 01/06/2013
+*
+* Version       : V_1.0 - Created 
+-->
+<!-- Page -->
+<apex:page sidebar="false" showHeader="false" controller="MarsUpdateMarginController">
+
+    <!-- Form -->
+    <apex:form >
+    
+        <!-- Page Message -->
+        <apex:pageMessages id="pM"/>
+    
+        <!-- Page Block -->
+        <apex:pageBlock >
+        
+            <!-- Page Block Button -->
+            <apex:pageBlockButtons location="bottom">
+            
+                <apex:commandButton value="Update" action="{!updateSelectedItems}" reRender="oPForResult,pM" id="button"/>
+                <apex:commandButton value="Cancel" onClick="window.close();return false;" immediate="true"/>
+            </apex:pageBlockButtons>
+        
+            <!-- Output panel -->
+            <apex:outputPanel id="oPForResult">
+                <script>
+                    //Check if page data have been saved successfully and close the top
+                    if('{!isSuccessfullyUpdate}' != null && '{!isSuccessfullyUpdate}' == 'true') {
+                        window.opener.location.href = '/{!$CurrentPage.parameters.accountId}';
+                        self.close();
+                    }
+                </script>
+            </apex:outputPanel>
+        
+            <!-- Page Block Section -->
+            <apex:pageBlockSection >
+            
+                <apex:inputField value="{!contact.Margin__c}" required="true"/>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

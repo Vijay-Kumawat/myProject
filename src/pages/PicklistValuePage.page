@@ -1,0 +1,16 @@
+<apex:page controller="PickListValue">
+    <apex:form >
+       <apex:pageBlock >
+           <apex:pageBlockSection >
+           <apex:selectList value="{!courseName}" size="1">
+                <apex:selectOptions value="{!options}"/>
+                <apex:actionSupport event="onchange" action="{!selectedOptions}" rerender="pds"/>
+              </apex:selectList>
+          </apex:pageBlockSection>
+          
+          <apex:pageBlockSection id="pds">
+              <apex:inputText value="{!toBeDisplayInBox}" title="Selected"/>
+          </apex:pageBlockSection>
+       </apex:pageBlock>
+    </apex:form>
+</apex:page>

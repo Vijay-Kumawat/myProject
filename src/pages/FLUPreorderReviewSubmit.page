@@ -1,0 +1,341 @@
+<!--
+* Description	:	This is Visualforce Page for FLU Pre-order Review & Submit.
+* 
+* Created By    :	
+*
+* Created Date  :	09/16/2013
+*
+* Version       :	V_1.0 - Created 
+-->
+
+<apex:page StandardController="Account" extensions="FLUPreorderController" showHeader="false" standardStylesheets="false">
+
+	<!-- CSS Include Here -->
+    <apex:stylesheet value="{!URLFOR($Resource.FLUPreorderCSS)}"/>
+    
+	<apex:form >
+		<apex:pageBlock >
+		
+			<div class="headerImageClass">
+				<apex:image value="/servlet/servlet.FileDownload?file=015900000026UXz"/>
+			</div>
+		
+         	<div class="headerClass">
+         		{!$Label.Confirm_Account_Page_Header}
+         		<span class="headerSubClass">     
+         			{!$Label.Confirm_Account_Page_Header_Season}
+         		</span>
+         	</div>
+         	
+         	<div class="panelAlignmentClass">
+         		<apex:image value="/servlet/servlet.FileDownload?file=01590000001hBzv" styleClass="panalClass"/>
+         	</div><br/>
+         	
+         	<table>
+       			<tr>
+       				<td class="imageTdAlignmentClass">
+       					<apex:image value="/servlet/servlet.FileDownload?file=01590000001hBzl" styleClass="imageClass"/>
+		    		</td>
+		    		<td>
+		    			<div class="mainHeadingClass"> 
+					    	{!$Label.Review_Submit_Page_Heading}
+				    	</div>
+				    	<div class="mainHeadingContentClass">
+				    		<apex:outputText value="{!$Label.Review_Submit_Page_Heading_Content}" escape="false"/>
+						</div>
+					</td>
+			    </tr>
+		    </table><br/>
+		    
+		    <div class="reviewSubmitDivInformationClass">
+		    	<table>
+		    		<tr>
+		    			<td class="headerValue">
+                            {!$ObjectType.Account.fields.AccountNumber.Label}
+                        </td>
+                        <td class="textBoldClass">
+                            <apex:outputField value="{!Account.AccountNumber}"/>
+                        </td>
+                        <td class="headerValue">
+		    				Main Contact
+		    			</td>
+		    			<td>
+		    				<strong>Eric Besse</strong>
+		    			</td>
+		    		</tr>
+		    		<tr>
+		    			<td class="headerValue">
+                            {!$ObjectType.Account.fields.Name.Label}
+                        </td>
+                        <td class="textBoldClass">
+                            <apex:outputField value="{!Account.Name}"/>
+                        </td>     
+                        <td class="headerValue">
+		    				Email
+		    			</td>
+		    			<td>
+		    				<strong>eric.besse@besse.com</strong>
+		    			</td>
+		    		</tr>
+		    		<tr>
+		    			<td colspan="4">
+		    				<hr class="horizontalLineClass"/>
+		    			</td>
+		    		</tr>	
+		    		<tr>
+		    			<td class="tableHeaderValueClass">
+		    				Shipping Address
+		    			</td>
+		    			<td>
+		    			</td>
+		    			<td class="tableHeaderValueClass">
+		    				Billing Address
+		    			</td>
+		    			<td>
+		    			</td>
+		    		</tr>
+		    		<tr>
+		    			<td class="headerValue">
+                            {!$ObjectType.Account.fields.Shipping_Address1__c.Label}
+                        </td>
+                        <td>
+                            <apex:outputField value="{!Account.Shipping_Address1__c}"/>
+                        </td>
+                        <td class="headerValue">
+                            {!$ObjectType.Account.fields.Billing_Address1__c.Label}
+                        </td>
+                        <td>
+                            <apex:outputField value="{!Account.Billing_Address1__c}"/>
+                        </td>
+		    		</tr>
+		    		<tr>
+		    			<td class="headerValue">
+                            {!$ObjectType.Account.fields.Shipping_Address2__c.Label}
+                        </td>
+                        <td>
+                        	<apex:outputField value="{!Account.Shipping_Address2__c}"/>
+                        </td>
+                        <td class="headerValue">
+                            {!$ObjectType.Account.fields.Billing_Address2__c.Label}
+                        </td>
+                        <td>
+                        	<apex:outputField value="{!Account.Shipping_Address2__c}"/>
+                        </td>
+		    		</tr>
+		    		<tr>
+		    			<td class="headerValue">
+                            City
+                        </td>
+                        <td>
+                            <apex:outputField value="{!Account.ShippingCity}"/>
+                        </td>
+                        <td class="headerValue">
+                            City
+                        </td>
+                        <td>
+                            <apex:outputField value="{!Account.BillingCity}"/>
+                        </td>
+		    		</tr>
+		    		<tr>
+		    			<td class="headerValue">
+		    				State
+		    			</td>
+		    			<td>
+		    				OH
+		    			</td>
+		    			<td class="headerValue">
+		    				State
+		    			</td>
+		    			<td>
+		    				OH
+		    			</td>
+		    		</tr>
+		    		<tr>
+		    			<td class="headerValue">
+		    				ZIP
+		    			</td>
+		    			<td>
+		    				45069
+		    			</td>
+		    			<td class="headerValue">
+		    				ZIP
+		    			</td>
+		    			<td>
+		    				45069
+		    			</td>
+		    		</tr>
+		    		<tr>
+		    			<td class="headerValue">
+		    				Shipping Phone
+		    			</td>
+		    			<td>
+		    				(800) 543-2111
+		    			</td>
+		    			<td class="headerValue">
+		    				Billing Phone
+		    			</td>
+		    			<td>
+		    			</td>
+		    		</tr>
+		    		<tr>
+		    			<td class="headerValue">
+		    				Shipping Fax
+		    			</td>
+		    			<td>
+		    				(866) 883-2167
+		    			</td>
+		    			<td class="headerValue">
+		    				Billing Fax
+		    			</td>
+		    			<td>
+		    			</td>
+		    		</tr>
+		    		<tr>
+		    			<td class="headerValue">
+		    				Delivery Hours
+		    			</td>
+		    			<td>
+		    				MTWRF 9-5
+		    			</td>
+		    			<td>
+		    			</td>
+		    			<td>
+		    			</td>
+		    		</tr>
+		    		<tr>
+		    			<td colspan="4">
+	    					<div class="pageMessageClass">
+	    						<apex:outputText value="{!$Label.Review_Submit_Page_Message}" escape="false"/>
+	    					</div>
+    					</td>
+    				</tr>
+    				<tr>
+    					<td class="headerValue">
+    						PO
+    					</td>
+    					<td>
+    						docno123
+    					</td>
+    					<td>
+    					</td>
+    					<td>
+    					</td>
+    				</tr>
+    				<tr>
+    					<td class="headerValue">
+    						Dates You Can’t<br/>Receive Shipments
+    					</td>
+    					<td>
+    						Sept 6, Oct 12
+    					</td>
+    					<td colspan="2">
+    						<div class="editButtonAlignmentClass">
+    							<input type="submit" value="Edit" class="editButtonClass"/>
+    						</div>
+    					</td>
+		    		</tr>
+		    		<tr>
+		    			<table class="ReviewSubmitTableClass">
+		    				<tr class="reviewSubmitPageTableHeaderClass">
+		    					<th>
+		    						Besse#
+		    					</th>
+		    					<th>
+		    						Product
+		    					</th>
+		    					<th>
+		    						Age Indication
+		    					</th>
+		    					<th>
+		    						List Price
+		    					</th>
+		    					<th>
+		    						Final Price(includes $7.50 excise tax)
+		    					</th>
+		    					<th class="tableThHeaderClass">
+		    						YOUR PRE-ORDER UNITS
+		    					</th>
+		    					<th>
+		    						Dose/Unit
+		    					</th>
+		    					<th>
+		    						Total Doses
+		    					</th>
+		    				</tr>
+		    				<tr>
+		    					<td colspan="8" class="tableTdHeadingClass">
+		    						MedImmune
+		    					</td>
+		    				</tr>
+		    				<tr class="tableTdContentClass">
+		    					<td>
+		    						40235
+		    					</td>
+		    					<td>
+		    						FluMist® Quadrivalent Intranasal Vaccine,
+									delivery in pack of 10 pre-filled,
+									single-use sprayers, P-free
+		    					</td>
+		    					<td>
+		    						2-49 years
+		    					</td>
+		    					<td>
+		    						$000000
+		    					</td>
+		    					<td>
+		    						$000000
+		    					</td>
+		    					<td class="tableTdFontColorClass">
+		    						100
+		    					</td>
+		    					<td>
+		    						10
+		    					</td>
+		    					<td class="tableTdFontBoldClass">
+		    						1000
+		    					</td>
+		    				</tr>
+		    				<tr>
+		    					<td class="fontColorClass">
+		    						Shipping<br/>Preference:
+		    					</td>
+		    					<td class="tdFontColorClass">
+		    						July: <span class="reviewSubmitFontColorClass">50 units</span> &nbsp;&nbsp;&nbsp;&nbsp;
+		    						August: <span class="reviewSubmitFontColorClass">50 units</span>
+		    					</td>
+	    					</tr>
+		    			</table>
+	    			</tr>
+	    			<tr>
+    					<div class="editPreOrderAlignmentClass">
+    						<input type="submit" value="{!$Label.Review_Submit_Page_Button_Edit_Pre_order}" class="editPreOrderClass"/>
+    					</div>
+    				</tr>
+    				<tr>
+		    			<td colspan="4">
+		    				<hr class="horizontalLineClass"/>
+		    			</td>
+		    		</tr>
+		    		<tr>
+		    			<td colspan="4">
+		    				<apex:outputText value="{!$Label.Review_Submit_Page_Text_Content1}" escape="false"/>
+		    				<apex:outputText value="{!$Label.Review_Submit_Page_Text_Content1_1}" escape="false"/>
+		    				<apex:outputText value="{!$Label.Review_Submit_Page_Text_Content2}" escape="false"/>
+		    			</td>
+		    		</tr>
+		    	</table>
+		    </div>
+		    
+		    <div class="buttonClass">
+    			<input type="submit" value="{!$Label.Review_Submit_Page_Button_Return_to_Step4}" onClick="window.open('/apex/FLUPreorderContactPreferences' , '_parent');return false;" class="returnPageButtonClass"/>
+    			<input type="submit" value="{!$Label.Review_Submit_Page_Button_Accept_Terms_Conditions_And_Submit}" onClick="window.open('/apex/FLUPreorderThankYou' , '_parent');return false;" class="forwardPageButtonClass"/>
+		    </div>
+		    
+		    <div id="footer"> 
+				<p> 
+					Copyright &copy; 2010 AmerisourceBergen Corporation. All rights reserved.
+				</p> 
+			</div>
+     	</apex:pageBlock>
+	</apex:form>
+</apex:page>

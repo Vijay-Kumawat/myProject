@@ -1,0 +1,56 @@
+<!--
+* Description   : This is Visualforce Page to display the PayPal Info Folder Infromation.
+* 
+* Created By    : Vijay Kumawat
+*
+* Created Date  : 02/03/2013
+*
+* Version       : v1.0 - Create 
+-->
+
+<!-- Page -->
+<apex:page StandardController="PayPal_Info_Folder__c" extensions="PaypalProccessor" tabStyle="PayPal_Info_Folder__c">
+
+    <apex:form >
+    
+        <!-- Apex Message -->
+        <apex:pagemessages />
+        
+        <apex:sectionHeader title="Paypal Express Way" subtitle="Money Transfer"/>
+        
+        <!-- Page Block -->
+        <apex:pageBlock title="PayPal Account Details" id="pb">
+        
+            <!-- Buttons -->
+            <apex:pageBlockButtons id="pbb">
+                
+                <apex:commandButton action="{!pay}" value="Money Transfer" id="btn_search"/>
+                <apex:commandButton action="{!cancel}" value="Cancel" />
+            </apex:pageBlockButtons>
+        
+            <!-- Page Block Section -->
+            <apex:pageBlockSection title=" Address Information" collapsible="true">
+            
+                <apex:inputField value="{!PayPal_Info_Folder__c.City__c}" />
+                <apex:inputField value="{!PayPal_Info_Folder__c.State__c}" />
+                <apex:inputField value="{!PayPal_Info_Folder__c.Country__c}" />
+                <apex:inputField value="{!PayPal_Info_Folder__c.Zip_Code__c}" />
+            </apex:pageBlockSection>
+            
+            <!-- Page Block Section -->
+            <apex:pageBlockSection title="Personal Information" collapsible="true">
+                
+                <apex:inputField value="{!PayPal_Info_Folder__c.FirstName__c}" />
+                <apex:inputField value="{!PayPal_Info_Folder__c.LastName__c}" />
+                <apex:inputField value="{!PayPal_Info_Folder__c.Expire_Month__c}" />
+                <apex:inputField value="{!PayPal_Info_Folder__c.Expire_Year__c}" />
+                <apex:inputField value="{!PayPal_Info_Folder__c.Card_No__c}" />
+                <apex:inputField value="{!PayPal_Info_Folder__c.Card_Type__c}" />
+                <apex:inputField value="{!PayPal_Info_Folder__c.Address1__c}" />
+                <apex:inputField value="{!PayPal_Info_Folder__c.Address2__c}" />
+                <apex:inputField value="{!PayPal_Info_Folder__c.Amount__c}" />
+                    
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

@@ -1,0 +1,60 @@
+<!--
+* Description	:	This is Visualforce Page for display information after submitting the record and also navigate to the another account.
+* 
+* Created By    :	
+*
+* Created Date  :	09/17/2013
+*
+* Version       :	V_1.0 - Created 
+-->
+
+<apex:page StandardController="Account" showHeader="false" standardStylesheets="false">
+
+	<!-- CSS Include Here -->
+    <apex:stylesheet value="{!URLFOR($Resource.FLUPreorderCSS)}"/>
+    
+	<apex:form >
+		<apex:pageBlock >
+		
+			<div class="headerImageClass">
+				<apex:image value="/servlet/servlet.FileDownload?file=015900000026UXz"/>
+			</div>
+		
+         	<div class="thankYouPageHeaderClass">
+         		{!$Label.Confirm_Account_Page_Header}
+         		<span class="headerSubClass">     
+         			{!$Label.Confirm_Account_Page_Header_Season}
+         		</span>
+         	</div><br/><br/>
+         	
+         	<table>
+       			<tr>
+       				<td>
+		    			<div class="thankYouPageMainHeadingClass"> 
+					    	{!$Label.Thank_You_Page_Heading}
+				    	</div>
+				    	<div class="thankYouPageMainHeadingContentClass">
+				    		<apex:outputText value="{!$Label.Thank_You_Page_Heading_Content}" escape="false"/>
+						</div>
+					</td>
+			    </tr>
+		    </table><br/><br/>
+		    
+		    <div class="thankYouPageMainHeadingClass">
+		    	{!$Label.Thank_You_Page_Heading_Next_Action}
+		    </div><br/>
+		    
+		    <div class="thankYouPageButtonClass">
+    			<input type="submit" value="{!$Label.Thank_You_Page_Button_For_Another_Account}" onClick="window.open('/apex/FLUPreorderDashboard' , '_parent');return false;" class="thankYouPageButtonClassForAnotherAccount"/><br/>
+    			<input type="submit" value="{!$Label.Thank_You_Page_Button_Summary_For_Pre_order}" onClick="window.open('/apex/FLUPreorderSummary' , '_parent');return false;" class="thankYouPageButtonNavigationClass"/><br/>
+    			<input type="submit" value="{!$Label.Thank_You_Page_Button_Go_Back_To_Besse_com}" onClick="window.open('https://www.besse.com' , '_parent');return false;" class="thankYouPageButtonNavigationClass"/>
+		    </div>
+		    
+		    <div id="footer"> 
+				<p> 
+					Copyright &copy; 2010 AmerisourceBergen Corporation. All rights reserved.
+				</p> 
+			</div>
+     	</apex:pageBlock>
+	</apex:form>
+</apex:page>

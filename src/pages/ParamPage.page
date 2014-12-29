@@ -1,0 +1,13 @@
+<apex:page standardController="Contact" extensions="ParamExample">
+    <apex:form >
+ 
+          <apex:actionFunction action="{!processButtonClick}" name="processButtonClick" status="myStatus">
+            <apex:param name="nickName"
+                value="Testing"
+                assignTo="{!nickName}"/>
+        </apex:actionFunction>
+ 
+        <apex:commandLink value="Process Nickname" action="{!processButtonClick}" status="myStatus"/>
+        
+    </apex:form>
+</apex:page>
