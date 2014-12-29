@@ -1,8 +1,8 @@
 /*
 * Description   : This is class there to perform Account Advance Search Functionality with the hepl of standard controller.
 * 
-* Created By    : Vijay Kumar Kumawat
-*
+* Created By    : Vijay Kumar Kumawat (Simplyforce)
+* 
 * Created Date  : 10/09/2012
 *
 * Version       : v1.0 - Create 
